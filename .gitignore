@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+*.idea/
+/*/target/
+*.iml
+/*/velocity.log
+*bower_components/
+*node_modules/
+/api/src/assets/dist/dev/
