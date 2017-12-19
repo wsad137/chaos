@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  font-size: 14px;
+  font-family: "微软雅黑 Light"
+}
+
+li {
+  list-style: none;
+}
+
+.fl {
+  float: left
+}
+
+.w200 {
+  width: 20%
+}
+
+.w10 {
+  width: 100%
+}
+
+.w1020 {
+  width: 80%
+}
+
+.caidan {
+  padding: 10px;
+  border-right-style: ridge;
+  cursor: pointer;
+}
+
+.caidan ul {
+  padding: 0 0 0 15px;
+  display: none;
+}
+
+.caidan-item {
+  margin: 3px 0px;
+  background-color: #e0f9f7;
+  padding: 3px;
+}
+
+.form {
+  padding-left: 10px;
+  padding-top: 10px;
+  width: 79%;
+  float: left;
+  border-left-style: ridge;
+}
+
+.form ul {
+  padding: 0 0 0 15px;
+}
+
+.form-item {
+  float: left;
+  width: 100%;
+  /*margin: 5px 0;*/
+  display: none;
+}
+
+.form-item label {
+  float: left;
+  /*width: 80px;*/
+  text-align: right;
+}
+
+.form-item li {
+  float: left;
+  width: 100%;
+  margin: 5px 0;
+  /*height: 25px;*/
+  /*line-height: 25px;*/
+}
+
+.form-item li input {
+  float: left;
+  width: 89%;
+}
+
+#jsonShow {
+  background-color: ghostwhite;
+  margin-top: 20px;
+  /*width: 500px;*/
+  /*height: 400px;*/
+  width: 100%;
+  float: left;
+}
+
+#jsonShow textarea.jsoneditor-text {
+  min-height: 400px;
+  background-color: ghostwhite;
+}
+
+.top {
+  border-bottom-style: ridge;
+  padding-bottom: 10px;
+}
+
+.top li {
+  margin: 2px 0px;
+  float: left;
+  width: 25%;
+}
+
+.top label {
+  float: left;
+  margin-left: 5px;
+}
+
+.head-row {
+  margin: 5px auto;
+}

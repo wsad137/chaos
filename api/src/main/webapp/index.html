@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>接口文档</title>
+    <link rel="stylesheet" type="text/css" href="css/api-095ea545ed.css">
+    <link rel="stylesheet" type="text/css" href="lib/jsoneditor/dist/jsoneditor.css">
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/angular-toastr/angular-toastr.css"/>
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="lib/jsoneditor/dist/jsoneditor-minimalist.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-toastr/angular-toastr.tpls.js"></script>
+    <script src="lib/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script type="text/javascript" src="lib/angular/angular-animate.min.js"></script>
+    <script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/app.js"></script>
+    <!--<script type="text/javascript" charset="utf-8" src="lib/ueditor/ueditor.config.js"></script>-->
+    <!--<script type="text/javascript" charset="utf-8" src="lib/ueditor/ueditor.all.js"></script>-->
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <!--<script type="text/javascript" charset="utf-8" src="lib/ueditor/lang/zh-cn/zh-cn.js"></script>-->
+
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+</head>
+<body ng-app="apiApp">
+<div class="container-fluid" ng-controller="apiCtrl">
+    <div class="row">
+        <div class="panel panel-info">
+            <div class="panel-heading" ng-click="global.isShow=!global.isShow;">
+                <h3 class="panel-title">默认全局设置</h3>
+            </div>
+            <div class="panel-body" ng-show="global.isShow">
+                <div class="row">
+                    <div class="col-md-1">
+                        <select class="form-control input-sm" ng-model="global.type" ng-options="item for item in types">
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <select class="form-control input-sm" ng-model="global.cType" ng-options="item for item in cTypes">
+
+                            <!--<option>application/json</option>-->
+                            <!--<option>application/x-www-form-urlencoded</option>-->
+                            <!--<option>multipart/form-data</option>-->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <!--<div class="form-inline">-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="basePath">接口请求头：</label>-->
+                        <input placeholder="接口请求头" title="接口请求头" type="text" class="form-control input-sm" value="{{global.basePath}}" ng-model="global.basePath">
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-info" style="margin-bottom: 0;margin-top: 20px">
+                            <div class="panel-heading " ng-click="header.isShow=!header.isShow;">
+                                <h3 class="panel-title">header ></h3>
+                            </div>
+                            <div class="panel-body" ng-show="header.isShow">
+                                <div class="row head-row" ng-repeat="h in header.childs">
+                                    <div class="col-md-3">
+                                        <input type="text" placeholder="key" class="form-control input-sm">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="value" class="form-control input-sm">
+                                    </div>
+                                    <div class="col-md-3" ng-if="$index==0">
+                                        <button type="button" class="btn btn-block btn-info" ng-click="add(header.childs)">添加</button>
+                                    </div>
+                                    <div class="col-md-3" ng-if="$index>0">
+                                        <button type="button" class="btn btn-block btn-default" ng-click="del(header.childs,h)">删除</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-info" style="margin-bottom: 0;margin-top: 20px">
+                            <div class="panel-heading " ng-click="cookie.isShow=!cookie.isShow;">
+                                <h3 class="panel-title">cookie ></h3>
+                            </div>
+                            <div class="panel-body" ng-show="cookie.isShow">
+                                <div class="row head-row" ng-repeat="h in cookie.childs">
+                                    <div class="col-md-3">
+                                        <input type="text" placeholder="key" class="form-control input-sm">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="value" class="form-control input-sm">
+                                    </div>
+                                    <div class="col-md-3" ng-if="$index==0">
+                                        <button type="button" class="btn btn-block btn-info" ng-click="add(cookie.childs)">添加</button>
+                                    </div>
+                                    <div class="col-md-3" ng-if="$index>0">
+                                        <button type="button" class="btn btn-block btn-default" ng-click="del(cookie.childs,h)">删除</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <div style="float: left;width: 200px">
+
+            <!--<div class="col-sm-2">-->
+            <div class="panel panel-info" ng-repeat="m in menu" style="margin-bottom: 0;">
+                <div class="panel-heading " ng-click="apiChange(m.id)">
+                    <h3 class="panel-title">{{m.name}} ></h3>
+                </div>
+                <div class="panel-body" ng-show="m.isShow" style="padding: 0">
+                    <div class="list-group" style="margin-bottom: 0">
+                        <a href="#{{m.name}}/{{api.name}}" class="list-group-item" ng-repeat="api in m.apis" ng-click="apiChange(m.id,api.id)">{{api.name}}</a>
+                        <!--<a href="#" class="list-group-item">xxxx接口</a>-->
+                        <!--<a href="#" class="list-group-item">xxxx接口</a>-->
+                        <!--<a href="#" class="list-group-item">xxxx接口</a>-->
+                    </div>
+                </div>
+            </div>
+            <!--</div>-->
+
+        </div>
+        <div style="margin-left: 215px">
+            <div class="row" ng-repeat="api in apis" ng-show="api.isShow">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="text-info">接口地址：</label>
+                            <label class="text-info">{{global.basePath}}{{api.url}}</label>
+                            <button class="btn btn-xs btn-info">复制</button>
+                        </div>
+                    </div>
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">参数</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="form-group" ng-repeat="field in api.fields">
+                                    <label>说明:{{field.desc}}</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">{{field.name}}</span>
+                                        <input name="{{field.name}}" class="form-control" value="{{field.def}}">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>提交方式：</label>
+                            <select class="form-inline input-sm" ng-model="api.type" ng-options="item for item in types">
+                            </select>
+                            <label>请求类型：</label>
+                            <select class="form-inline input-sm" ng-model="api.cType" ng-options="item for item in cTypes">
+                            </select>
+                        </div>
+                        <!--</div>-->
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-md-2 col-lg-1">
+                            <button type="button" class="btn btn-primary btn-block" ng-click="submit(api)">提交</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="jsonShow" id="show-{{api.id}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+    var editors = [];
+    //    $(function () {
+    //
+    //        jQuery.fn.serializeJson = function () {
+    //            var serializeObj = {};
+    //            var array = this.serializeArray();
+    //            var str = this.serialize();
+    //            $(array).each(function () {
+    //                if (serializeObj[this.name]) {
+    //                    if (jQuery.isArray(serializeObj[this.name])) {
+    //                        serializeObj[this.name].push(this.value);
+    //                    } else {
+    //                        serializeObj[this.name] = [serializeObj[this.name], toJSON(this.value)];
+    //                    }
+    //                } else {
+    //                    serializeObj[this.name] = toJSON(this.value);
+    //                }
+    //            });
+    //            return serializeObj;
+    //        };
+    //
+    //        var setEditorBox = $("#setEditorBox");
+    //        $("#editorBox").hide();
+    //        setEditorBox.change(function () {
+    //            if ($(this).is(':checked')) {
+    //                $("#editorBox").show();
+    //            } else {
+    //                $("#editorBox").hide();
+    //            }
+    //        })
+    //
+    //        var time = $("#time");
+    //        var gettime = new Date().getTime();
+    //        time.val(gettime)
+    //        $(".form input[value='time']").val(gettime)
+    //
+    //        var rootPath = $("#rootPath");
+    //        var urlPattern = $("#urlPattern");
+    //        updatePath(rootPath);
+    //        rootPath.change(function () {
+    //            updatePath(rootPath);
+    //        })
+    //        urlPattern.change(function () {
+    //            updatePath(rootPath)
+    //        })
+    //
+    //        var caidanItem = $(".caidan").find(".caidan-item");
+    //        var caidanTitleItem = $(".caidan").find("h3");
+    //        var formItem = $(".form").find(".form-item");
+    //
+    ////        caidanTitleItem.next().slideToggle();
+    //        caidanTitleItem.each(function (index) {
+    //            $(this).click(function () {
+    //                $(this).next().slideToggle("fast");
+    //            })
+    //        })
+    //        formItem.hide()
+    //        caidanItem.each(function (index) {
+    //            $(this).click(function () {
+    //                formItem.hide();
+    //                formItem.eq(index).show();
+    //            })
+    //        })
+    //
+    //        $("div[name='jsonShow']").each(function (i) {
+    //            var editor = new JSONEditor($(this)[0], options);
+    //            editors.push(editor);
+    //            $(this).attr("tag", i)
+    //            $(this).prevAll("form").attr("tag", i)
+    //        })
+    //
+    //    })
+
+
+//    var container = document.getElementById('jsonShow');
+    var options = {
+        mode: 'view',
+        modes: ['text', 'view'] // allowed modes
+//        modes: ['code', 'form', 'text', 'tree', 'view'] // allowed modes
+    };
+    var json = {
+        "firstName": "John",
+        "lastName": "",
+        "age": 25,
+        "address": {"streetAddress": "21 2nd Street", "city": "New York", "state": "NY", "postalCode": "10021"},
+        "phoneNumber": [{"type": "home", "number": "212 555-1234"}, {
+            "type": "fax",
+            "number": "646 555-4567"
+        }, {"obj": {"type": "home", "number": "212 555-1234"}}]
+    };
+    //    var editor = new JSONEditor(container, options);
+//    var editor = new JSONEditor(container, options, json);
+
+
+    /**
+     * 发送请求
+     * @param t
+     */
+    //    function send(t) {
+    //        var o = $(t);
+    //        var form = o.parent("form");
+    //        var postType = form.find("input[name='postType']:checked").val();
+    //        var url = form.find(".form-url").text();
+    //        var param = form.serializeJson();
+    //        var editor = editors[$(form).attr("tag")]
+    ////        o.nextAll().
+    ////        var param = form.serializeObject();
+    //
+    //
+    //        if (postType == "application/json") {
+    //            jQuery.ajax({
+    //                type: "POST",
+    //                url: url,
+    //                dataType: "json",
+    //                contentType: "application/json;charset=utf-8",
+    //                data: JSON.stringify(param),
+    //                success: function (data) {
+    ////                var jsonStr = JSON.stringify(data);
+    //                    editor.set(data);
+    //                    editor.expandAll();
+    //                }, beforeSend: function (request) {
+    //                    request.setRequestHeader("ttw-obj", "test-api");
+    //                }, error: function (xhr, status, error) {
+    //                    editor.set(xhr);
+    //                    editor.expandAll();
+    //                }
+    //            });
+    //        } else if (postType == 'application/x-www-form-urlencoded') {
+    //            jQuery.ajax({
+    //                type: "POST",
+    //                url: url,
+    //                dataType: "html",
+    //                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+    //                data: form.serialize(),
+    //                success: function (data) {
+    ////                var jsonStr = JSON.stringify(data);
+    //                    editor.set(JSON.parse(data));
+    //                    editor.expandAll();
+    //                }, beforeSend: function (request) {
+    //                    request.setRequestHeader("ttw-obj", "test-api");
+    //                }, error: function (xhr, status, error) {
+    //                    editor.set(xhr);
+    //                    editor.expandAll();
+    //                }
+    //            });
+    //        } else {
+    //            form.attr("action", url)
+    //            form.attr("encoding", postType)
+    //            form.attr("enctype", postType)
+    //            form.submit();
+    //        }
+    //    }
+    //
+    //
+    //    function updatePath(rootPath) {
+    //        var urlPattern = $("#urlPattern");
+    //        $(".form-url").each(function (index) {
+    //            var paths = location.pathname.split('/');
+    //            var path = location.origin;
+    //            if (rootPath.is(":checked")) {
+    //                if (paths[1] != 'api') path += "/" + paths[1];
+    //            } else {
+    //                path += paths[0];
+    //            }
+    //            $(this).text(path + $(this).attr("name") + urlPattern.val())
+    //            $(this).parent("form").attr("action", path + $(this).attr("name") + urlPattern.val())
+    //        })
+    //    }
+    //
+    //
+    //    /**
+    //     * 表单转json
+    //     * @returns {{}}
+    //     */
+    //    jQuery.fn.serializeObject = function () {
+    //        var o = {};
+    //        var a = this.serializeArray();
+    //        jQuery.each(a, function () {
+    //            if (o[this.name] !== undefined) {
+    //                if (!o[this.name].push) {
+    //                    o[this.name] = [o[this.name]];
+    //                }
+    ////                o[this.name].push(this.value || '');
+    //                o[this.name].push(toJSON(this.value));
+    //            } else {
+    ////                o[this.name] = this.value || '';
+    //                o[this.name] = toJSON(this.value);
+    //            }
+    //        });
+    //        return o;
+    //    };
+    //
+    //    function toJSON(str) {
+    //        try {
+    //            if (!str) return undefined;
+    ////           return eval("("+str+")")
+    //            return JSON.parse(str);
+    //        } catch (exception) {
+    //            console.warn(exception)
+    //
+    //            return str;
+    //        }
+    //    }
+
+
+    //    (function ($) {
+    //    jQuery.fn.serializeJson = function () {
+    //        var serializeObj = {};
+    //        var array = this.serializeArray();
+    //        var str = this.serialize();
+    //        $(array).each(function () {
+    //            if (serializeObj[this.name]) {
+    //                if (jQuery.isArray(serializeObj[this.name])) {
+    //                    serializeObj[this.name].push(this.value);
+    //                } else {
+    //                    serializeObj[this.name] = [serializeObj[this.name], toJSON(this.value)];
+    //                }
+    //            } else {
+    //                serializeObj[this.name] = toJSON(this.value);
+    //            }
+    //        });
+    //        return serializeObj;
+    //    };
+    //    })(jQuery);
+</script>
+</html>
