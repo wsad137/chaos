@@ -147,8 +147,8 @@ public class PropertiesConfig extends PropertiesConfiguration {
 //        System.out.println(CommonProperties._wechat4j.getString(CommonKey._propertie.wechat4j.appid));
 
 //        UtilsConstant.File.tempDir.toString();
-//        PropertiesUtil.getInstance("config.properties").setProperty("aaaa", "1234");
-//        log.info(PropertiesUtil.getInstance("config.properties").getValueFromPropFile("pageSize"));
+//        PropertiesUtil.getInstance("_config.properties").setProperty("aaaa", "1234");
+//        log.info(PropertiesUtil.getInstance("_config.properties").getValueFromPropFile("pageSize"));
     }
 
 }

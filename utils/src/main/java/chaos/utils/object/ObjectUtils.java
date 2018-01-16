@@ -6,7 +6,11 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,23 +46,52 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
      *     [a,,b,c] = true
      * </pre>
      *
-     * @param objects
+     * @param obj
      * @return
      */
-    public static boolean isEmpty(Object... objects) {
-        if (objects == null) return true;
-        if (objects.length == 0) return true;
-        for (int i = 0; i < objects.length; i++) {
-            Object object;
-            try {
-                object = objects[i];
-                if (object instanceof CharSequence) if (object.equals("null")) return true;
-            } catch (Exception ignored) {
-                return true;
+//    public static boolean isEmpty(Object... objects) {
+//        if (objects == null) return true;
+//        if (objects.length == 0) return true;
+//        for (int i = 0; i < objects.length; i++) {
+//            Object object;
+//            try {
+//                object = objects[i];
+//                if (object instanceof CharSequence) if (object.equals("null")) return true;
+//            } catch (Exception ignored) {
+//                return true;
+//            }
+//            if (ObjectUtils.isEmpty(object)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    /**
+     * 判断是否为空
+     *
+     * @param obj
+     * @return
+     */
+    public static boolean isEmpty(Object obj) {
+        if (obj == null) return true;
+        try {
+            if (obj instanceof CharSequence) {
+                CharSequence cs = (CharSequence) obj;
+                return StringUtils.isEmpty(cs.toString().trim()) || obj.equals("null");
             }
-            if (org.springframework.util.ObjectUtils.isEmpty(object)) {
-                return true;
+            if (obj instanceof Collection) {
+                return CollectionUtils.isEmpty((Collection) obj);
             }
+            if (obj instanceof Map) {
+                return MapUtils.isEmpty((Map) obj);
+            }
+            if (obj.getClass().isArray()) {
+                return ArrayUtils.getLength(obj) <= 0;
+            }
+        } catch (Exception e) {
+            log.error("非空判断异常！");
+            return true;
         }
         return false;
     }

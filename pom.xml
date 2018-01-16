@@ -12,6 +12,7 @@
         <module>utils</module>
         <module>api</module>
         <module>core</module>
+        <module>weixin</module>
     </modules>
     <packaging>pom</packaging>
     <properties>

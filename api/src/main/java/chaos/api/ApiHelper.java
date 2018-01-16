@@ -63,7 +63,7 @@ public class ApiHelper {
         return apiConfig;
     }
 
-//    private ApiConfig config = new ApiConfig();
+//    private ApiConfig _config = new ApiConfig();
 
     public void refresh() {
         if (this.applicationContext != null) init(applicationContext);
@@ -121,7 +121,7 @@ public class ApiHelper {
             log.info("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝开始生成api页面html＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
             String[] con = applicationContext.getBeanNamesForAnnotation(ApiGroup.class);
 //        Object[] con = ArrayUtils.addAll(ArrayUtils.addAll(con, con2), con3);
-            if (ObjectUtils.isEmpty((Object) con)) return;
+            if (ObjectUtils.isEmpty(con)) return;
             Map<String, List<_ApiModel>> listMap = new HashMap<>();
             List<ApiGroupModel> groupModels = Lists.newArrayList();
 
@@ -244,7 +244,7 @@ public class ApiHelper {
 //                listMap.put(groupModel.getName(), list);
             }
 
-//            ApiConfig config = new ApiConfig();
+//            ApiConfig _config = new ApiConfig();
 
         /*
         生成html
