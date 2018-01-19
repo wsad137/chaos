@@ -1,36 +1,35 @@
-var app = angular.module("apiApp", ['appServices','ui.bootstrap','angularFileUpload','toastr']);
+var app = angular.module("apiApp", ['appServices', 'ui.bootstrap', 'angularFileUpload', 'toastr']);
 // var app = angular.module("pmsApp", ['appServices', 'ui.bootstrap', 'ngAnimate', 'toastr', 'angularFileUpload']);
 // var app = angular.module("pmsApp", ['appServices', 'ui.bootstrap', 'ngAnimate', 'toastr']);
 
 app.controller("apiCtrl", apiCtrl);
 
 
-// app
-// config(['toastrConfig', function (toastrConfig) {/*消息提示框*/
-//     angular.extend(toastrConfig, {
-//         timeOut: '2500',
-//         autoDismiss: false,
-//         containerId: 'toast-container',
-//         maxOpened: 0,
-//         newestOnTop: true,
-//         positionClass: 'toast-top-center',
-//         preventDuplicates: false,
-//         progressBar: false,
-//         preventOpenDuplicates: false,
-//         target: 'body'
-//     });
-//     // "closeButton": true,
-//     // "progressBar": true,
-//     // "positionClass": "toast-top-center",
-//     // "showDuration": "300",
-//     // "hideDuration": "1000",
-//     // "timeOut": "2500",
-//     // "extendedTimeOut": "1000",
-//     // "showEasing": "swing",
-//     // "hideEasing": "linear",
-//     // "showMethod": "fadeIn",
-//     // "hideMethod": "fadeOut"
-// }])
+app.config(['toastrConfig', function (toastrConfig) {/*消息提示框*/
+    angular.extend(toastrConfig, {
+        timeOut: '2500',
+        autoDismiss: false,
+        containerId: 'toast-container',
+        maxOpened: 0,
+        newestOnTop: true,
+        positionClass: 'toast-top-center',
+        preventDuplicates: false,
+        progressBar: false,
+        preventOpenDuplicates: false,
+        target: 'body'
+    });
+    // "closeButton": true,
+    // "progressBar": true,
+    // "positionClass": "toast-top-center",
+    // "showDuration": "300",
+    // "hideDuration": "1000",
+    // "timeOut": "2500",
+    // "extendedTimeOut": "1000",
+    // "showEasing": "swing",
+    // "hideEasing": "linear",
+    // "showMethod": "fadeIn",
+    // "hideMethod": "fadeOut"
+}]);
 app.config(['$httpProvider', function ($httpProvider) {/*启用跨域cookie*/
     // TODO Safari 浏览器不兼容
     $httpProvider.defaults.withCredentials = true;

@@ -114,7 +114,7 @@ gulp.task('build', function (cb) {
     gulp.src(['dist/' + env2 + '/js/*.*', 'dist/' + env2 + '/css/*.*']).pipe(vp0).pipe(gulp.dest('dist/' + env2 + '/tmp')).on('end', function () {
         del(vp0.paths);
         del('dist/' + env2 + '/tmp');
-        gulp.src(['src/**', '!src/include/*.html', '!src/**/*.scss', '!src/**/*.map','!**/*___jb_tmp___']).pipe(gulp.dest('dist/' + env2 + '/')).on('end', function () {
+        gulp.src(['src/**', '!src/include/*.html', '!src/**/*.scss', '!src/**/*.map', '!**/*___jb_tmp___']).pipe(gulp.dest('dist/' + env2 + '/')).on('end', function () {
             gulp.src(['src/**/*.html', '!src/include/*.html']).pipe(fileinclude()).pipe(gulp.dest('dist/' + env2 + '/')).on('end', function () {
                 gulp.src('src/**/*.scss').pipe(sass()).pipe(gulp.dest('dist/' + env2 + '/')).on('end', function () {
                     gulp.src(["env/" + env2 + ".js", 'src/js/app.js']).pipe(concat('js/app.js')).pipe(gulp.dest('dist/' + env2 + '/')).on('end', function () {
@@ -135,7 +135,7 @@ gulp.task('build', function (cb) {
         });
     });
 });
-gulp.task('server', function () {
+gulp.task('server', ['build'], function () {
     var env2 = minimist.env;
     browserSync.init({
         server: 'dist/' + env2 + '/'

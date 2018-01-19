@@ -43,24 +43,18 @@
             <div class="panel-body" ng-show="global.isShow">
                 <div class="row">
                     <div class="col-md-1">
-                        <select class="form-control input-sm" ng-model="global.type" ng-options="item for item in types">
+                        <select title="请求类型" class="form-control input-sm" ng-model="global.type" ng-options="item for item in types">
                         </select>
                     </div>
                     <div class="col-md-1">
-                        <select class="form-control input-sm" ng-model="global.cType" ng-options="item for item in cTypes">
-
-                            <!--<option>application/json</option>-->
-                            <!--<option>application/x-www-form-urlencoded</option>-->
-                            <!--<option>multipart/form-data</option>-->
+                        <select title="提交方式" class="form-control input-sm" ng-model="global.cType" ng-options="item for item in cTypes">
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <!--<div class="form-inline">-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="basePath">接口请求头：</label>-->
-                        <input placeholder="接口请求头" title="接口请求头" type="text" class="form-control input-sm" value="{{global.basePath}}" ng-model="global.basePath">
-                        <!--</div>-->
-                        <!--</div>-->
+                        <input placeholder="url请求头" title="url请求头" type="text" class="form-control input-sm" value="{{global.basePath}}" ng-model="global.basePath">
+                    </div>
+                    <div class="col-md-1">
+                        <input placeholder="url请求后缀" title="url请求后缀" type="text" class="form-control input-sm" value="{{global.baseSuffix}}" ng-model="global.baseSuffix">
                     </div>
                 </div>
                 <div class="row">
@@ -134,7 +128,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label class="text-info">接口地址：</label>
-                            <label class="text-info">{{global.basePath}}{{api.url}}</label>
+                            <label class="text-info">{{global.basePath}}{{api.url}}{{global.baseSuffix}}</label>
                             <button class="btn btn-xs btn-info">复制</button>
                         </div>
                     </div>
@@ -162,7 +156,7 @@
                             <select class="form-inline input-sm" ng-model="api.cType" ng-options="item for item in cTypes"></select>
                         </div>
                     </div>
-                    <div class="row" style="margin-top: 10px;">
+                    <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
                         <div class="col-md-2 col-lg-1">
                             <button type="button" class="btn btn-primary btn-block" ng-click="submit(api)">提交</button>
                         </div>

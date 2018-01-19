@@ -12,7 +12,7 @@ var cType = ['application/json', 'application/x-www-form-urlencoded', 'multipart
 /*JSONEditor option*/
 var options = {
     mode: 'view',
-    modes: ['text', 'view'] // allowed modes
+    modes: ['text', 'view', 'code', 'form', 'tree'] // allowed modes
 //        modes: ['code', 'form', 'text', 'tree', 'view'] // allowed modes
 };
 
@@ -122,6 +122,7 @@ function apiCtrl($scope, http, toastr) {
         } else if (api.type === 'GET') {
 
         }
+        // TODO 其他提交方式待续
         /*其他待续...*/
     };
 

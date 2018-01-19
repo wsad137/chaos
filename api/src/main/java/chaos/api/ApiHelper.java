@@ -263,12 +263,15 @@ public class ApiHelper {
 
             FileUtils.forceMkdir(new File(webPath));
 
-            URL webFile = this.getClass().getClassLoader().getResource(File.separator + "chaosApi.zip");
+//            URL webFile = new File(webPath, "chaosApi.zip").toURL();
+
+//            URL webFile = this.getClass().getClassLoader().getResource(File.separator + "chaosApi.zip");
 //            URL webFile = this.getClass().getClassLoader().getResource(File.separator + "chaosApi");
 
-            if (webFile != null) {
-//                FileUtils.copyDirectoryToDirectory(new File(webFile.getPath()), new File(realPath));
-                ZipUtil.unZip(webFile.getPath(), webPath);
+//            if (webFile != null) {
+            File customFile = new File(webPath, "chaosApi.zip");
+            if (customFile.exists()) {
+                ZipUtil.unZip(customFile.getPath(), webPath);
             } else {/*获取不到 jar中获取*/
 //                ClassLoaderUtil.
 //                InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("/chaosApi/");
