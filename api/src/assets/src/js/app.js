@@ -45,6 +45,33 @@ appServices.service("http", http);
 
 function http($http, toastr) {
     this.post = function (url, data, fn) {
+
+
+        // $.ajax({
+        //     type: 'POST',
+        //     url: url,
+        //     data: data,
+        //     dataType: 'json',
+        //     success: function (result,status,xhr) {
+        //         var data = result;
+        //         // if (!data.success) {
+        //         //     toastr.warning(data.eMsg, "", {
+        //         //         onHidden: function () {
+        //         //             if (data.eCode === -1) window.location.href = "../index.html";
+        //         //         }
+        //         //     });
+        //         //     return;
+        //         // }
+        //         console.info(url);
+        //         console.info(data);
+        //         // console.info(JSON.stringify(data));
+        //         fn(data, status, xhr.headers, xhr.config)
+        //     },
+        //     error: function (xhr,status,error) {
+        //         toastr.error("链接超时！");
+        //     }
+        // });
+
         $http.post(url, data).then(function (resp) {
             //console.info("*-*-*-*-sDao-success");
             var data = resp.data;
@@ -69,7 +96,7 @@ function http($http, toastr) {
         });
     };
     this.get = function (url, data, fn) {
-        $http.get(url, data).then(function (resp) {
+        $http.get(url, JSON.data).then(function (resp) {
             //console.info("*-*-*-*-sDao-success");
             var data = resp.data;
             // if (!data.success) {

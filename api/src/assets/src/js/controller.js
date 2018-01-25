@@ -41,11 +41,15 @@ function apiCtrl($scope, http, toastr) {
     /*请求记录*/
     $scope.record = {isShow: false, childs: []};
 
+    /*表单记录*/
+    $scope.forms = [];
+
     /*还原本地存储的全局设置 配置*/
     if (getItem('global')) $scope.global = JSON.parse(getItem('global'));
     if (getItem('header')) $scope.header = JSON.parse(getItem('header'));
     if (getItem('cookie')) $scope.cookie = JSON.parse(getItem('cookie'));
     if (getItem('record')) $scope.record = JSON.parse(getItem('record'));
+    if (getItem('forms')) $scope.forms = JSON.parse(getItem('forms'));
 
     /*清除默认配置*/
     $scope.globalDef = function () {
@@ -90,6 +94,7 @@ function apiCtrl($scope, http, toastr) {
             $scope.apis.forEach(function (t) {
                 t.type = $scope.global.type;
                 t.cType = $scope.global.cType;
+                setFormsData(t)
             })
         });
 
@@ -105,6 +110,16 @@ function apiCtrl($scope, http, toastr) {
         }
     });
 
+    /*设置缓存的form表单*/
+    function setFormsData(api) {
+        var form = $scope.forms.find("id", api.id);
+        if (!form || !form.data) return;
+        Object.keys(form.data).forEach(function (t) {
+            if (!api.data) api.data = {};
+            api.data[t] = form.data[t];
+        });
+    }
+
     /*发送请求*/
     $scope.submit = function (api) {
         /*添加请求记录*/
@@ -114,6 +129,9 @@ function apiCtrl($scope, http, toastr) {
         if (!api.JSONEditor) {
             api.JSONEditor = new JSONEditor(angular.element("#show-" + api.id)[0], options)
         }
+
+        /*保存提交缓存*/
+        setFormsApiData();
 
         if (api.type === 'POST') {
             http.post($scope.global.basePath + api.url, api.data, function (d) {
@@ -140,5 +158,22 @@ function apiCtrl($scope, http, toastr) {
     $scope.$watch("record", function (value) {
         setItem('record', JSON.stringify(value));
     }, true);
+    $scope.$watch("apis", function (value) {
 
+    }, false);
+
+    /**
+     * 保存提交缓存
+     */
+    function setFormsApiData() {
+        $scope.apis.forEach(function (t) {
+            var findApi = $scope.forms.find("id", t.id);
+            if (!findApi) {
+                $scope.forms.push({id: t.id, data: t.data})
+            } else {
+                findApi.data = t.data;
+            }
+        });
+        setItem('forms', JSON.stringify($scope.forms));
+    }
 }

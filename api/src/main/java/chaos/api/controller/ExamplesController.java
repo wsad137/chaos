@@ -16,7 +16,7 @@ import java.util.Properties;
 @ApiGroup(name = "core-api控制器")
 @Controller
 @RequestMapping("/api")
-public class ExamplesController extends BaseCoreController {
+public class ExamplesController extends BaseApiController {
 
     /**
      * 测试返回JSON数据

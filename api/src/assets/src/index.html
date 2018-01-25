@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>接口文档</title>
-    <link rel="stylesheet" type="text/css" href="css/api-095ea545ed.css">
+    <link rel="stylesheet" type="text/css" href="css/api.css">
     <link rel="stylesheet" type="text/css" href="lib/jsoneditor/dist/jsoneditor.css">
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="lib/angular-toastr/angular-toastr.css"/>
@@ -134,7 +134,9 @@
                     </div>
                     <div class="panel panel-success">
                         <div class="panel-heading" ng-click="api.data.isShow=!api.data.isShow;">
-                            <h3 class="panel-title">参数&gt;</h3>
+                            <h3 class="panel-title">参数&gt;
+                                &nbsp;&nbsp;&nbsp;<button class="btn btn-xs btn-info" ng-click="">清空表单</button>
+                            </h3>
                         </div>
                         <div class="panel-body" ng-show="api.data.isShow">
                             <form>
@@ -173,14 +175,14 @@
     </div>
 
 </div>
-<div style="position: fixed;right: 0;top: 0;width: 250px" ng-show="record.isShow">
+<div style="position: fixed;right: 0;top: 0;width: 250px;z-index: 2;" ng-show="record.isShow">
     <div class="panel panel-primary" style="height: -webkit-fill-available; overflow: auto;">
-        <div class="panel-heading ">
+        <div class="panel-heading" ng-click="record.isShow=!record.isShow;">
             <h3 class="panel-title">请求记录 ></h3>
         </div>
         <div class="panel-body" style="padding: 0">
             <div class="list-group" style="margin-bottom: 0">
-                <a href="#{{r.nameGroup}}/{{r.name}}" class="list-group-item" ng-repeat="r in record.childs |orderBy:'time':true" ng-click="apiChange(r.idGroup,r.id)">{{r.nameGroup}}-{{r.name}}</a>
+                <a href="#{{r.nameGroup}}/{{r.name}}" class="list-group-item" ng-repeat="r in record.childs |orderBy:'time':true track by $index" ng-click="apiChange(r.idGroup,r.id)">{{r.nameGroup}}-{{r.name}}</a>
             </div>
         </div>
     </div>

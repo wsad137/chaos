@@ -108,6 +108,7 @@ public class ApiFieldModel {
         if (!StringUtils.isEmpty(apiField.def())) setDef(apiField.def());
         if (!StringUtils.isEmpty(apiField.desc())) setDesc(apiField.desc());
         if (!StringUtils.isEmpty(apiField.type())) setType(apiField.type());
+
     }
 
     /**

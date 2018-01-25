@@ -60,30 +60,37 @@ gulp.task("bower-update", function () {
 
 gulp.task('bower-libs', ['bower-update'], function () {
     gulp.src('./bower_components/angular/angular.min.js').pipe(gulp.dest('./src/lib/angular/'));
-    gulp.src('./bower_components/angular-cookies/angular-cookies.min.js').pipe(gulp.dest('./src/lib/angular/'));
-    gulp.src('./bower_components/angular-sanitize/angular-sanitize.min.js').pipe(gulp.dest('./src/lib/angular/'));
-    gulp.src('./bower_components/angular-ui-router/release/angular-ui-router.min.js').pipe(gulp.dest('./src/lib/angular/'));
+    // gulp.src('./bower_components/angular/angular.min.js.map').pipe(gulp.dest('./src/lib/angular/'));
+    // gulp.src('./bower_components/angular-cookies/angular-cookies.min.js').pipe(gulp.dest('./src/lib/angular/'));
+    // gulp.src('./bower_components/angular-sanitize/angular-sanitize.min.js').pipe(gulp.dest('./src/lib/angular/'));
+    // gulp.src('./bower_components/angular-ui-router/release/angular-ui-router.min.js').pipe(gulp.dest('./src/lib/angular/'));
     gulp.src('./bower_components/angular-file-upload/dist/*').pipe(gulp.dest('./src/lib/angular-file-upload/dist/'));
     gulp.src('./bower_components/angular-bootstrap/ui-bootstrap-tpls.js').pipe(gulp.dest('./src/lib/angular-bootstrap/'));
     gulp.src(['./bower_components/angular-toastr/dist/angular-toastr.tpls.js', './bower_components/angular-toastr/dist/angular-toastr.css']).pipe(gulp.dest('./src/lib/angular-toastr/'));
     gulp.src('./bower_components/angular-animate/angular-animate.min.js').pipe(gulp.dest('./src/lib/angular/'));
+    // gulp.src('./bower_components/angular-animate/angular-animate.min.js.map').pipe(gulp.dest('./src/lib/angular/'));
 
     gulp.src('./bower_components/bootstrap/dist/**').pipe(gulp.dest('./src/lib/bootstrap/'));
-    gulp.src('./bower_components/bootstrap-table/dist/**').pipe(gulp.dest('./src/lib/bootstrap-table/'));
-    gulp.src('./bower_components/bootstrap-editable/src/**').pipe(gulp.dest('./src/lib/bootstrap-editable/'));
-    gulp.src(['./bower_components/bootstrap-sweetalert/dist/sweetalert.css', './bower_components/bootstrap-sweetalert/dist/sweetalert.min.js']).pipe(gulp.dest('./src/lib/bootstrap-sweetalert/'));
+    // gulp.src('./bower_components/bootstrap-table/dist/**').pipe(gulp.dest('./src/lib/bootstrap-table/'));
+    // gulp.src('./bower_components/bootstrap-editable/src/**').pipe(gulp.dest('./src/lib/bootstrap-editable/'));
+    // gulp.src(['./bower_components/bootstrap-sweetalert/dist/sweetalert.css', './bower_components/bootstrap-sweetalert/dist/sweetalert.min.js']).pipe(gulp.dest('./src/lib/bootstrap-sweetalert/'));
     gulp.src('./bower_components/jquery/dist/jquery.min.js').pipe(gulp.dest('./src/lib/jquery/'));
-    gulp.src('./bower_components/jquery-backstretch/jquery.backstretch.min.js').pipe(gulp.dest('./src/lib/jquery-backstretch/'));
-    gulp.src('./bower_components/jquery-validation/dist/*.min.*').pipe(gulp.dest('./src/lib/jquery-validation/'));
-    gulp.src('./bower_components/jquery-validation/src/localization/messages_zh.js').pipe(gulp.dest('./src/lib/jquery-validation/localization/'));
-    gulp.src('./bower_components/font-awesome/css/font-awesome.min.css').pipe(gulp.dest('./src/lib/font-awesome/css/'));
-    gulp.src('./bower_components/font-awesome/fonts/**').pipe(gulp.dest('./src/lib/font-awesome/fonts/'));
+    // gulp.src('./bower_components/jquery-backstretch/jquery.backstretch.min.js').pipe(gulp.dest('./src/lib/jquery-backstretch/'));
+    // gulp.src('./bower_components/jquery-validation/dist/*.min.*').pipe(gulp.dest('./src/lib/jquery-validation/'));
+    // gulp.src('./bower_components/jquery-validation/src/localization/messages_zh.js').pipe(gulp.dest('./src/lib/jquery-validation/localization/'));
+
+    // gulp.src('./bower_components/font-awesome/css/font-awesome.min.css').pipe(gulp.dest('./src/lib/font-awesome/css/'));
+    // gulp.src('./bower_components/font-awesome/fonts/**').pipe(gulp.dest('./src/lib/font-awesome/fonts/'));
+
     gulp.src('./bower_components/jsoneditor/dist/jsoneditor-minimalist.min.js').pipe(gulp.dest('./src/lib/jsoneditor/dist/'));
     gulp.src('./bower_components/jsoneditor/dist/jsoneditor.css').pipe(gulp.dest('./src/lib/jsoneditor/dist/'));
     gulp.src('./bower_components/jsoneditor/dist/img/**').pipe(gulp.dest('./src/lib/jsoneditor/dist/img/'));
 });
 gulp.task('clean', function () {
     return del(['dist/**', 'rev/**'])
+});
+gulp.task('clean-lib', ['clean'], function () {
+    return del(['src/lib'])
 });
 gulp.task('build', function (cb) {
     // var env2 = minimist.env;
@@ -158,7 +165,7 @@ gulp.task('package', function () {
 });
 // 线上打包
 gulp.task('package-lib', function () {
-    runSequence('clean', 'bower-libs', 'build', 'zip');
+    runSequence('clean-lib', 'bower-libs', 'build', 'zip');
 });
 gulp.task('zip', function () {
     var env2 = minimist.env;

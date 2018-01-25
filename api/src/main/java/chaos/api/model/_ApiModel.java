@@ -6,6 +6,7 @@ import chaos.api.annoatation.ApiField;
 import chaos.api.annoatation.ApiModel;
 import chaos.api.annoatation.ApiRes;
 import chaos.api.annoatation.F;
+import chaos.utils.Md5Utils;
 import chaos.utils.object.ObjectUtils;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
@@ -15,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -142,7 +144,7 @@ public class _ApiModel {
         def.name = getName();
         def.nameGroup = getNameGroup();
         def.url = getUrl();
-
+        def.generateId();
         processorField(def);
 
 
@@ -276,5 +278,14 @@ public class _ApiModel {
 
     public void setRes(List<_ApiModel> res) {
         this.res = res;
+    }
+
+    /**
+     * 创建id
+     */
+    public void generateId() {
+//        String s = Base64.getEncoder().encodeToString((String.valueOf(getName()) + String.valueOf(getUrl()) + String.valueOf(getNameGroup())).getBytes());
+        String s = Md5Utils.toMd5((String.valueOf(getName()) + String.valueOf(getUrl()) + String.valueOf(getNameGroup())));
+        setId(s);
     }
 }

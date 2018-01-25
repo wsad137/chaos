@@ -15,11 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-class BaseCoreController {
+class BaseApiController {
     /**
      * The Request.
      *
-     * @see BaseCoreController#request BaseController#request request
+     * @see BaseApiController#request BaseController#request request
      */
     @Autowired
     protected HttpServletRequest request;
