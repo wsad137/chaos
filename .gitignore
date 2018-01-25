@@ -5,4 +5,5 @@
 /*/velocity.log
 *bower_components/
 *node_modules/
-/api/src/assets/dist/*
+/api/src/assets/dist/
+/api/src/assets/src/lib/
