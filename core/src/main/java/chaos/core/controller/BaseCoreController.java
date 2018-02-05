@@ -11,16 +11,15 @@ class BaseCoreController {
     /**
      * The Request.
      *
-     * @see BaseCoreController#request BaseController#request request
+     * @see BaseCoreController#request_ BaseController#request request
      */
     @Autowired
-    protected HttpServletRequest request;
+    protected HttpServletRequest request_;
     /**
      * response
      */
     @Autowired
-    protected HttpServletResponse response;
-
+    protected HttpServletResponse response_;
 
 
 }

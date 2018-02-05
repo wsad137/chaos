@@ -1,6 +1,8 @@
 package chaos.core.context;
 
 import chaos.api.ApiHelper;
+import chaos.core.commons.ExceptionUtils_;
+import chaos.core.commons.KaptchaUtils_;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +25,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent event) {
         appContext = event.getApplicationContext();
         try {
+            ExceptionUtils_.init(appContext);
+            KaptchaUtils_.init(appContext);
             ApiHelper.getInstance().init(appContext);
         } catch (Exception e) {
             log.warn("初始化异常！", e);

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chaos.core.dao.SAccountMapper">
+    <resultMap id="BaseResultMap" type="chaos.core.model.SAccount">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="status" jdbcType="SMALLINT" property="status"/>
+        <result column="u_id" jdbcType="VARCHAR" property="uId"/>
+        <result column="token" jdbcType="VARCHAR" property="token"/>
+        <result column="l_t" jdbcType="BIGINT" property="lT"/>
+        <result column="ut" jdbcType="BIGINT" property="ut"/>
+        <result column="ct" jdbcType="BIGINT" property="ct"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, nickname, username, password, status, u_id, token, l_t, ut, ct
+  </sql>
+    <insert id="insertSelective" parameterType="chaos.core.model.SAccount">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into s_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="uId != null">
+                u_id,
+            </if>
+            <if test="token != null">
+                token,
+            </if>
+            <if test="lT != null">
+                l_t,
+            </if>
+            <if test="ut != null">
+                ut,
+            </if>
+            <if test="ct != null">
+                ct,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="uId != null">
+                #{uId,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="lT != null">
+                #{lT,jdbcType=BIGINT},
+            </if>
+            <if test="ut != null">
+                #{ut,jdbcType=BIGINT},
+            </if>
+            <if test="ct != null">
+                #{ct,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="chaos.core.model.SAccount">
+        update s_account
+        <set>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="uId != null">
+                u_id = #{uId,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                token = #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="lT != null">
+                l_t = #{lT,jdbcType=BIGINT},
+            </if>
+            <if test="ut != null">
+                ut = #{ut,jdbcType=BIGINT},
+            </if>
+            <if test="ct != null">
+                ct = #{ct,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <resultMap extends="BaseResultMap" id="BaseResultMapExt" type="chaos.core.model.SAccount">
+        <collection column="id" property="roles" select="chaos.core.dao.SRoleMapper.selectListByAid"/>
+    </resultMap>
+</mapper>

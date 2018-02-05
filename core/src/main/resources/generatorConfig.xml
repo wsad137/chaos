@@ -8,7 +8,7 @@
     <!--<properties resource="/env/dev.properties"/>-->
     <!--<properties url="file:///D:/java/IntelliJ_IDEA_WORK/shop/src/main/resources/jdbc.properties"/>-->
     <!--<properties url="file:///D:/java/IntelliJ_IDEA_WORK/shop/src/main/resources/jdbc.properties"/>-->
-    <properties resource="generatorConfig.properties"/>
+    <!--<properties resource="generatorConfig.properties"/>-->
 
     <!--指定特定数据库的jdbc驱动jar包的位置 -->
     <!--<classPathEntry location="${jdbc.driverLocation}"/>-->
@@ -26,9 +26,9 @@
 
 
         <!--jdbc的数据库连接 -->
-        <jdbcConnection driverClass="${jdbc.driverClassName}" connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}"></jdbcConnection>
-        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/core" userId="wangjian" password="123456">-->
-        <!--</jdbcConnection>-->
+        <!--<jdbcConnection driverClass="${jdbc.driverClassName}" connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}"></jdbcConnection>-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/chaos-core" userId="wangjian" password="123456">
+        </jdbcConnection>
 
 
         <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
@@ -110,24 +110,42 @@
         <!--</table>-->
 
 
-        <!-- 日志信息表-->
-        <table tableName="common_logs" domainObjectName="LogModel" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
+         <!--日志信息表-->
+        <!--<table tableName="logs_" domainObjectName="LogModel_" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
 
-        <!-- 异常信息表-->
-        <table tableName="common_exceptions" domainObjectName="ExceptionModel" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <!--&lt;!&ndash; 异常信息表&ndash;&gt;-->
+        <!--<table tableName="exceptions_" domainObjectName="ExceptionModel_" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
 
-        <!-- 城市信息表-->
-        <table tableName="common_region" domainObjectName="RegionModel" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+        <!--&lt;!&ndash; 城市信息表&ndash;&gt;-->
+        <!--<table tableName="region_" domainObjectName="RegionModel_" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--&lt;!&ndash; 文件上传信息表&ndash;&gt;-->
+        <!--&lt;!&ndash;<table tableName="common_up_file" domainObjectName="UpFileModel" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;配置记录表&ndash;&gt;-->
+        <!--<table tableName="config_" domainObjectName="ConfigModel_" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+
+        <!--shiro-->
+        <!--<table tableName="s_account" domainObjectName="SAccount" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="s_account_role" domainObjectName="SAccountRole" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
+        <!--<table tableName="s_permission" domainObjectName="SPermission" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <table tableName="s_role" domainObjectName="SRole" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <!-- 文件上传信息表-->
-        <!--<table tableName="common_up_file" domainObjectName="UpFileModel" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <!--<table tableName="s_role_permission" domainObjectName="SRolePermission" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
+        <!--shiro-->
 
-        <!--配置记录表-->
-        <table tableName="common_config" domainObjectName="ConfigModel" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
 
         <!--ucenter 模块-->
 

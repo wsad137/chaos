@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chaos.core.dao.SRolePermissionMapper">
+  <resultMap id="BaseResultMap" type="chaos.core.model.SRolePermission">
+    <result column="rid" jdbcType="BIGINT" property="rid" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+  </resultMap>
+  <insert id="insertSelective" parameterType="chaos.core.model.SRolePermission">
+    insert into s_role_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=BIGINT},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

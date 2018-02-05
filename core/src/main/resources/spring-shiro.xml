@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <!--<aop:config proxy-target-class="true"/>-->
+    <!-- 会话Session ID生成器 -->
+    <!--<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>-->
+
+
+    <!-- 配置权限管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--配置多个验证逻辑-->
+        <property name="authenticator" ref="modularRealmAuthenticator"/>
+
+        <!-- ref对应我们写的realm  MyShiro -->
+        <!--<property name="realm" ref="myShiro"/>-->
+        <!--<property name="realms">-->
+            <!--<list value-type=""></list>-->
+            <!--<util:list>-->
+                <!--<ref bean="myShiro"/>-->
+                <!--<ref bean="mobileRealm"/>-->
+            <!--</util:list>-->
+        <!--</property>-->
+
+        <!--<property name="authenticator"-->
+        <!-- 使用下面配置的缓存管理器 -->
+        <property name="cacheManager" ref="redisCacheManager"/>
+        <!--<property name="cacheManager" ref=""/>-->
+
+        <property name="sessionManager" ref="sessionManager"/>
+        <!--<property name="rememberMeManager" ref="myRememberMeManager"></property>-->
+
+        <property name="rememberMeManager" ref="rememberMeManager"/>
+
+    </bean>
+
+    <bean id="modularRealmAuthenticator" class="chaos.core.shiro.MyModularRealmAuthenticator">
+        <!--只有第一个成功地验证的Realm 返回的信息将被使用。所有进一步的Realm 将被忽略。如果没有一个验证成功，则整体尝试失败-->
+        <property name="authenticationStrategy">
+            <bean class="org.apache.shiro.authc.pam.FirstSuccessfulStrategy"/>
+        </property>
+        <!--<property name=""-->
+        <property name="realms">
+            <util:list>
+                <ref bean="myShiro"/>
+                <ref bean="mobileRealm"/>
+            </util:list>
+        </property>
+    </bean>
+
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager"
+          class="chaos.core.shiro.MyRememberMeManager">
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="rememberMe"/>
+        <property name="httpOnly" value="true"/>
+        <!--<property name="maxAge" value="2592000"/>&lt;!&ndash; 30天 &ndash;&gt;-->
+        <property name="maxAge" value="31104000"/><!-- 一年 -->
+    </bean>
+
+
+    <!--<bean id="myRememberMeManager" class="com.jiyoo.shiro.MyRememberMeManager"></bean>-->
+
+    <bean id="sessionManager" class="chaos.core.shiro.MyDefaultWebSessionManager">
+
+        <property name="globalSessionTimeout" value="518400000"/><!--两个月-->
+        <!--<property name="globalSessionTimeout" value="24000000"/>-->
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <!--<property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>-->
+        <!--<property name="sessionDAO" ref="sessionDAO"/>-->
+        <property name="sessionDAO" ref="redisSessionDAO"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
+
+    <!-- 会话Cookie 模板-->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="31104000"/>
+        <!--<property name="maxAge" value="180000"/>-->
+    </bean>
+
+    <!-- cacheManager -->
+    <bean id="redisCacheManager" class="org.crazycake.shiro.RedisCacheManager">
+        <property name="redisManager" ref="redisManager"/>
+    </bean>
+
+
+    <!-- 配置shiro的过滤器工厂类，id- shiroFilter要和我们在web.xml中配置的过滤器一致 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 调用我们配置的权限管理器 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 配置我们的登录请求地址 -->
+        <property name="loginUrl" value="/account/login1"/>
+        <!-- 配置我们在登录页登录成功后的跳转地址，如果你访问的是非/login地址，则跳到您访问的地址 -->
+        <property name="successUrl" value="/account/loginSuccess"/>
+        <!-- 如果您请求的资源不再您的权限范围，则跳转到/403请求地址 -->
+        <property name="unauthorizedUrl" value="/account/403"/>
+        <!-- 权限配置 -->
+        <!--<property name="filterChainDefinitions">-->
+        <!--<value>-->
+        <!-- anon表示此地址不需要任何权限即可访问 -->
+        <!--/static/**=anon-->
+        <!--/api/**=anon-->
+        <!--/**.html=anon-->
+        <!-- perms[user:query]表示访问此连接需要权限为user:query的用户 -->
+        <!--/user=perms[user:query]-->
+        <!-- roles[manager]表示访问此连接需要用户的角色为manager -->
+        <!--/user/add=roles[manager]-->
+        <!--/user/del/**=roles[admin]-->
+        <!--/user/edit/**=roles[manager]-->
+        <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login-->
+        <!--/** = authc-->
+        <!--</value>-->
+        <!--</property>-->
+
+
+        <property name="filters">
+
+            <util:map>
+                <!--<entry key="role" value-ref="role"></entry>-->
+                <!--<entry key="authc" value-ref="authc"/>-->
+                <entry key="mobileAuthc" value-ref="mobileAuthc"/>
+                <!--<entry key="corsFilter" value-ref="corsFilter"/>-->
+                <!--<entry key="user" value="com.jiyoo.shiro.filter.UserFilter"></entry>-->
+                <!--<entry key="login" value-ref="login"></entry>-->
+                <!--<entry key="role" value-ref="role"></entry>-->
+                <!--<entry key="simple" value-ref="simple"></entry>-->
+                <!--<entry key="permission" value-ref="permission"></entry>-->
+                <!--<entry key="kickout" value-ref="kickoutSessionFilter"></entry>-->
+
+                <!--默认过滤器-->
+                <!--anon &#45;&#45; org.apache.shiro.web.filter.authc.AnonymousFilter-->
+                <!--authc &#45;&#45; org.apache.shiro.web.filter.authc.FormAuthenticationFilter-->
+                <!--authcBasic &#45;&#45; org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter-->
+                <!--perms &#45;&#45; org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter-->
+                <!--port &#45;&#45; org.apache.shiro.web.filter.authz.PortFilter-->
+                <!--rest &#45;&#45; org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter-->
+                <!--roles &#45;&#45; org.apache.shiro.web.filter.authz.RolesAuthorizationFilter-->
+                <!--ssl &#45;&#45; org.apache.shiro.web.filter.authz.SslFilter-->
+                <!--user &#45;&#45; org.apache.shiro.web.filter.authc.UserFilter-->
+                <!--logout &#45;&#45; org.apache.shiro.web.filter.authc.LogoutFilter-->
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions" value="/**=mobileAuthc"/>
+    </bean>
+    <bean id="mobileAuthc" class="chaos.core.shiro.filter.MobileFormAuthenticationFilter"/>
+    <bean id="corsFilter" class="chaos.core.shiro.filter.CorsFilter"/>
+    <!-- 认证数据库存储-->
+    <bean id="role" class="chaos.core.shiro.RoleAuthorizationFilter"/>
+    <!--<bean id="shiroManager" class="com.sojson.core.shiro.service.impl.ShiroManagerImpl"/>-->
+    <bean id="authc" class="chaos.core.shiro.filter.AuthcAuthorizationFilter"/>
+    <!--<bean id="role" class="com.sojson.core.shiro.filter.RoleFilter"/>-->
+    <!--<bean id="permission" class="com.sojson.core.shiro.filter.PermissionFilter"/>-->
+    <!--<bean id="simple" class="com.sojson.core.shiro.filter.SimpleAuthFilter"/>-->
+
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">/error/302</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
+    <!-- the lifecycleBeanProcessor has run: -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor" p:proxyTargetClass="true"/>
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+
+    <!-- shiro redisManager -->    <bean id="redisManager" class="org.crazycake.shiro.RedisManager">
+        <property name="host" value="${redis.hostName}"/>
+        <property name="port" value="${redis.port}"/>
+        <!--<property name="port" value="6379"/>-->
+        <property name="expire" value="7776000"/><!--一个季度-->
+        <!--<property name="expire" value="${redis.expire}"/>-->
+        <!--<property name="password" value="123456"/>-->
+        <!-- optional properties:
+        <property name="timeout" value="10000"/>
+        <property name="password" value="123456"/>
+        -->
+    </bean>
+
+    <!-- redisSessionDAO -->
+    <bean id="redisSessionDAO" class="org.crazycake.shiro.RedisSessionDAO">
+        <property name="redisManager" ref="redisManager"/>
+    </bean>
+
+
+    <!--&lt;!&ndash; 用户缓存 &ndash;&gt;-->
+    <!--<bean id="customShiroCacheManager" class="com.sojson.core.shiro.cache.impl.CustomShiroCacheManager">-->
+    <!--<property name="shiroCacheManager" ref="jedisShiroCacheManager"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; shiro 缓存实现，对ShiroCacheManager，我是采用redis的实现 &ndash;&gt;-->
+    <!--<bean id="jedisShiroCacheManager" class="com.sojson.core.shiro.cache.impl.JedisShiroCacheManager">-->
+    <!--<property name="jedisManager" ref="jedisManager"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; redis 的缓存 &ndash;&gt;-->
+    <!--<bean id="jedisManager" class="com.sojson.core.shiro.cache.JedisManager">-->
+    <!--<property name="jedisPool" ref="jedisPool"/>-->
+    <!--</bean>-->
+
+
+    <!--<bean id="shiroCacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>-->
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <!--pc端认证授权-->
+    <bean id="myShiro" class="chaos.core.shiro.PcRealm"/>
+    <!--移动端认证授权-->
+    <bean id="mobileRealm" class="chaos.core.shiro.MobileRealm"/>
+
+</beans>
