@@ -39,7 +39,7 @@ public class SAccountController_ extends BaseCoreController {
     private final static Logger log = LoggerFactory.getLogger(SAccountController_.class);
 
     @Autowired
-    SAccountService_ sAccountService;
+    protected SAccountService_ sAccountService_;
 
 
     /**

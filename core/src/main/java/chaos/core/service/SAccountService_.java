@@ -1,6 +1,7 @@
 package chaos.core.service;
 
 import chaos.core.model.SAccount;
+import chaos.core.model.SAccountRole;
 
 /**
  * Created by chaos on 2018/1/16.
@@ -82,4 +83,11 @@ public interface SAccountService_ {
      * @return
      */
     boolean addOrUpdateAccount(SAccount account);
+
+    /**
+     *
+     * @param accountRole
+     * @return
+     */
+    boolean addOrUpdateAccountRrole(SAccountRole accountRole);
 }

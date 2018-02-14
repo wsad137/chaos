@@ -5,6 +5,9 @@ import chaos.api.annoatation.ApiField;
 import java.io.Serializable;
 
 public class SRolePermission implements Serializable {
+    @ApiField("id///")
+    private Long id;
+
     /**
      * 角色ID
      */
@@ -24,6 +27,20 @@ public class SRolePermission implements Serializable {
      * @mbg.generated
      */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * 
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * 角色ID

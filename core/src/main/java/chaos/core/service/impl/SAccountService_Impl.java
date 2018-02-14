@@ -4,6 +4,7 @@ import chaos.core.dao.SAccountMapper;
 import chaos.core.dao.SAccountRoleMapper;
 import chaos.core.dao.SRoleMapper;
 import chaos.core.model.SAccount;
+import chaos.core.model.SAccountRole;
 import chaos.core.service.SAccountService_;
 import chaos.utils.object.ObjectUtils;
 import org.slf4j.Logger;
@@ -82,5 +83,17 @@ public class SAccountService_Impl implements SAccountService_ {
     public boolean addOrUpdateAccount(SAccount account) {
         if (ObjectUtils.isEmpty(account.getId())) return sAccountMapper.insert(account) > 0;
         return sAccountMapper.updateByPrimaryKeySelective(account) > 0;
+    }
+
+    @Override
+    public boolean addOrUpdateAccountRrole(SAccountRole accountRole) {
+
+        SAccountRole sAccountRole = sAccountRoleMapper.selectByAId(accountRole.getaId());
+
+        if (sAccountRole == null) {
+            return sAccountRoleMapper.insert(accountRole) > 0;
+        } else {
+            return sAccountRoleMapper.updateByPrimaryKeySelective(accountRole) > 0;
+        }
     }
 }

@@ -17,16 +17,16 @@ import java.util.Properties;
  * 作者：王健
  * qq:1413221142
  */
-public class ConfigHelper {
+public class WeiXinConfig_ {
 
-    private final static Logger log = LoggerFactory.getLogger(ConfigHelper.class);
+    private final static Logger log = LoggerFactory.getLogger(WeiXinConfig_.class);
 
     private static final String configFile = "/chaos-weixin.properties";
 
 //    private List<Config> configs = Lists.newArrayList();
 
-    public Map<String, Config> getConfigs() {
-        return configs;
+    public static Map<String, Config> getConfigs() {
+        return getInstance().configs;
     }
 
     public void setConfigs(Map<String, Config> configs) {
@@ -37,15 +37,15 @@ public class ConfigHelper {
 
     private Properties p = new Properties();
 
-    private static ConfigHelper configHelper;
+    private static WeiXinConfig_ weiXinConfig_;
 
-    private ConfigHelper() {
+    private WeiXinConfig_() {
         init();
     }
 
-    public static ConfigHelper getInstance() {
-        if (configHelper == null) configHelper = new ConfigHelper();
-        return configHelper;
+    private static WeiXinConfig_ getInstance() {
+        if (weiXinConfig_ == null) weiXinConfig_ = new WeiXinConfig_();
+        return weiXinConfig_;
     }
 
     private void refresh() {

@@ -28,7 +28,6 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,40 +37,43 @@ import java.util.stream.Collectors;
  * 作者：王健(chaos)
  * 时间：2016-02-03
  */
-public class ApiHelper {
+public class ApiUtils_ {
 
-    private static final Logger log = Logger.getLogger(ApiHelper.class);
+    private static final Logger log = Logger.getLogger(ApiUtils_.class);
 
-    private ApiHelper() {
+    private ApiUtils_() {
     }
 
-    private static ApiHelper apiHelper = new ApiHelper();
-
-    public static ApiHelper getInstance() {
-        return apiHelper;
+    private ApiUtils_(ApplicationContext context) {
+        this.context = context;
     }
+
+    private static ApiUtils_ apiUtils_;
+
+//    private static ApiUtils_ getInstance(ApplicationContext context) {
+//        if (apiUtils_ == null) apiUtils_ = new ApiUtils_(context);
+//        return apiUtils_;
+//    }
 
     private static ApiConfig apiConfig;
 
-    public ApiConfig getConfig() {
-
-        if (apiConfig != null) {
-            return apiConfig;
-        } else {
-            apiConfig = new ApiConfig();
-        }
+    public static ApiConfig getConfig() {
+        if (apiConfig == null) apiConfig = new ApiConfig();
         return apiConfig;
     }
 
 //    private ApiConfig _config = new ApiConfig();
 
-    public void refresh() {
-        if (this.applicationContext != null) init(applicationContext);
+    /**
+     *
+     */
+    public static void refresh() {
+        apiUtils_.processor();
     }
 
-    public void refresh(ApplicationContext applicationContext) {
-        init(applicationContext);
-    }
+//    public void refresh(ApplicationContext applicationContext) {
+//        init(applicationContext);
+//    }
 
     //    private static Object getJdkDynamicProxyTargetObject(Object proxy) {
 //        Field h = null;
@@ -101,25 +103,32 @@ public class ApiHelper {
 //
 //        return target;
 //    }
-    private ApplicationContext applicationContext;
+    private ApplicationContext context;
 
     /**
      * 生成html帮助文档
      *
-     * @param applicationContext
+     * @param context
      */
-    public void init(ApplicationContext applicationContext) {
+    public static void init(ApplicationContext context) {
+
+        if (apiUtils_ == null) apiUtils_ = new ApiUtils_(context);
+        refresh();
+    }
+
+
+    public void processor() {
         try {
+//            getInstance(applicationContext);
+//            if (applicationContext == null) {
+//                log.error("applicationContext 为空无法初始化Api接口文档！");
+//                return;
+//            }
 
-
-            if (applicationContext == null) {
-                log.error("applicationContext 为空无法初始化Api接口文档！");
-                return;
-            }
-            this.applicationContext = applicationContext;
+//            this.applicationContext = applicationContext;
 
             log.info("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝开始生成api页面html＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
-            String[] con = applicationContext.getBeanNamesForAnnotation(ApiGroup.class);
+            String[] con = context.getBeanNamesForAnnotation(ApiGroup.class);
 //        Object[] con = ArrayUtils.addAll(ArrayUtils.addAll(con, con2), con3);
             if (ObjectUtils.isEmpty(con)) return;
             Map<String, List<_ApiModel>> listMap = new HashMap<>();
@@ -129,7 +138,7 @@ public class ApiHelper {
             for (Object c : con) {
                 String s = String.valueOf(c);
 //                ArrayList list = new ArrayList();
-                Object o = applicationContext.getBean(s);
+                Object o = context.getBean(s);
                 Class cla = o.getClass();
 
 
@@ -252,7 +261,7 @@ public class ApiHelper {
 
 //            String realPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath("");
 //            String defPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath("/api/");
-            String realPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath("/");
+            String realPath = ((WebApplicationContext) context).getServletContext().getRealPath("/");
             String webPath;
             if (StringUtils.isEmpty(getConfig().getRootPath())) {
 //                webPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath(getConfig().getName());

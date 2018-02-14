@@ -1,6 +1,7 @@
 package chaos.core.context;
 
-import chaos.api.ApiHelper;
+import chaos.api.ApiUtils_;
+import chaos.core.commons.DbUtils_;
 import chaos.core.commons.ExceptionUtils_;
 import chaos.core.commons.KaptchaUtils_;
 import org.slf4j.Logger;
@@ -16,8 +17,8 @@ import org.springframework.stereotype.Component;
  * qq:1413221142
  */
 @Component
-public class Init implements ApplicationListener<ContextRefreshedEvent> {
-    private final static Logger log = LoggerFactory.getLogger(Init.class);
+public class Init_ implements ApplicationListener<ContextRefreshedEvent> {
+    private final static Logger log = LoggerFactory.getLogger(Init_.class);
 
     public ApplicationContext appContext;
 
@@ -25,9 +26,10 @@ public class Init implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent event) {
         appContext = event.getApplicationContext();
         try {
+            DbUtils_.init(appContext);
             ExceptionUtils_.init(appContext);
             KaptchaUtils_.init(appContext);
-            ApiHelper.getInstance().init(appContext);
+            ApiUtils_.init(appContext);
         } catch (Exception e) {
             log.warn("初始化异常！", e);
         }

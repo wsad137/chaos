@@ -1,8 +1,8 @@
 package chaos.weixin.example;
 
-import chaos.weixin._WeixinController;
+import chaos.weixin.WeixinController_;
 import chaos.weixin.common.Config;
-import chaos.weixin.common.ConfigHelper;
+import chaos.weixin.common.WeiXinConfig_;
 import chaos.weixin.request.WechatRequest;
 import chaos.weixin.response.WechatResponse;
 import org.slf4j.Logger;
@@ -23,7 +23,7 @@ import java.io.IOException;
  */
 @RequestMapping("/weixin")
 @Controller
-public class ExampleController extends _WeixinController {
+public class ExampleController extends WeixinController_ {
 
     @Autowired
     HttpServletRequest request;
@@ -36,7 +36,7 @@ public class ExampleController extends _WeixinController {
     @RequestMapping(value = "/main")
     @ResponseBody
     public void test() {
-        Config config = ConfigHelper.getInstance().getConfigs().get("wx139feb09a227b2ee");
+        Config config = WeiXinConfig_.getConfigs().get("wx139feb09a227b2ee");
         init(request, config);
         try {
             String res = execute();

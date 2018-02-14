@@ -28,11 +28,11 @@ import java.util.List;
  * @author ChengNing
  * @date 2014-12-4
  */
-public abstract class _WeixinController {
+public abstract class WeixinController_ {
 
     private Config config;
 
-    Logger logger = Logger.getLogger(_WeixinController.class);
+    Logger logger = Logger.getLogger(WeixinController_.class);
 
     private HttpServletRequest request;
 
@@ -52,7 +52,7 @@ public abstract class _WeixinController {
     /**
      * 构建微信处理
      */
-    public _WeixinController() {
+    public WeixinController_() {
 //		this.config = config;
 //		this.request = request;
         this.wechatRequest = new WechatRequest();
@@ -89,6 +89,7 @@ public abstract class _WeixinController {
         }
         //分发消息，得到响应
         String result = dispatch();
+        if (result.equals("<xml/>\n")) result = "";
         logger.info("response data:" + result);
         return result;
     }
@@ -106,6 +107,7 @@ public abstract class _WeixinController {
             logger.error("post data deal failed!");
             e.printStackTrace();
         }
+
         // 解析数据
         setPostData(postDataStr);
         // 消息分发处理
@@ -243,6 +245,7 @@ public abstract class _WeixinController {
      * @return
      */
     private String response() {
+
         String result = null;
         try {
             JaxbParser jaxbParser = new JaxbParser(WechatResponse.class);
@@ -441,19 +444,16 @@ public abstract class _WeixinController {
 
     /**
      * 图像消息Msgtype=image
-     *
      */
     protected abstract void onImage();
 
     /**
      * 语音消息 Msgtype=voice
-     *
      */
     protected abstract void onVoice();
 
     /**
      * 视频 消息Msgtype=video
-     *
      */
     protected abstract void onVideo();
 

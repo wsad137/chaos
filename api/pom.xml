@@ -8,6 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>api</artifactId>
     <!--<version>2.0.1</version>-->
+    <!--<version>2.0-RELEASE</version>-->
     <packaging>war</packaging>
     <name>api Maven Webapp</name>
     <url>http://maven.apache.org</url>
@@ -20,7 +21,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <!--<version>3.8.1</version>-->
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -36,9 +37,12 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
-            <version>1.7</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -65,6 +69,10 @@
             <artifactId>javax.servlet-api</artifactId>
             <!--<version>3.1.0</version>-->
         </dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+        </dependency>
         <!--<dependency>-->
         <!--<groupId>chaos</groupId>-->
         <!--<artifactId>core</artifactId>-->
@@ -73,7 +81,8 @@
         <!--</dependency>-->
     </dependencies>
     <build>
-        <finalName>${project.parent.groupId}-${project.artifactId}.${project.version}</finalName>
+        <!--<finalName>${project.parent.groupId}-${project.artifactId}.${project.version}</finalName>-->
+        <finalName>${project.artifactId}</finalName>
         <resources>
             <!--配置maven资料目录-->
             <resource>

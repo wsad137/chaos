@@ -5,6 +5,9 @@ import chaos.api.annoatation.ApiField;
 import java.io.Serializable;
 
 public class SAccountRole implements Serializable {
+    @ApiField("id///")
+    private Long id;
+
     /**
      * 账号ID
      */
@@ -24,6 +27,20 @@ public class SAccountRole implements Serializable {
      * @mbg.generated
      */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * 
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * 账户ID

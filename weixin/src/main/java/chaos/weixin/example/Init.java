@@ -1,6 +1,6 @@
 package chaos.weixin.example;
 
-import chaos.weixin._WeiXinHelper;
+import chaos.weixin.WeiXinUtils_;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -20,11 +20,11 @@ public class Init implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent event) {
         appContext = event.getApplicationContext();
 
-//        _WeiXinHelper.refreshToken();
-        _WeiXinHelper weiXinHelper = new _WeiXinHelper();
-        weiXinHelper.init(appContext);
+//        WeiXinUtils_.refreshToken();
+//        WeiXinUtils_ weiXinHelper = new WeiXinUtils_();
+        WeiXinUtils_.init(appContext);
 //Ex
-//        ConfigHelper.init(appContext);
+//        WeiXinConfig_.init(appContext);
 //        KaptchaHelper.init(appContext);
 //        CommonRequestHelper.init(appContext);
 //_WeXinHelper

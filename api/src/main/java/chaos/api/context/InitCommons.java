@@ -1,6 +1,6 @@
 package chaos.api.context;
 
-import chaos.api.ApiHelper;
+import chaos.api.ApiUtils_;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -27,7 +27,7 @@ public class InitCommons implements ApplicationListener<ContextRefreshedEvent> {
 
         log.info("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝Commons-web初始化＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
         try {
-            ApiHelper.getInstance().init(appContext);
+            ApiUtils_.init(appContext);
         } catch (Exception e) {
             log.warn("初始化异常！", e);
         }

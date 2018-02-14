@@ -1,7 +1,7 @@
 package chaos.api.model;
 
 
-import chaos.api.ApiHelper;
+import chaos.api.ApiUtils_;
 import chaos.api.annoatation.ApiField;
 import chaos.api.annoatation.ApiModel;
 import chaos.api.annoatation.ApiRes;
@@ -16,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.nio.charset.Charset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -120,7 +119,7 @@ public class _ApiModel {
         //排除不需要的字段
         for (String s : getExclude()) temp.remove(s);
 
-        String globalIgnore = ApiHelper.getInstance().getConfig().getGlobalIgnore();
+        String globalIgnore = ApiUtils_.getConfig().getGlobalIgnore();
 
         String[] strings = new String[0];
         if (!StringUtils.isEmpty(globalIgnore)) strings = StringUtils.split(globalIgnore, ",");

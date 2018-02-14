@@ -24,12 +24,14 @@
         <dependency>
             <groupId>chaos</groupId>
             <artifactId>utils</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <!--<version>2.0-SNAPSHOT</version>-->
+            <version>2.0-RELEASE</version>
         </dependency>
         <dependency>
             <groupId>chaos</groupId>
             <artifactId>api</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <!--<version>2.0-SNAPSHOT</version>-->
+            <version>2.0-RELEASE</version>
             <classifier>jar</classifier>
         </dependency>
         <dependency>
@@ -201,9 +203,8 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
-            <version>1.6.0.RELEASE</version>
+            <!--<version>1.6.0.RELEASE</version>-->
         </dependency>
-
 
 
         <dependency>
@@ -261,83 +262,80 @@
             <artifactId>mybatis</artifactId>
         </dependency>
 
-
-
-
     </dependencies>
     <build>
         <!--<finalName>${project.parent.groupId}-${project.artifactId}.${project.version}</finalName>-->
         <finalName>${project.artifactId}</finalName>
 
 
-        <!--<plugins>-->
-        <!--<plugin>-->
-        <!--<groupId>org.apache.maven.plugins</groupId>-->
-        <!--<artifactId>maven-surefire-plugin</artifactId>-->
-        <!--<version>2.19.1</version>-->
-        <!--<configuration>-->
-        <!--&lt;!&ndash;跳过测试&ndash;&gt;-->
-        <!--<skip>true</skip>-->
-        <!--</configuration>-->
-        <!--</plugin>-->
-        <!--<plugin>-->
-        <!--<groupId>org.apache.maven.plugins</groupId>-->
-        <!--<artifactId>maven-war-plugin</artifactId>-->
-        <!--<version>3.0.0</version>-->
-        <!--&lt;!&ndash;web同时打包jar&ndash;&gt;-->
-        <!--<configuration>-->
-        <!--&lt;!&ndash;<packagingExcludes>*.sql</packagingExcludes>&ndash;&gt;-->
-        <!--&lt;!&ndash;<warSourceExcludes>*.sql</warSourceExcludes>&ndash;&gt;-->
-        <!--<attachClasses>true</attachClasses>-->
-        <!--<classesClassifier>jar</classesClassifier>-->
-        <!--&lt;!&ndash;<webResources>&ndash;&gt;-->
-        <!--&lt;!&ndash;<resource>&ndash;&gt;-->
-        <!--&lt;!&ndash;<directory>src/main/resources</directory>&ndash;&gt;-->
-        <!--&lt;!&ndash;<targetPath>WEB-INF/classes</targetPath>&ndash;&gt;-->
-        <!--&lt;!&ndash;<filtering>true</filtering>&ndash;&gt;-->
-        <!--&lt;!&ndash;</resource>&ndash;&gt;-->
-        <!--&lt;!&ndash;</webResources>&ndash;&gt;-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <!--跳过测试-->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <!--web同时打包jar-->
+                <configuration>
+                    <!--<packagingExcludes>*.sql</packagingExcludes>-->
+                    <!--<warSourceExcludes>*.sql</warSourceExcludes>-->
+                    <attachClasses>true</attachClasses>
+                    <classesClassifier>jar</classesClassifier>
+                    <!--<webResources>-->
+                    <!--<resource>-->
+                    <!--<directory>src/main/resources</directory>-->
+                    <!--<targetPath>WEB-INF/classes</targetPath>-->
+                    <!--<filtering>true</filtering>-->
+                    <!--</resource>-->
+                    <!--</webResources>-->
 
-        <!--&lt;!&ndash;<webResources>&ndash;&gt;-->
-        <!--&lt;!&ndash;<resource>&ndash;&gt;-->
-        <!--&lt;!&ndash;&lt;!&ndash; 相对pom.xml的目录 &ndash;&gt;&ndash;&gt;-->
-        <!--&lt;!&ndash;<directory>src/main/resources/</directory>&ndash;&gt;-->
-        <!--&lt;!&ndash;&lt;!&ndash; 文件目标位置 &ndash;&gt;&ndash;&gt;-->
-        <!--&lt;!&ndash;<targetPath>WEB-INF/classes</targetPath>&ndash;&gt;-->
-        <!--&lt;!&ndash;<includes>&ndash;&gt;-->
-        <!--&lt;!&ndash;<include>*.xml</include>&ndash;&gt;-->
-        <!--&lt;!&ndash;<include>*.properties</include>&ndash;&gt;-->
-        <!--&lt;!&ndash;</includes>&ndash;&gt;-->
-        <!--&lt;!&ndash;&lt;!&ndash;&ndash;&gt;-->
-        <!--&lt;!&ndash;<excludes>&ndash;&gt;-->
-        <!--&lt;!&ndash;<exclude>**/image2</exclude>&ndash;&gt;-->
-        <!--&lt;!&ndash;</excludes>&ndash;&gt;-->
-        <!--&lt;!&ndash;&ndash;&gt;&ndash;&gt;-->
-        <!--&lt;!&ndash;</resource>&ndash;&gt;-->
-        <!--&lt;!&ndash;</webResources>&ndash;&gt;-->
-        <!--&lt;!&ndash;<archiveClasses>false</archiveClasses>&ndash;&gt;-->
+                    <!--<webResources>-->
+                    <!--<resource>-->
+                    <!--&lt;!&ndash; 相对pom.xml的目录 &ndash;&gt;-->
+                    <!--<directory>src/main/resources/</directory>-->
+                    <!--&lt;!&ndash; 文件目标位置 &ndash;&gt;-->
+                    <!--<targetPath>WEB-INF/classes</targetPath>-->
+                    <!--<includes>-->
+                    <!--<include>*.xml</include>-->
+                    <!--<include>*.properties</include>-->
+                    <!--</includes>-->
+                    <!--&lt;!&ndash;-->
+                    <!--<excludes>-->
+                    <!--<exclude>**/image2</exclude>-->
+                    <!--</excludes>-->
+                    <!--&ndash;&gt;-->
+                    <!--</resource>-->
+                    <!--</webResources>-->
+                    <!--<archiveClasses>false</archiveClasses>-->
 
-        <!--&lt;!&ndash;当archiveClasses=true时，resources中的文件资源会被打到jar中；&ndash;&gt;-->
-        <!--&lt;!&ndash;当archiveClasses=false时，resources中的文件资源在war的根目录。&ndash;&gt;-->
+                    <!--当archiveClasses=true时，resources中的文件资源会被打到jar中；-->
+                    <!--当archiveClasses=false时，resources中的文件资源在war的根目录。-->
 
-        <!--<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>-->
-        <!--</configuration>-->
-        <!--</plugin>-->
-        <!--<plugin>-->
-        <!--<groupId>org.apache.maven.plugins</groupId>-->
-        <!--<artifactId>maven-source-plugin</artifactId>-->
-        <!--<version>3.0.1</version>-->
-        <!--<executions>-->
-        <!--<execution>-->
-        <!--<id>attach-sources</id>-->
-        <!--<phase>verify</phase>&lt;!&ndash;  要绑定到的生命周期的阶段 在verify之后，install之前执行下面指定的goal &ndash;&gt;-->
-        <!--<goals>-->
-        <!--<goal>jar-no-fork</goal>&lt;!&ndash; 类似执行mvn source:jar &ndash;&gt;-->
-        <!--</goals>-->
-        <!--</execution>-->
-        <!--</executions>-->
-        <!--</plugin>-->
-        <!--</plugins>-->
+                    <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase><!--  要绑定到的生命周期的阶段 在verify之后，install之前执行下面指定的goal -->
+                        <goals>
+                            <goal>jar-no-fork</goal><!-- 类似执行mvn source:jar -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
 
         <resources>
             <!--配置maven资料目录-->
