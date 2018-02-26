@@ -3,7 +3,7 @@
 <mapper namespace="chaos.core.dao.SAccountRoleMapper">
     <resultMap id="BaseResultMap" type="chaos.core.model.SAccountRole">
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="a_id" jdbcType="VARCHAR" property="aId"/>
+        <result column="a_id" jdbcType="BIGINT" property="aId"/>
         <result column="r_id" jdbcType="BIGINT" property="rId"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -24,7 +24,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="aId != null">
-                #{aId,jdbcType=VARCHAR},
+                #{aId,jdbcType=BIGINT},
             </if>
             <if test="rId != null">
                 #{rId,jdbcType=BIGINT},
@@ -35,7 +35,7 @@
         update s_account_role
         <set>
             <if test="aId != null">
-                a_id = #{aId,jdbcType=VARCHAR},
+                a_id = #{aId,jdbcType=BIGINT},
             </if>
             <if test="rId != null">
                 r_id = #{rId,jdbcType=BIGINT},

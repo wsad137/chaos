@@ -12,7 +12,7 @@ public class SAccountRole implements Serializable {
      * 账号ID
      */
     @ApiField("aId/账户ID//")
-    private String aId;
+    private Long aId;
 
     /**
      * 角色ID
@@ -45,15 +45,15 @@ public class SAccountRole implements Serializable {
     /**
      * 账户ID
      */
-    public String getaId() {
+    public Long getaId() {
         return aId;
     }
 
     /**
      * 账户ID
      */
-    public void setaId(String aId) {
-        this.aId = aId == null ? null : aId.trim();
+    public void setaId(Long aId) {
+        this.aId = aId;
     }
 
     /**

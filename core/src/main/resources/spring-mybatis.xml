@@ -26,6 +26,17 @@
         </property>
         <!--<property name="connectionProperties">-->
             <!--<props>-->
+                <!--<prop key="a">b</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+        <!--<property name="connectionProperties">-->
+            <!--<props>-->
+                <!--<prop key="remarks">true</prop>-->
+                <!--<prop key="useInformationSchema" >true</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+        <!--<property name="connectionProperties">-->
+            <!--<props>-->
                 <!--&lt;!&ndash;连接池中保存的最大连接数目&ndash;&gt;-->
                 <!--<prop key="maxPoolSize">20</prop>-->
                 <!--&lt;!&ndash;连接池中保存的最少连接数目&ndash;&gt;-->

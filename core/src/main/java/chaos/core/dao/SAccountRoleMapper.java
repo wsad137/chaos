@@ -23,10 +23,10 @@ public interface SAccountRoleMapper {
      * @mbg.generated
      */
     @Insert({
-            "insert into s_account_role (a_id, r_id)",
-            "values (#{aId,jdbcType=VARCHAR}, #{rId,jdbcType=BIGINT})"
+        "insert into s_account_role (a_id, r_id)",
+        "values (#{aId,jdbcType=BIGINT}, #{rId,jdbcType=BIGINT})"
     })
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(SAccountRole record);
 
     /**
@@ -44,10 +44,10 @@ public interface SAccountRoleMapper {
      * @mbg.generated
      */
     @Select({
-            "select",
-            "id, a_id, r_id",
-            "from s_account_role",
-            "where id = #{id,jdbcType=BIGINT}"
+        "select",
+        "id, a_id, r_id",
+        "from s_account_role",
+        "where id = #{id,jdbcType=BIGINT}"
     })
     @ResultMap("chaos.core.dao.SAccountRoleMapper.BaseResultMap")
     SAccountRole selectByPrimaryKey(Long id);
@@ -67,10 +67,10 @@ public interface SAccountRoleMapper {
      * @mbg.generated
      */
     @Update({
-            "update s_account_role",
-            "set a_id = #{aId,jdbcType=VARCHAR},",
-            "r_id = #{rId,jdbcType=BIGINT}",
-            "where id = #{id,jdbcType=BIGINT}"
+        "update s_account_role",
+        "set a_id = #{aId,jdbcType=BIGINT},",
+          "r_id = #{rId,jdbcType=BIGINT}",
+        "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(SAccountRole record);
 
@@ -78,7 +78,7 @@ public interface SAccountRoleMapper {
             "select",
             "id, a_id, r_id",
             "from s_account_role",
-            "where a_id = #{aId,jdbcType=VARCHAR}"
+            "where a_id = #{aId,jdbcType=BIGINT}"
     })
     @ResultMap("chaos.core.dao.SAccountRoleMapper.BaseResultMap")
     SAccountRole selectByAId(String aId);

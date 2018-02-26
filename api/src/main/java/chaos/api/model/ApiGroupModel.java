@@ -17,7 +17,7 @@ public class ApiGroupModel {
 
     private String id = RandomStringUtils.randomAlphabetic(10);
     private String name;
-    private List<_ApiModel> apis = Lists.newArrayList();
+    private List<ApiModel_> apis = Lists.newArrayList();
 
     public String getId() {
         return id;
@@ -35,11 +35,11 @@ public class ApiGroupModel {
         this.name = name;
     }
 
-    public List<_ApiModel> getApis() {
+    public List<ApiModel_> getApis() {
         return apis;
     }
 
-    public void setApis(List<_ApiModel> apis) {
+    public void setApis(List<ApiModel_> apis) {
         this.apis = apis;
     }
 }

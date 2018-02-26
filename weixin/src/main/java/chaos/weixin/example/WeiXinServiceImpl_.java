@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
  * 时间：2016-11-01
  */
 @Service
-public class WeiXinServiceImpl extends _CustomerServer {
+public class WeiXinServiceImpl_ extends _CustomerServer {
 
 
-    private static final Logger log = Logger.getLogger(WeiXinServiceImpl.class);
+    private static final Logger log = Logger.getLogger(WeiXinServiceImpl_.class);
 
 
     private static String key = "chaos-weixin-Accesstoken";

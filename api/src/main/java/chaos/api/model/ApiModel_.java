@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * 作者：王健
  * 时间：2016-02-03
  */
-public class _ApiModel {
+public class ApiModel_ {
 
     private String id = RandomStringUtils.randomAlphabetic(10);
     private String idGroup;
@@ -41,7 +41,7 @@ public class _ApiModel {
     private List<F> _fields = Lists.newArrayList();
     private List<ApiFieldModel> returnFields = new ArrayList<>();
     private List<ApiRes> _res = Lists.newArrayList();
-    private List<_ApiModel> res = Lists.newArrayList();
+    private List<ApiModel_> res = Lists.newArrayList();
 
 
     /**
@@ -50,8 +50,8 @@ public class _ApiModel {
      * @param apiRes
      * @return
      */
-    private _ApiModel processorRes(ApiRes apiRes) {
-        _ApiModel def = new _ApiModel();
+    private ApiModel_ processorRes(ApiRes apiRes) {
+        ApiModel_ def = new ApiModel_();
         def.desc = apiRes.desc();
         processorField(def);
         return def;
@@ -62,7 +62,7 @@ public class _ApiModel {
      *
      * @param def
      */
-    private void processorField(_ApiModel def) {
+    private void processorField(ApiModel_ def) {
         Map<String, ApiFieldModel> temp = new HashMap<>();
         //添加bean中的字段
         for (Class bean : getBeans()) {
@@ -137,8 +137,8 @@ public class _ApiModel {
         });
     }
 
-    public _ApiModel processor(ApiGroupModel groupModel) {
-        _ApiModel def = new _ApiModel();
+    public ApiModel_ processor(ApiGroupModel groupModel) {
+        ApiModel_ def = new ApiModel_();
         def.idGroup = groupModel.getId();
         def.name = getName();
         def.nameGroup = getNameGroup();
@@ -271,11 +271,11 @@ public class _ApiModel {
         this.returnFields = returnFields;
     }
 
-    public List<_ApiModel> getRes() {
+    public List<ApiModel_> getRes() {
         return res;
     }
 
-    public void setRes(List<_ApiModel> res) {
+    public void setRes(List<ApiModel_> res) {
         this.res = res;
     }
 

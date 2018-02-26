@@ -69,39 +69,36 @@ public class DbUtils_ {
 
 
         log.info("数据库连接正常");
+        Connection conn = null;
         try {
-            URL url = DbUtils_.class.getClassLoader().getResource("db");
-            if (url == null) {
-                dataSource.getConnection().close();
-                return;
-            }
-            String path = url.toURI().getPath();
-
+            conn = dataSource.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            String path = DbUtils_.class.getClassLoader().getResource("db").toURI().getPath();
             if (path == null) {
-                dataSource.getConnection().close();
-                return;
+                /*web上下文获取资源*/
+                path = context.getResource("WEB-INF/classes/db").getFile().getPath();
             }
-
             File temp = new File(path);
-
             Collection<File> files = FileUtils.listFiles(temp, FileFilterUtils.suffixFileFilter("sql"), null);
-
-            ScriptRunner runner = new ScriptRunner(dataSource.getConnection());
+            ScriptRunner runner = new ScriptRunner(conn);
             for (File file : files) {
                 if (file.isDirectory()) continue;
-                JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
                 String name = Files.getNameWithoutExtension(file.getPath());
-//                String name = file.getName().substring(0, file.getName().lastIndexOf("."));
-                if (!tableExist(jdbcTemplate, name)) {
-//                    runner.runScript(Resources.getResourceAsReader(file.getPath()));
+                if (!tableExist(conn, name)) {
                     runner.runScript(new InputStreamReader(new FileInputStream(file), Constant_._coding.UTF8));
                     log.info(file.getName() + " 表创建成功！");
-
                 }
             }
-            dataSource.getConnection().close();
-        } catch (IOException | SQLException | URISyntaxException e) {
+        } catch (Exception e) {
             log.warn(e);
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception ignored) {
+            }
         }
     }
 
@@ -119,6 +116,7 @@ public class DbUtils_ {
 //
 //            (2) 获得当前数据库以及驱动的信息
             log.info(dbmd.getDatabaseProductName() + "-" + dbmd.getDatabaseProductVersion());
+
 //            System.out.println(dbmd.getDatabaseProductName());
 //            用以获得当前数据库是什么数据库。比如oracle，access等。返回的是字符串。
 //            System.out.println(dbmd.getDatabaseProductVersion());
@@ -158,11 +156,11 @@ public class DbUtils_ {
      * @return
      * @throws Exception
      */
-    private boolean tableExist(JdbcTemplate jt, String tableName) {
+    private boolean tableExist(Connection conn, String tableName) {
         ResultSet tabs = null;
-        Connection conn = null;
+//        Connection conn = null;
         try {
-            conn = jt.getDataSource().getConnection();
+//            conn = jt.getDataSource().getConnection();
             DatabaseMetaData dbMetaData = conn.getMetaData();
             String[] types = {"TABLE"};
             tabs = dbMetaData.getTables(conn.getCatalog(), null, null, types);
@@ -174,7 +172,7 @@ public class DbUtils_ {
         } finally {
             try {
                 tabs.close();
-                conn.close();
+//                conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

@@ -20,7 +20,7 @@
     </context:component-scan>
     <context:property-placeholder location="classpath*:*.properties" file-encoding="utf-8"/>
 
-    <context:mbean-export default-domain="mbeanCore" registration="replaceExisting"/>
+    <!--<context:mbean-export default-domain="mbeanCore" registration="replaceExisting"/>-->
 
     <task:annotation-driven executor="defaultExecutor"/>
     <task:executor id="defaultExecutor" pool-size="1-5" queue-capacity="20"/>

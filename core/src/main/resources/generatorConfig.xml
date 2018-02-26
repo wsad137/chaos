@@ -131,9 +131,9 @@
 
 
         <!--shiro-->
-        <!--<table tableName="s_account" domainObjectName="SAccount" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
+        <table tableName="s_account" domainObjectName="SAccount" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+            <generatedKey column="id" sqlStatement="SELECT UUID_SHORT()" identity="false"/>
+        </table>
         <table tableName="s_account_role" domainObjectName="SAccountRole" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
@@ -143,9 +143,9 @@
         <!--<table tableName="s_role" domainObjectName="SRole" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <table tableName="s_role_permission" domainObjectName="SRolePermission" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="s_role_permission" domainObjectName="SRolePermission" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
         <!--shiro-->
 
 

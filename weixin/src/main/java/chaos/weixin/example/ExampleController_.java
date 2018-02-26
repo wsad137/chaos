@@ -23,14 +23,14 @@ import java.io.IOException;
  */
 @RequestMapping("/weixin")
 @Controller
-public class ExampleController extends WeixinController_ {
+public class ExampleController_ extends WeixinController_ {
 
     @Autowired
     HttpServletRequest request;
 
     @Autowired
     HttpServletResponse response;
-    private Logger log = LoggerFactory.getLogger(ExampleController.class);
+    private Logger log = LoggerFactory.getLogger(ExampleController_.class);
 
     //    JspApplicationContextImpl
     @RequestMapping(value = "/main")

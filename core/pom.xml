@@ -297,21 +297,21 @@
                     <!--</webResources>-->
 
                     <!--<webResources>-->
-                    <!--<resource>-->
-                    <!--&lt;!&ndash; 相对pom.xml的目录 &ndash;&gt;-->
-                    <!--<directory>src/main/resources/</directory>-->
-                    <!--&lt;!&ndash; 文件目标位置 &ndash;&gt;-->
-                    <!--<targetPath>WEB-INF/classes</targetPath>-->
-                    <!--<includes>-->
-                    <!--<include>*.xml</include>-->
-                    <!--<include>*.properties</include>-->
-                    <!--</includes>-->
-                    <!--&lt;!&ndash;-->
-                    <!--<excludes>-->
-                    <!--<exclude>**/image2</exclude>-->
-                    <!--</excludes>-->
-                    <!--&ndash;&gt;-->
-                    <!--</resource>-->
+                        <!--<resource>-->
+                            <!--&lt;!&ndash; 相对pom.xml的目录 &ndash;&gt;-->
+                            <!--<directory>src/main/resources/</directory>-->
+                            <!--&lt;!&ndash; 文件目标位置 &ndash;&gt;-->
+                            <!--<targetPath>WEB-INF/classes</targetPath>-->
+                            <!--<includes>-->
+                                <!--<include>*.xml</include>-->
+                                <!--<include>*.properties</include>-->
+                            <!--</includes>-->
+                            <!--&lt;!&ndash;-->
+                            <!--<excludes>-->
+                            <!--<exclude>**/image2</exclude>-->
+                            <!--</excludes>-->
+                            <!--&ndash;&gt;-->
+                        <!--</resource>-->
                     <!--</webResources>-->
                     <!--<archiveClasses>false</archiveClasses>-->
 

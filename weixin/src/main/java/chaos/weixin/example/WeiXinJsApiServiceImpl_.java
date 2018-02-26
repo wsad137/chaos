@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * 时间：2016-11-01
  */
 @Service
-public class WeiXinJsApiServiceImpl extends _CustomerServer {
+public class WeiXinJsApiServiceImpl_ extends _CustomerServer {
 
     private static String key = "chaos-weixin-jsApiAccesstoken";
 

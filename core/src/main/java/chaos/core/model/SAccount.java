@@ -11,7 +11,7 @@ import java.time.Instant;
 public class SAccount implements Serializable {
 
     @ApiField("id///")
-    private String id;
+    private Long id;
 
     /**
      * 用户昵称
@@ -78,15 +78,15 @@ public class SAccount implements Serializable {
     /**
      *
      */
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      *
      */
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

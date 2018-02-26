@@ -36,7 +36,7 @@ public class ApiConfig {
     }
 
     public String getName() {
-        if (StringUtils.isEmpty(name)) name = "chaosApi";
+        if (StringUtils.isEmpty(name)) name = "api_";
         return name;
     }
 

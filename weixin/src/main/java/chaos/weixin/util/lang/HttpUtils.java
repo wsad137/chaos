@@ -55,14 +55,13 @@ public class HttpUtils {
      */
     public static String post(String url, InputStream instream) {
         try {
-            logger.warn("url= " + url);
+            logger.info("url= " + url);
             HttpEntity entity = Request.Post(url)
                     .bodyStream(instream, ContentType.create("text/html", Consts.UTF_8))
                     .execute().returnResponse().getEntity();
             return entity != null ? EntityUtils.toString(entity) : null;
         } catch (Exception e) {
-            logger.error("post请求异常，" + e.getMessage() + "\n post url:" + url);
-            e.printStackTrace();
+            logger.warn("post请求异常，" + e.getMessage() + "\n post url:" + url, e);
         }
         return null;
     }
@@ -86,14 +85,13 @@ public class HttpUtils {
      */
     private static String httpPost(String url, String data) {
         try {
-            logger.warn("url= " + url);
+            logger.info("url= " + url);
             HttpEntity entity = Request.Post(url)
                     .bodyString(data, ContentType.create("text/html", Consts.UTF_8))
                     .execute().returnResponse().getEntity();
             return entity != null ? EntityUtils.toString(entity) : null;
         } catch (Exception e) {
-            logger.error("post请求异常，" + e.getMessage() + "\n post url:" + url);
-            e.printStackTrace();
+            logger.warn("post请求异常，" + e.getMessage() + "\n post url:" + url, e);
         }
         return null;
     }
@@ -119,15 +117,14 @@ public class HttpUtils {
      */
     public static String postFile(String url, String name, File file) {
         try {
-            logger.warn("url= " + url);
+            logger.info("url= " + url);
             HttpEntity reqEntity = MultipartEntityBuilder.create().addBinaryBody(name, file).build();
             Request request = Request.Post(url);
             request.body(reqEntity);
             HttpEntity resEntity = request.execute().returnResponse().getEntity();
             return resEntity != null ? EntityUtils.toString(resEntity) : null;
         } catch (Exception e) {
-            logger.error("postFile请求异常，" + e.getMessage() + "\n post url:" + url);
-            e.printStackTrace();
+            logger.warn("postFile请求异常，" + e.getMessage() + "\n post url:" + url, e);
         }
         return null;
     }
@@ -145,8 +142,7 @@ public class HttpUtils {
             HttpEntity resEntity = request.execute().returnResponse().getEntity();
             return EntityUtils.toByteArray(resEntity);
         } catch (Exception e) {
-            logger.error("postFile请求异常，" + e.getMessage() + "\n post url:" + url);
-            e.printStackTrace();
+            logger.warn("postFile请求异常，" + e.getMessage() + "\n post url:" + url, e);
         }
         return null;
     }
@@ -159,13 +155,12 @@ public class HttpUtils {
      */
     private static String httpGet(String url) {
         try {
-            logger.warn("url= " + url);
+            logger.info("url= " + url);
             HttpEntity entity = Request.Get(url).execute().returnResponse().getEntity();
             return entity != null ? EntityUtils.toString(entity, Consts.UTF_8) : null;
 //            return entity != null ? EntityUtils.toString(entity) : null;
         } catch (Exception e) {
-            logger.error("get请求异常，" + e.getMessage() + "\n get url:" + url);
-            e.printStackTrace();
+            logger.warn("get请求异常，" + e.getMessage() + "\n get url:" + url, e);
         }
         return null;
     }

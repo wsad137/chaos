@@ -4,7 +4,7 @@ import chaos.api.annoatation.Api;
 import chaos.api.annoatation.ApiGroup;
 import chaos.api.model.ApiConfig;
 import chaos.api.model.ApiGroupModel;
-import chaos.api.model._ApiModel;
+import chaos.api.model.ApiModel_;
 import chaos.api.model.ApiFieldModel;
 import chaos.utils.ComparatorUtils;
 import chaos.utils.ZipUtil;
@@ -20,7 +20,6 @@ import org.apache.log4j.Logger;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -127,11 +126,11 @@ public class ApiUtils_ {
 
 //            this.applicationContext = applicationContext;
 
-            log.info("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝开始生成api页面html＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+            log.info("开始生成api页面html");
             String[] con = context.getBeanNamesForAnnotation(ApiGroup.class);
 //        Object[] con = ArrayUtils.addAll(ArrayUtils.addAll(con, con2), con3);
             if (ObjectUtils.isEmpty(con)) return;
-            Map<String, List<_ApiModel>> listMap = new HashMap<>();
+            Map<String, List<ApiModel_>> listMap = new HashMap<>();
             List<ApiGroupModel> groupModels = Lists.newArrayList();
 
             //遍历所有控制器
@@ -194,7 +193,7 @@ public class ApiUtils_ {
                 /**
                  * 遍历方法
                  */
-                List<_ApiModel> apis = Lists.newArrayList();
+                List<ApiModel_> apis = Lists.newArrayList();
                 for (Method method : cla.getMethods()) {
                     Api api = method.getAnnotation(Api.class);
                     if (ObjectUtils.isEmpty(api)) continue;
@@ -202,7 +201,7 @@ public class ApiUtils_ {
 
                     getReturnFields(method);
 
-                    _ApiModel apiModel = new _ApiModel();
+                    ApiModel_ apiModel = new ApiModel_();
                     apiModel.setName(api.name());
                     apiModel.setNameGroup(groupModel.getName());
                     apiModel.setDesc(api.desc());
@@ -261,14 +260,20 @@ public class ApiUtils_ {
 
 //            String realPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath("");
 //            String defPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath("/api/");
-            String realPath = ((WebApplicationContext) context).getServletContext().getRealPath("/");
-            String webPath;
-            if (StringUtils.isEmpty(getConfig().getRootPath())) {
-//                webPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath(getConfig().getName());
-                webPath = realPath + File.separator + getConfig().getName();
-            } else {
+            String realPath = context.getResource(getConfig().getName()).getFile().getPath();
+//            String realPath = context.getResource("/").getFile().getPath();
+//            String realPath = ((WebApplicationContext) context).getServletContext().getRealPath("/");
+            String webPath = realPath;
+            if (!StringUtils.isEmpty(getConfig().getRootPath())) {
                 webPath = getConfig().getRootPath() + getConfig().getName();
             }
+            log.info("api文件路径：" + webPath);
+//            if (StringUtils.isEmpty(getConfig().getRootPath())) {
+////                webPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath(getConfig().getName());
+//                webPath = realPath + File.separator + getConfig().getName();
+//            } else {
+//                webPath = getConfig().getRootPath() + getConfig().getName();
+//            }
 
             FileUtils.forceMkdir(new File(webPath));
 
@@ -335,7 +340,7 @@ public class ApiUtils_ {
         } catch (Exception e) {
             log.warn("加载模板异常！", e);
         }
-        log.info("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝生成apihtml完成＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝==");
+        log.info("生成api-html完成");
     }
 
     /**

@@ -8,14 +8,14 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class InitCommons implements ApplicationListener<ContextRefreshedEvent> {
+public class ApiInit_ implements ApplicationListener<ContextRefreshedEvent> {
 
 
 //    @Value("${file.upload}")
 //    @Value("${mail.send}")
 //    private boolean email_send;
 
-    private static final Logger log = Logger.getLogger(InitCommons.class);
+    private static final Logger log = Logger.getLogger(ApiInit_.class);
     public ApplicationContext appContext;
 
     //  private static Scanner sc = new Scanner(System.in);
@@ -25,13 +25,13 @@ public class InitCommons implements ApplicationListener<ContextRefreshedEvent> {
         appContext = event.getApplicationContext();
         System.out.println(appContext.getId());
 
-        log.info("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝Commons-web初始化＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+        log.info("api-web初始化");
         try {
             ApiUtils_.init(appContext);
         } catch (Exception e) {
             log.warn("初始化异常！", e);
         }
-        log.info("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝Commons-web初始化完成＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+        log.info("api-web初始化完成");
 
     }
 

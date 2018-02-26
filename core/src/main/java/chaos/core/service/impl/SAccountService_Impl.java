@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+
 /**
  * Created by chaos on 2018/1/16.
  * 作者：王健
@@ -44,7 +46,8 @@ public class SAccountService_Impl implements SAccountService_ {
 
     @Override
     public boolean addAccount(SAccount sAccount) {
-        return false;
+        sAccount.setCt(Instant.now().toEpochMilli());
+        return sAccountMapper.insert(sAccount) > 0;
     }
 
     @Override
@@ -81,14 +84,14 @@ public class SAccountService_Impl implements SAccountService_ {
 
     @Override
     public boolean addOrUpdateAccount(SAccount account) {
-        if (ObjectUtils.isEmpty(account.getId())) return sAccountMapper.insert(account) > 0;
+        if (ObjectUtils.isEmpty(account.getId())) return addAccount(account);
         return sAccountMapper.updateByPrimaryKeySelective(account) > 0;
     }
 
     @Override
     public boolean addOrUpdateAccountRrole(SAccountRole accountRole) {
 
-        SAccountRole sAccountRole = sAccountRoleMapper.selectByAId(accountRole.getaId());
+        SAccountRole sAccountRole = sAccountRoleMapper.selectByAId(accountRole.getaId() + "");
 
         if (sAccountRole == null) {
             return sAccountRoleMapper.insert(accountRole) > 0;

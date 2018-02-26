@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
  * qq:1413221142
  */
 @Component
-public class Init_ implements ApplicationListener<ContextRefreshedEvent> {
-    private final static Logger log = LoggerFactory.getLogger(Init_.class);
+public class CoreInit_ implements ApplicationListener<ContextRefreshedEvent> {
+    private final static Logger log = LoggerFactory.getLogger(CoreInit_.class);
 
     public ApplicationContext appContext;
 

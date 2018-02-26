@@ -8,10 +8,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Init implements ApplicationListener<ContextRefreshedEvent> {
+public class WeiXinInit_ implements ApplicationListener<ContextRefreshedEvent> {
 
 
-    private static final Logger log = Logger.getLogger(Init.class);
+    private static final Logger log = Logger.getLogger(WeiXinInit_.class);
 
     public ApplicationContext appContext;
 
