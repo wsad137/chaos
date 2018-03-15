@@ -35,6 +35,12 @@ public class WeiXinConfig_ {
 
     private Map<String, Config> configs = Maps.newHashMap();
 
+    public static Config getConfigDef() {
+        return getInstance().configDef;
+    }
+
+    private Config configDef;
+
     private Properties p = new Properties();
 
     private static WeiXinConfig_ weiXinConfig_;
@@ -69,6 +75,7 @@ public class WeiXinConfig_ {
                     if (!o.contains("item" + i)) continue;
                     Config config = toModle(i);
                     if (StringUtils.isEmpty(config.getAppid())) continue;
+                    if (configDef == null) configDef = config;
                     configs.put(config.getAppid(), config);
                 }
 
