@@ -1,12 +1,9 @@
 package chaos.core.dao;
 
 import chaos.core.model.RegionModel_;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 public interface RegionModel_Mapper {
     /**
@@ -16,8 +13,8 @@ public interface RegionModel_Mapper {
      * @mbg.generated
      */
     @Delete({
-        "delete from region_",
-        "where id = #{id,jdbcType=SMALLINT}"
+            "delete from region_",
+            "where id = #{id,jdbcType=SMALLINT}"
     })
     int deleteByPrimaryKey(Short id);
 
@@ -28,12 +25,12 @@ public interface RegionModel_Mapper {
      * @mbg.generated
      */
     @Insert({
-        "insert into region_ (name, code, ",
-        "parent_id)",
-        "values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=SMALLINT}, ",
-        "#{parentId,jdbcType=SMALLINT})"
+            "insert into region_ (name, code, ",
+            "parent_id)",
+            "values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=SMALLINT}, ",
+            "#{parentId,jdbcType=SMALLINT})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Short.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Short.class)
     int insert(RegionModel_ record);
 
     /**
@@ -51,10 +48,10 @@ public interface RegionModel_Mapper {
      * @mbg.generated
      */
     @Select({
-        "select",
-        "id, name, code, parent_id",
-        "from region_",
-        "where id = #{id,jdbcType=SMALLINT}"
+            "select",
+            "id, name, code, parent_id",
+            "from region_",
+            "where id = #{id,jdbcType=SMALLINT}"
     })
     @ResultMap("chaos.core.dao.RegionModel_Mapper.BaseResultMap")
     RegionModel_ selectByPrimaryKey(Short id);
@@ -74,11 +71,25 @@ public interface RegionModel_Mapper {
      * @mbg.generated
      */
     @Update({
-        "update region_",
-        "set name = #{name,jdbcType=VARCHAR},",
-          "code = #{code,jdbcType=SMALLINT},",
-          "parent_id = #{parentId,jdbcType=SMALLINT}",
-        "where id = #{id,jdbcType=SMALLINT}"
+            "update region_",
+            "set name = #{name,jdbcType=VARCHAR},",
+            "code = #{code,jdbcType=SMALLINT},",
+            "parent_id = #{parentId,jdbcType=SMALLINT}",
+            "where id = #{id,jdbcType=SMALLINT}"
     })
     int updateByPrimaryKey(RegionModel_ record);
+
+
+    @Select({"select * from region_ where parent_id = #{parentId}"})
+    @ResultMap("chaos.core.dao.RegionModel_Mapper.BaseResultMap")
+    List<RegionModel_> selectByParentId(int parentId);
+
+    @Select({
+            "select",
+            "id, name, code, parent_id",
+            "from region_",
+            "where id in (${ids})"
+    })
+    @ResultMap("BaseResultMap")
+    List<RegionModel_> selectByIds(@Param("ids") String ids);
 }

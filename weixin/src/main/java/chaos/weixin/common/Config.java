@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
+ * 微信配置文件 appid 为主键
+ *
  * @author ChengNing
  * @date 2014年12月8日
  */
@@ -158,7 +160,6 @@ public class Config {
 //    public static Config instance(String publicNo) {
 //        return config = new Config(publicNo);
 //    }
-
     public String getToken() {
         return token;
     }

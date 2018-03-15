@@ -15,19 +15,19 @@ public class JsApiManager {
 
     private static Logger logger = Logger.getLogger(JsApiManager.class);
 
-    private JsApiManager() {
+    public JsApiManager() {
 
     }
-
-    private JsApiManager(Config config) {
-        this.config = config;
-    }
-
-    private Config config;
-
-    public static JsApiManager getInstance(Config config) {
-        return new JsApiManager(config);
-    }
+//
+//    private JsApiManager(Config config) {
+//        this.config = config;
+//    }
+//
+//    private Config config;
+//
+//    public static JsApiManager getInstance(Config config) {
+//        return new JsApiManager(config);
+//    }
 
 
     /**
@@ -36,7 +36,7 @@ public class JsApiManager {
      * @param url
      * @return
      */
-    public JsApiParam signature(String url) {
+    public static JsApiParam signature(Config config, String url) {
         StringBuffer signatureSource = new StringBuffer();
         String nonceStr = RandomStringGenerator.generate();
         String timestamp = Long.toString(System.currentTimeMillis() / 1000);
@@ -48,7 +48,7 @@ public class JsApiManager {
         logger.info("sign source : " + signatureSource);
         String signature = DigestUtils.sha1Hex(signatureSource.toString());
         logger.info("sign : " + signature);
-        return new JsApiParam(url, jsapiTicket, nonceStr, timestamp, signature);
+        return new JsApiParam(config, url, jsapiTicket, nonceStr, timestamp, signature);
     }
 //    /**
 //     * 给需要调用JS SDK的URL签名

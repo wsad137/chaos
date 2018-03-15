@@ -3,6 +3,8 @@ package chaos.core.model;
 import chaos.api.annoatation.ApiField;
 import chaos.utils.Md5Utils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -10,6 +12,7 @@ import java.time.Instant;
 
 public class SAccount implements Serializable {
 
+    @JsonSerialize(using = ToStringSerializer.class)
     @ApiField("id///")
     private Long id;
 
@@ -93,6 +96,7 @@ public class SAccount implements Serializable {
      * 用户昵称
      */
     public String getNickname() {
+        if (nickname == null) return getUsername();
         return nickname;
     }
 

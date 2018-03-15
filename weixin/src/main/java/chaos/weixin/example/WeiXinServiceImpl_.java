@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 public class WeiXinServiceImpl_ extends _CustomerServer {
 
 
-    private static final Logger log = Logger.getLogger(WeiXinServiceImpl_.class);
+    protected static final Logger log = Logger.getLogger(WeiXinServiceImpl_.class);
 
 
-    private static String key = "chaos-weixin-Accesstoken";
+    protected static String key = "chaos-weixin-Accesstoken";
 
 //    public WeiXinServiceImpl(Config config) {
 //        super(config);

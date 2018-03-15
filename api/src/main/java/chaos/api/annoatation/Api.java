@@ -15,11 +15,18 @@ import java.lang.annotation.*;
 public @interface Api {
 
     /**
+     * 接口名称
+     *
+     * @return
+     */
+    String value() default "";
+
+    /**
      * 字段集合
      *
      * @return
      */
-    F[] value() default {};
+    F[] fs() default {};
 
     /**
      * 接口名称

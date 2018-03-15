@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 public @interface ApiField {
     /**
-     * 字段描述
+     * 字段名称
      *
      * @return
      */

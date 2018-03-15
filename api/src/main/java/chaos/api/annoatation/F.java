@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 @Target(ElementType.ANNOTATION_TYPE)
 public @interface F {
     /**
-     * 字段描述
+     * 字段名称
      *
      * @return
      */

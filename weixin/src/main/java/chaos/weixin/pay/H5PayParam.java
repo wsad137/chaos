@@ -15,6 +15,7 @@ public class H5PayParam {
 
     private H5PayParam(Config config) {
         this.config = config;
+        this.appid = this.config.getAppid();
     }
 
     private H5PayParam() {
@@ -24,7 +25,7 @@ public class H5PayParam {
         return new H5PayParam(config);
     }
 
-    private String appid = config.getAppid();
+    private String appid;
     private String timeStamp;
     private String nonceStr;
     private String packageWithPrepayId; // 参数名package

@@ -16,15 +16,12 @@ import java.util.Properties;
 @ApiGroup(name = "core-api控制器")
 @Controller
 @RequestMapping("/api")
-public class ExamplesController extends BaseApiController {
+public class ExamplesController_ extends BaseApiController {
 
     /**
      * 测试返回JSON数据
      */
-//    @Api(value = "测试方法", params = {"value///aaaa//bbb"})
-    @Api(value = {@F(value = "aaaa", desc = "测试字段1"), @F("aa")}, name = "测试",
-            res = {@ApiRes(desc = "aaa", beans = {TestModel.class})})
-//    @ApiRes(desc = "接口数据返回说明desc", beans = {TestModel.class})
+    @Api(fs = {@F(name = "name", desc = "测试字段1"), @F("phone")}, name = "测试", beans = {TestModel.class})
     @RequestMapping(value = "/test")
     @ResponseBody
     public CaseRes test() {
@@ -41,7 +38,7 @@ public class ExamplesController extends BaseApiController {
      * 测试返回JSON数据
      */
 //    @Api(value = "测试方法", params = {"value///aaaa//bbb"})
-    @Api(value = {@F("aaaa"), @F("aa")}, name = "测试", beans = {TestModel.class},
+    @Api(fs = {@F("aaaa"), @F("aa")}, name = "测试", beans = {TestModel.class},
             res = {@ApiRes(desc = "aaa", beans = {TestModel.class})})
 //    @ApiRes(desc = "接口数据返回说明desc", beans = {TestModel.class})
     @RequestMapping(value = "/test2")

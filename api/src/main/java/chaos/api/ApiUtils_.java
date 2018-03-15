@@ -202,11 +202,12 @@ public class ApiUtils_ {
                     getReturnFields(method);
 
                     ApiModel_ apiModel = new ApiModel_();
-                    apiModel.setName(api.name());
+                    apiModel.setName(api.value());
+                    if (apiModel.getName() == null) apiModel.setName(api.name());
                     apiModel.setNameGroup(groupModel.getName());
                     apiModel.setDesc(api.desc());
                     apiModel.setFieldStr(api.fieldStr());
-                    apiModel.set_fields(Arrays.asList(api.value()));
+                    apiModel.set_fields(Arrays.asList(api.fs()));
                     apiModel.setBeans(api.beans());
                     apiModel.set_res(Arrays.asList(api.res()));
                     apiModel.setExclude(api.excFields());

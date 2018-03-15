@@ -161,6 +161,7 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
         return def;
     }
 
+    @Deprecated
     public static String toString(Object object, String def) {
         if (ObjectUtils.isEmpty(object)) return def;
         def = String.valueOf(object);
@@ -168,6 +169,7 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
         return def;
     }
 
+    @Deprecated
     public static String toString(Object object) {
         return toString(object, "");
     }
@@ -557,10 +559,18 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
     }
 
     public static boolean toBool(Object aTrue) {
-        if (aTrue == null) return false;
-//        org.apache.commons.lang3.ObjectUtils
-//        BooleanUtils.toBoolean(aTrue)
-        return false;
+        try {
+            return BooleanUtils.toBoolean(String.valueOf(aTrue));
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
+    public static boolean toBool(Object aTrue, boolean def) {
+        try {
+            return BooleanUtils.toBoolean(String.valueOf(aTrue));
+        } catch (Exception e) {
+            return def;
+        }
     }
 }

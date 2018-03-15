@@ -19,13 +19,15 @@ public class RefundRequest {
 
     private RefundRequest(Config config) {
         this.config = config;
+        this.appid = this.config.getAppid();
+        this.mch_id = this.config.getMchId();
     }
 
     private Config config;
 
 
-    private String appid = config.getAppid();
-    private String mch_id = config.getMchId();
+    private String appid;
+    private String mch_id;
     private String device_info;
     private String nonce_str;
     private String sign;

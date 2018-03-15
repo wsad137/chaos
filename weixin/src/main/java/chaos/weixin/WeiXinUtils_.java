@@ -3,6 +3,7 @@ package chaos.weixin;
 import chaos.utils.object.ObjectUtils;
 import chaos.weixin.common.Config;
 import chaos.weixin.common.WeiXinConfig_;
+import chaos.weixin.jsapi.JsApiManager;
 import chaos.weixin.oauth.OAuthException;
 import chaos.weixin.oauth.OAuthManager;
 import chaos.weixin.oauth.protocol.get_access_token.GetAccessTokenRequest;
@@ -122,7 +123,13 @@ public class WeiXinUtils_ {
         timer.schedule(jsApiTicketTimer, JsApiTicketTimer.DELAY, JsApiTicketTimer.PERIOD);
     }
 
-
+    /**
+     * 根据code授权取用户
+     *
+     * @param code
+     * @param config
+     * @return
+     */
     public static Map getUserByCode(String code, Config config) {
         GetAccessTokenRequest req = new GetAccessTokenRequest(code, config);
         GetAccessTokenResponse accessToken = null;
@@ -137,10 +144,23 @@ public class WeiXinUtils_ {
             Map<String, Object> toMap1 = ObjectUtils.objectToMap(userInfo);
             toMap.putAll(toMap1);
         } catch (OAuthException e) {
-            e.printStackTrace();
+            log.warn("根据code取用户失败", e);
             return Maps.newHashMap();
         }
         return toMap;
+    }
+
+    /**
+     * 取jsApiConfig
+     *
+     * @param config
+     * @return
+     */
+    public static Map getJsApiConfig(Config config, String url) {
+        Map<String, Object> map = ObjectUtils.objectToMap(JsApiManager.signature(config, url));
+        if (map != null && map.containsKey("config")) map.remove("config");
+        return map;
+
     }
 
 }

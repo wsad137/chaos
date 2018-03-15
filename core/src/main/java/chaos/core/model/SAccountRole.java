@@ -1,16 +1,20 @@
 package chaos.core.model;
 
 import chaos.api.annoatation.ApiField;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import java.io.Serializable;
 
 public class SAccountRole implements Serializable {
+    @JsonSerialize(using = ToStringSerializer.class)
     @ApiField("id///")
     private Long id;
 
     /**
      * 账号ID
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     @ApiField("aId/账户ID//")
     private Long aId;
 
@@ -29,14 +33,14 @@ public class SAccountRole implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * 
+     *
      */
     public void setId(Long id) {
         this.id = id;

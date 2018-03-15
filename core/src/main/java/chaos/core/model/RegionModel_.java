@@ -3,6 +3,7 @@ package chaos.core.model;
 import chaos.api.annoatation.ApiField;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class RegionModel_ implements Serializable {
     @ApiField("id///")
@@ -34,15 +35,17 @@ public class RegionModel_ implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
+    private Iterable<? extends RegionModel_> child = new ArrayList<>();
+
     /**
-     * 
+     *
      */
     public Short getId() {
         return id;
     }
 
     /**
-     * 
+     *
      */
     public void setId(Short id) {
         this.id = id;
@@ -88,5 +91,13 @@ public class RegionModel_ implements Serializable {
      */
     public void setParentId(Short parentId) {
         this.parentId = parentId;
+    }
+
+    public Iterable<? extends RegionModel_> getChild() {
+        return child;
+    }
+
+    public void setChild(Iterable<? extends RegionModel_> child) {
+        this.child = child;
     }
 }

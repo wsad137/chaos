@@ -4,6 +4,9 @@ import chaos.core.service.CaptchaService_;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.Assert;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * ©土土网 app-parent
  * qq:1413221142
@@ -33,13 +36,22 @@ public class KaptchaUtils_ {
         instance = new KaptchaUtils_(context);
     }
 
-    private CaptchaService_ getCaptchaService() {
-        return captchaService;
-    }
+//    private CaptchaService_ getCaptchaService() {
+//        return captchaService;
+//    }
 
     public static boolean isVerify(String iCode) {
-        return getInstance().getCaptchaService().isVerify(iCode);
+        return getInstance().captchaService.isVerify(iCode);
 //        return getCaptchaService().isVerify(iCode);
 
+    }
+
+    public static void getICodeImg(HttpServletRequest request_, HttpServletResponse response_) {
+        getInstance().captchaService.getICodeImg(request_, response_);
+    }
+
+    public static String getICode() {
+        String iCode = getInstance().captchaService.getICode();
+        return iCode;
     }
 }

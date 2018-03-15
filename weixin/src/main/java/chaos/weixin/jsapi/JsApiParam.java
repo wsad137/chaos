@@ -18,7 +18,7 @@ public class JsApiParam {
 
     public JsApiParam(Config config) {
         this.config = config;
-        this.appid =config.getAppid();
+        this.appid = config.getAppid();
     }
 
     private String appid;
@@ -28,7 +28,9 @@ public class JsApiParam {
     private String timeStamp;
     private String signature;
 
-    public JsApiParam(String url, String jsapiTicket, String nonceStr, String timeStamp, String signature) {
+    public JsApiParam(Config config, String url, String jsapiTicket, String nonceStr, String timeStamp, String signature) {
+        this.config = config;
+        this.appid = config.getAppid();
         this.url = url;
         this.jsapiTicket = jsapiTicket;
         this.nonceStr = nonceStr;

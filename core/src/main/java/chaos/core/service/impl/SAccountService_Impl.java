@@ -47,6 +47,7 @@ public class SAccountService_Impl implements SAccountService_ {
     @Override
     public boolean addAccount(SAccount sAccount) {
         sAccount.setCt(Instant.now().toEpochMilli());
+        if (sAccount.getStatus() == null) sAccount.setStatus((short) 1);
         return sAccountMapper.insert(sAccount) > 0;
     }
 

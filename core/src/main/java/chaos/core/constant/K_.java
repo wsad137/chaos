@@ -61,7 +61,6 @@ public interface K_ {
         }
 
         interface file {
-
             String upload = "file.upload";
             String upload_ads = "file.upload.ads";
             String upload_temp = "file.upload.temp";
@@ -100,7 +99,6 @@ public interface K_ {
 
         interface project {
             String ucAuthority_mode = "project.ucAuthority.mode";
-
         }
 
         interface env {
@@ -110,6 +108,9 @@ public interface K_ {
             String env_isSendSms = "env.isSendSms";
             //跳过验证码
             String env_isVerify = "env.isVerify";
+            //项目主入口url
+            String env_server_url_main = "env.server.url.main";
+
 
         }
     }

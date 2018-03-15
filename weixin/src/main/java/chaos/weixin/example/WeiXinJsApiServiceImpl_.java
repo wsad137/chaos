@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class WeiXinJsApiServiceImpl_ extends _CustomerServer {
 
-    private static String key = "chaos-weixin-jsApiAccesstoken";
+    protected static String key = "chaos-weixin-jsApiAccesstoken";
 
     @Override
     public boolean save(Config config, Token token) {

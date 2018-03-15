@@ -9,7 +9,8 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>utils</artifactId>
     <!--<packaging>jar</packaging>-->
-    <!--<version>2.0-RELEASE</version>-->
+    <!--<version>2.0-RELEASE-${maven.build.timestamp}</version>-->
+    <version>${maven.build.timestamp}-RELEASE</version>
     <name>utils</name>
     <dependencies>
 
@@ -70,6 +71,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
+            <version>1.11</version>
         </dependency>
         <dependency>
             <groupId>redis.clients</groupId>
@@ -100,6 +102,8 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
+            <version>1.6.0.RELEASE</version>
+            <type>jar</type>
             <!--<version>2.0.0.M2</version>-->
         </dependency>
     </dependencies>
