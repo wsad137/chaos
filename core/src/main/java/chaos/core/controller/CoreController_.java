@@ -107,7 +107,7 @@ public class CoreController_ extends BaseCoreController {
 //    }
 
 
-    @Api(value = "地区:列表", fieldStr = {"parentId/上级ID//0"})
+    @Api(name = "地区:列表", fieldStr = {"parentId/上级ID//0"})
     @RequestMapping("region/getRegion")
     @ResponseBody
     public CaseRes getRegion(@RequestBody(required = false) RegionModel_ model) {

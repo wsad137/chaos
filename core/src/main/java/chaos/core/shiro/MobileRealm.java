@@ -35,10 +35,11 @@ public class MobileRealm extends AuthorizingRealm {
         /*移动端token登录*/
         if (authenticationToken instanceof MobileAuthenticationToken) {
             MobileAuthenticationToken mToken = (MobileAuthenticationToken) authenticationToken;
-            account = sAccountService.byTokenAccount(mToken.getUsername());
-            if (account == null) throw new IncorrectCredentialsException(Message_.account.notExist_acount);
-//            info = new SimpleAuthenticationInfo(mToken.getUsername(), account.getPassword(), account.getNickname());
-            info = new SimpleAuthenticationInfo(account.getUsername(), account.getPassword(), account.getNickname());
+
+//            account = sAccountService.byTokenAccount(mToken.getUsername());
+//            if (account == null) throw new IncorrectCredentialsException(Message_.account.notExist_acount);
+            info = new SimpleAuthenticationInfo(mToken.getPrincipal(), mToken.getPassword(), String.valueOf(mToken.getPrincipal()));
+//            info = new SimpleAuthenticationInfo(account.getUsername(), account.getPassword(), account.getNickname());
 //            SecurityUtils.setSecurityManager();
         }
         return info;

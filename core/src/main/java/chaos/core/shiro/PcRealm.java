@@ -51,6 +51,10 @@ public class PcRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+
+        /*移动端直接跳过*/
+        if (authenticationToken instanceof MobileAuthenticationToken) return null;
+
         String username = null, password = "";
         SimpleAuthenticationInfo info = null;
         SAccount account = null;
@@ -61,6 +65,9 @@ public class PcRealm extends AuthorizingRealm {
             if (account == null) throw new IncorrectCredentialsException(Message_.account.notExist_acount);
             info = new SimpleAuthenticationInfo(account.getUsername(), account.getPassword(), account.getNickname());
         }
+
+
+
         /*普通账号密码登录*/
         if (authenticationToken instanceof UsernamePasswordToken) {
             UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;

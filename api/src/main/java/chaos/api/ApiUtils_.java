@@ -203,7 +203,7 @@ public class ApiUtils_ {
 
                     ApiModel_ apiModel = new ApiModel_();
                     apiModel.setName(api.value());
-                    if (apiModel.getName() == null) apiModel.setName(api.name());
+                    if (StringUtils.isEmpty(apiModel.getName())) apiModel.setName(api.name());
                     apiModel.setNameGroup(groupModel.getName());
                     apiModel.setDesc(api.desc());
                     apiModel.setFieldStr(api.fieldStr());

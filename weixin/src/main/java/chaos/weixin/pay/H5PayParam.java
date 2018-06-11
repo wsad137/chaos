@@ -11,19 +11,19 @@ import javax.xml.bind.annotation.XmlElement;
  * Created by xuwen on 2015-12-10.
  */
 public class H5PayParam {
-    private Config config;
+//    private Config config;
 
-    private H5PayParam(Config config) {
-        this.config = config;
-        this.appid = this.config.getAppid();
+    public H5PayParam(Config config) {
+//        this.config = config;
+        this.appid = config.getAppid();
     }
 
     private H5PayParam() {
     }
 
-    public static H5PayParam getInstance(Config config) {
-        return new H5PayParam(config);
-    }
+//    public static H5PayParam getInstance(Config config) {
+//        return new H5PayParam(config);
+//    }
 
     private String appid;
     private String timeStamp;

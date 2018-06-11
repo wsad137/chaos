@@ -18,8 +18,8 @@ public interface SRoleMapper {
      * @mbg.generated
      */
     @Delete({
-        "delete from s_role",
-        "where id = #{id,jdbcType=BIGINT}"
+            "delete from s_role",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
@@ -30,12 +30,12 @@ public interface SRoleMapper {
      * @mbg.generated
      */
     @Insert({
-        "insert into s_role (name, status, ",
-        "mark)",
-        "values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, ",
-        "#{mark,jdbcType=VARCHAR})"
+            "insert into s_role (name, status, ",
+            "mark)",
+            "values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, ",
+            "#{mark,jdbcType=VARCHAR})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insert(SRole record);
 
     /**
@@ -53,10 +53,10 @@ public interface SRoleMapper {
      * @mbg.generated
      */
     @Select({
-        "select",
-        "id, name, status, mark",
-        "from s_role",
-        "where id = #{id,jdbcType=BIGINT}"
+            "select",
+            "id, name, status, mark",
+            "from s_role",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     @ResultMap("chaos.core.dao.SRoleMapper.BaseResultMap")
     SRole selectByPrimaryKey(Long id);
@@ -76,11 +76,11 @@ public interface SRoleMapper {
      * @mbg.generated
      */
     @Update({
-        "update s_role",
-        "set name = #{name,jdbcType=VARCHAR},",
-          "status = #{status,jdbcType=SMALLINT},",
-          "mark = #{mark,jdbcType=VARCHAR}",
-        "where id = #{id,jdbcType=BIGINT}"
+            "update s_role",
+            "set name = #{name,jdbcType=VARCHAR},",
+            "status = #{status,jdbcType=SMALLINT},",
+            "mark = #{mark,jdbcType=VARCHAR}",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(SRole record);
 
@@ -91,4 +91,12 @@ public interface SRoleMapper {
     })
     @ResultMap("chaos.core.dao.SRoleMapper.BaseResultMap")
     List<SRole> selectListByAid(String aId);
+
+    @Select({
+            "select",
+            "id, name, status, mark",
+            "from s_role"
+    })
+    @ResultMap("chaos.core.dao.SRoleMapper.BaseResultMap")
+    List<SRole> selectAll(String aId);
 }

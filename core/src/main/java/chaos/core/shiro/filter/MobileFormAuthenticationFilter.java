@@ -7,6 +7,7 @@ import chaos.core.service.SAccountService_;
 import chaos.core.shiro.MobileAuthenticationToken;
 import chaos.utils.json.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,7 @@ public class MobileFormAuthenticationFilter extends AccessControlFilter {
             //5、委托给Realm进行登录
 //            SecurityUtils.getSubject().login(authenticationToken);
             subject.login(authenticationToken);
+            subject.getSession().setAttribute("account", account);
         } catch (Exception e) {
             onLoginFail(servletResponse); //6、登录失败
             return false;

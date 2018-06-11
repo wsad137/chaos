@@ -68,7 +68,7 @@ public class SAccountService_Impl implements SAccountService_ {
 
     @Override
     public SAccount byTokenAccount(String token) {
-        return null;
+        return sAccountMapper.selectByToken(token);
     }
 
     @Override

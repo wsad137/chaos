@@ -1,6 +1,7 @@
 package chaos.core.model;
 
 import chaos.api.annoatation.ApiField;
+import chaos.api.annoatation.ApiModel;
 import chaos.utils.ConvertUtil;
 import chaos.utils.json.JsonUtils;
 import chaos.utils.object.ObjectUtils;
@@ -21,23 +22,24 @@ import java.util.Map;
  * 作者：王健(wangjian)
  * 时间：2016-09-26
  */
+@ApiModel
 public class BstParam {
 
     private final static Logger log = LoggerFactory.getLogger(BstParam.class);
 
-    @ApiField("limit/limit分页//0")
+    @ApiField(value = "limit", desc = "limit分页", def = "0")
     private int limit = 10;
-    @ApiField("offset/limit分页://0")
+    @ApiField(value = "offset", desc = "limit分页", def = "0")
     private int offset = 0;
     private String order;
     private String sort;
-    @ApiField("search/分页搜索条件")
+    @ApiField(value = "search", desc = "search")
     private BstSearch search;
 
     /**
      * 前置条件map
      */
-    @ApiField("beforeWhere/分页前置条件")
+    @ApiField(value = "beforeWhere", def = "分页前置条件")
     private Map<String, Object> beforeWhere = new HashMap();
 
     @JsonIgnore
@@ -46,11 +48,11 @@ public class BstParam {
     /**
      * 普通分页模式
      */
-    @ApiField("pageType/page分页://false")
+    @ApiField(value = "pageType", desc = "page分页", def = "false")
     private boolean pageType;
-    @ApiField("pageCount/page分页://10")
+    @ApiField(value = "pageCount", desc = "page分页", def = "10")
     private int pageCount = 10;
-    @ApiField("page/page分页:当前页码//1")
+    @ApiField(value = "page", desc = "page分页:当前页码", def = "1")
     private int page = -1;
 
     public BstParam() {

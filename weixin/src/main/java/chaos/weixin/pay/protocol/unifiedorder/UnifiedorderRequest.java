@@ -14,16 +14,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "xml")
 public class UnifiedorderRequest {
 
-    private Config config;
+//    private Config config;
 
     private UnifiedorderRequest() {
 
     }
 
     public UnifiedorderRequest(Config config) {
-        this.config = config;
-        this.appid = this.config.getAppid();
-        this.mch_id = this.config.getMchId();
+//        this.config = config;
+        this.appid = config.getAppid();
+        this.mch_id = config.getMchId();
     }
 
     private String appid ;

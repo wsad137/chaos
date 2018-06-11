@@ -16,8 +16,8 @@ public interface SAccountMapper {
      * @mbg.generated
      */
     @Delete({
-        "delete from s_account",
-        "where id = #{id,jdbcType=BIGINT}"
+            "delete from s_account",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
@@ -28,16 +28,16 @@ public interface SAccountMapper {
      * @mbg.generated
      */
     @Insert({
-        "insert into s_account (id, nickname, ",
-        "username, password, ",
-        "status, u_id, token, ",
-        "l_t, ut, ct)",
-        "values (#{id,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, ",
-        "#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, ",
-        "#{status,jdbcType=SMALLINT}, #{uId,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, ",
-        "#{lT,jdbcType=BIGINT}, #{ut,jdbcType=BIGINT}, #{ct,jdbcType=BIGINT})"
+            "insert into s_account (id, nickname, ",
+            "username, password, ",
+            "status, u_id, token, ",
+            "l_t, ut, ct)",
+            "values (#{id,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, ",
+            "#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, ",
+            "#{status,jdbcType=SMALLINT}, #{uId,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, ",
+            "#{lT,jdbcType=BIGINT}, #{ut,jdbcType=BIGINT}, #{ct,jdbcType=BIGINT})"
     })
-    @SelectKey(statement="SELECT UUID_SHORT()", keyProperty="id", before=true, resultType=Long.class)
+    @SelectKey(statement = "SELECT UUID_SHORT()", keyProperty = "id", before = true, resultType = Long.class)
     int insert(SAccount record);
 
     /**
@@ -55,10 +55,10 @@ public interface SAccountMapper {
      * @mbg.generated
      */
     @Select({
-        "select",
-        "id, nickname, username, password, status, u_id, token, l_t, ut, ct",
-        "from s_account",
-        "where id = #{id,jdbcType=BIGINT}"
+            "select",
+            "id, nickname, username, password, status, u_id, token, l_t, ut, ct",
+            "from s_account",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     @ResultMap("chaos.core.dao.SAccountMapper.BaseResultMap")
     SAccount selectByPrimaryKey(Long id);
@@ -78,17 +78,17 @@ public interface SAccountMapper {
      * @mbg.generated
      */
     @Update({
-        "update s_account",
-        "set nickname = #{nickname,jdbcType=VARCHAR},",
-          "username = #{username,jdbcType=VARCHAR},",
-          "password = #{password,jdbcType=VARCHAR},",
-          "status = #{status,jdbcType=SMALLINT},",
-          "u_id = #{uId,jdbcType=VARCHAR},",
-          "token = #{token,jdbcType=VARCHAR},",
-          "l_t = #{lT,jdbcType=BIGINT},",
-          "ut = #{ut,jdbcType=BIGINT},",
-          "ct = #{ct,jdbcType=BIGINT}",
-        "where id = #{id,jdbcType=BIGINT}"
+            "update s_account",
+            "set nickname = #{nickname,jdbcType=VARCHAR},",
+            "username = #{username,jdbcType=VARCHAR},",
+            "password = #{password,jdbcType=VARCHAR},",
+            "status = #{status,jdbcType=SMALLINT},",
+            "u_id = #{uId,jdbcType=VARCHAR},",
+            "token = #{token,jdbcType=VARCHAR},",
+            "l_t = #{lT,jdbcType=BIGINT},",
+            "ut = #{ut,jdbcType=BIGINT},",
+            "ct = #{ct,jdbcType=BIGINT}",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(SAccount record);
 
@@ -110,4 +110,32 @@ public interface SAccountMapper {
     })
     @ResultMap("chaos.core.dao.SAccountMapper.BaseResultMapExt")
     SAccount selectByUserNameExt(String username);
+
+    @Select({
+            "select",
+            "id, nickname, username, password, status, u_id, token, l_t, ut, ct",
+            "from s_account",
+            "where u_id = #{uId}"
+    })
+    @ResultMap("chaos.core.dao.SAccountMapper.BaseResultMap")
+    SAccount selectByUId(Long uId);
+
+    @Select({
+            "select",
+            "id, nickname, username, password, status, u_id, token, l_t, ut, ct",
+            "from s_account",
+            "where u_id = #{uId}"
+    })
+    @ResultMap("chaos.core.dao.SAccountMapper.BaseResultMapExt")
+    SAccount selectByUIdExt(Long uId);
+
+
+    @Select({
+            "select",
+            "id, nickname, username, password, status, u_id, token, l_t, ut, ct",
+            "from s_account",
+            "where token = #{token}"
+    })
+    @ResultMap("chaos.core.dao.SAccountMapper.BaseResultMap")
+    SAccount selectByToken(String token);
 }

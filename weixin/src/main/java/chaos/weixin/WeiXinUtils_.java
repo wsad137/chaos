@@ -39,7 +39,8 @@ public class WeiXinUtils_ {
     private WeiXinUtils_(ApplicationContext context) {
         this.context = context;
         log.info("accessToken监听器启动..........");
-        timer = new Timer("wechat", true);
+//        timer = new Timer("wechat", true);
+        timer = new Timer("wechat");
 
         /*注册所有公众号*/
 

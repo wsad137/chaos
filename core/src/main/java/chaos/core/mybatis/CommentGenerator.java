@@ -19,16 +19,27 @@ public class CommentGenerator extends DefaultCommentGenerator {
             field.addJavaDocLine("/**");
             field.addJavaDocLine(" * " + introspectedColumn.getRemarks());
             field.addJavaDocLine(" */");
+
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("@ApiField(\"");
-        sb.append(field.getName());
-        sb.append("/");
-        sb.append(introspectedColumn.getRemarks());
-        sb.append("//\")");
+//        sb.append("@ApiField(\"");
+//        sb.append(field.getName());
+//        sb.append("/");
+//        sb.append(introspectedColumn.getRemarks());
+//        sb.append("//\")");
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("@ApiField(\"");
+//        sb.append(field.getName());
+//        sb.append("/");
+//        sb.append(introspectedColumn.getRemarks());
+//        sb.append("//\")");
 
-        field.addFormattedAnnotations(sb,0);
-        field.addAnnotation("@ApiField(\""+field.getName()+"/"+introspectedColumn.getRemarks()+"//\")");
+//        @ApiField(value = "id///" ,desc = "")
+        sb.append("@ApiField(value = \"" + field.getName() + "\" ,desc = \"" + introspectedColumn.getRemarks() + "\")");
+        field.addFormattedAnnotations(sb, 0);
+//        field.addAnnotation("@ApiField(\"" + field.getName() + "/" + introspectedColumn.getRemarks() + "//\")");
+//        field.addAnnotation("@ApiField(\"" + field.getName() + "/" + introspectedColumn.getRemarks() + "//\")");
+        field.addAnnotation("@ApiField(value = \"" + field.getName() + "\" ,desc = \"" + introspectedColumn.getRemarks() + "\")");
 //        super.addFieldComment(field, introspectedTable, introspectedColumn);
     }
 
@@ -39,6 +50,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
         innerClass.addJavaDocLine(" * " + introspectedTable.getFullyQualifiedTableNameAtRuntime());
         innerClass.addJavaDocLine(" */");
 //        super.addClassComment(innerClass, introspectedTable, markAsDoNotDelete);
+        innerClass.addAnnotation("@ApiModel");
     }
 
     @Override

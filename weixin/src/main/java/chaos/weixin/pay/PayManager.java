@@ -522,8 +522,8 @@ public class PayManager {
      * @return
      */
     public H5PayParam buildH5PayConfig(String timeStamp, String nonceStr, String prepayId) {
-        H5PayParam config = H5PayParam.getInstance(this.config);
-//        H5PayParam config = new H5PayParam();
+//        H5PayParam config = H5PayParam.getInstance(this.config);
+        H5PayParam config = new H5PayParam(this.config);
         config.setTimeStamp(timeStamp);
         config.setNonceStr(nonceStr);
         config.setPackageWithPrepayId("prepay_id=" + prepayId);

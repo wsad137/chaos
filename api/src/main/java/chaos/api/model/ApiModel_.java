@@ -128,6 +128,7 @@ public class ApiModel_ {
         def.fields.addAll(new ArrayList<>(temp.values()));
 
 //        ComparatorUtils.sort(paramModels, "name", true);
+//        def.fields.sort(Comparator.comparing());
         def.fields.sort((o1, o2) -> {
             if (o1.getName().length() > o2.getName().length()) return 1;
             if (o1.getName().length() == o2.getName().length()) return 0;

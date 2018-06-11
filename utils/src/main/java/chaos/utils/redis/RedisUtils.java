@@ -38,6 +38,23 @@ public class RedisUtils {
         }
     }
 
+    /**
+     * @param key
+     * @param val
+     * @param seconds 过期时间秒
+     */
+    public static void set(String key, String val, Long seconds) {
+        try {
+            if (getJedis().exists(key)) {
+                getJedis().set(key, val, "XX", "EX", seconds);
+            } else {
+                getJedis().set(key, val, "NX", "EX", seconds);
+            }
+        } catch (Exception e) {
+            log.warn("保存失败！", e);
+        }
+    }
+
     public static Jedis getJedis() {
         if (jedis == null) jedis = new Jedis(_config.getHostName());
         return jedis;
@@ -50,10 +67,14 @@ public class RedisUtils {
 
     public static boolean test() {
         try {
-            return getJedis().setbit(Instant.now().toEpochMilli() + "", 1000, Instant.now().toEpochMilli() + "");
+            String val = "test..";
+            set("test", val, 5L);
+            String test = get("test");
+            if (test.equals(val)) return true;
         } catch (Exception e) {
             log.warn("redis不可用！");
             return false;
         }
+        return false;
     }
 }
