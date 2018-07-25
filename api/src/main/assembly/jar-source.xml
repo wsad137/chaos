@@ -1,0 +1,45 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+    <id>sources</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <formats>
+        <format>jar</format><!--打包的文件格式,也可以有：war zip-->
+    </formats>
+    <!--tar.gz压缩包下是否生成和项目名相同的根目录-->
+    <!--<includeBaseDirectory>true</includeBaseDirectory>-->
+    <!--<dependencySets>-->
+    <!--<dependencySet>-->
+    <!--&lt;!&ndash;是否把本项目添加到依赖文件夹下&ndash;&gt;-->
+    <!--<useProjectArtifact>true</useProjectArtifact>-->
+    <!--<outputDirectory>lib</outputDirectory>-->
+    <!--&lt;!&ndash;将scope为runtime的依赖包打包&ndash;&gt;-->
+    <!--<scope>runtime</scope>-->
+    <!--</dependencySet>-->
+    <!--</dependencySets>-->
+    <fileSets>
+        <!--<fileSet>-->
+        <!--<directory>src/main/bin</directory>-->
+        <!--<outputDirectory>/</outputDirectory>-->
+        <!--</fileSet>-->
+
+
+        <fileSet>
+            <directory>${project.build.directory}/classes/chaos/api/</directory>
+            <outputDirectory>chaos/api/</outputDirectory>
+        </fileSet>
+
+        <!--<fileSet>-->
+            <!--<directory>src/main/java/com/aoshu/ca/model</directory>-->
+            <!--<outputDirectory>com/aoshu/ca/model</outputDirectory>-->
+        <!--</fileSet>-->
+        <!--<fileSet>-->
+            <!--<directory>src/main/java/com/aoshu/ca/constant</directory>-->
+            <!--<outputDirectory>com/aoshu/ca/constant</outputDirectory>-->
+        <!--</fileSet>-->
+        <!--<fileSet>-->
+            <!--<directory>src/main/java/com/aoshu/ca/util</directory>-->
+            <!--<outputDirectory>com/aoshu/ca/util</outputDirectory>-->
+        <!--</fileSet>-->
+    </fileSets>
+</assembly>

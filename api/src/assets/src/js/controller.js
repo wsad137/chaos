@@ -94,7 +94,8 @@ function apiCtrl($scope, http, toastr) {
             $scope.apis.forEach(function (t) {
                 t.type = $scope.global.type;
                 t.cType = $scope.global.cType;
-                setFormsData(t)
+                setFormsData(t);
+                setResModel(t)
             })
         });
 
@@ -119,6 +120,12 @@ function apiCtrl($scope, http, toastr) {
             api.data[t] = form.data[t];
         });
     }
+
+    /*设置字典model*/
+    function setResModel(api) {
+        // api.res.isShow = false;
+    }
+
 
     /*发送请求*/
     $scope.submit = function (api) {

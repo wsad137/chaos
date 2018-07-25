@@ -13,10 +13,19 @@ import java.util.List;
  * qq:1413221142
  */
 public class ApiGroupModel {
+
     private final static Logger log = LoggerFactory.getLogger(ApiGroupModel.class);
 
+    /**
+     * 组标识
+     */
     private String id = RandomStringUtils.randomAlphabetic(10);
+    /**
+     * 组名称
+     */
     private String name;
+
+    /*接口集合*/
     private List<ApiModel_> apis = Lists.newArrayList();
 
     public String getId() {

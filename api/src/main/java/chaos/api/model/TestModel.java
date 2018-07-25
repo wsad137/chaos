@@ -1,5 +1,6 @@
 package chaos.api.model;
 
+import chaos.api.annoatation.ApiField;
 import chaos.api.annoatation.ApiModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +13,11 @@ import org.slf4j.LoggerFactory;
 @ApiModel
 public class TestModel {
     private final static Logger log = LoggerFactory.getLogger(TestModel.class);
-
+    @ApiField(desc = "id", def = "001")
     private int id;
+    @ApiField(desc = "用户名", def = "hahah")
     private String name;
+    @ApiField(desc = "bool", def = "true", notEmpty = true)
     private boolean bool;
 
     public int getId() {

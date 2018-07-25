@@ -118,46 +118,26 @@ public class ApiUtils_ {
 
     public void processor() {
         try {
-//            getInstance(applicationContext);
-//            if (applicationContext == null) {
-//                log.error("applicationContext 为空无法初始化Api接口文档！");
-//                return;
-//            }
-
-//            this.applicationContext = applicationContext;
-
             log.info("开始生成api页面html");
             String[] con = context.getBeanNamesForAnnotation(ApiGroup.class);
-//        Object[] con = ArrayUtils.addAll(ArrayUtils.addAll(con, con2), con3);
             if (ObjectUtils.isEmpty(con)) return;
-            Map<String, List<ApiModel_>> listMap = new HashMap<>();
             List<ApiGroupModel> groupModels = Lists.newArrayList();
 
             //遍历所有控制器
             for (Object c : con) {
                 String s = String.valueOf(c);
-//                ArrayList list = new ArrayList();
                 Object o = context.getBean(s);
                 Class cla = o.getClass();
-
-
                 if (AopUtils.isAopProxy(o)) {
                     cla = AopUtils.getTargetClass(o);
                     if (AopUtils.isJdkDynamicProxy(o)) cla = cla.getSuperclass();
                     while (cla.getName().contains("$$")) cla = cla.getSuperclass();
                 }
-//                ApiModel apiGroupModel = new ApiModel();
                 ApiGroupModel groupModel = new ApiGroupModel();
-
                 String clsMapping = "";
-                /**
+                /*
                  *取菜单标题
                  */
-//            if (cla.isAnnotationPresent(ApiMenu.class)) {
-//                ApiMenu apiMenu = (ApiMenu) cla.getAnnotation(ApiMenu.class);
-//                conUrlModel.className = apiMenu.value();
-//            }
-
                 if (cla.isAnnotationPresent(ApiGroup.class)) {
                     ApiGroup apiGroup = (ApiGroup) cla.getAnnotation(ApiGroup.class);
                     if (ObjectUtils.isEmpty(groupModel.getName())) {
@@ -165,24 +145,11 @@ public class ApiUtils_ {
                         if (!StringUtils.isEmpty(apiGroup.name())) groupModel.setName(apiGroup.name());
                     }
                 }
-//                if (cla.isAnnotationPresent(Api.class)) {
-//                    Api api = (Api) cla.getAnnotation(Api.class);
-//                    if (ObjectUtils.isEmpty(groupModel.getName())) {
-//                        groupModel.setName(api.name());
-//                    }
-//                }
-
-//            if (cla.isAnnotationPresent(ApiResponse.class)) {
-//                ApiResponse apiResponse = (ApiResponse) cla.getAnnotation(ApiResponse.class);
-//                if (ObjectUtils.isEmpty(conUrlModel.getClassName())) {
-//                    conUrlModel.getClassName() = apiResponse.value();
-//                }
-//            }
                 if (ObjectUtils.isEmpty(groupModel.getName())) {
                     groupModel.setName(s);
                 }
 
-                /**
+                /*
                  * 取url
                  */
                 if (cla.isAnnotationPresent(RequestMapping.class)) {
@@ -190,7 +157,7 @@ public class ApiUtils_ {
                     clsMapping = requestMapping.value()[0];
                 }
 
-                /**
+                /*
                  * 遍历方法
                  */
                 List<ApiModel_> apis = Lists.newArrayList();
@@ -211,19 +178,7 @@ public class ApiUtils_ {
                     apiModel.setBeans(api.beans());
                     apiModel.set_res(Arrays.asList(api.res()));
                     apiModel.setExclude(api.excFields());
-//                    apiModel.setReturnFields(getReturnFields(method));
-
-
-//                if (method.isAnnotationPresent(ApiMenu.class)) {
-//                    ApiMenu apiMenu = method.getAnnotation(ApiMenu.class);
-//                    urlModel.requestDesc = apiMenu.requestDesc();
-//                    urlModel.responseDesc = apiMenu.responseDesc();
-//                }
-
-
                     RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
-//                    System.out.println(applicationContext.getApplicationName());
-//                    System.out.println(applicationContext.getDisplayName());
                     if (ObjectUtils.isEmpty(requestMapping)) {
                         apiModel.setUrl((clsMapping + "/" + method.getName()));
                     } else {
@@ -233,111 +188,37 @@ public class ApiUtils_ {
                         apiModel.setName(method.getName());
                     }
                     apiModel.setMethod(method);
-//                Parameter[] parameters = method.getParameters();
-//                for (Parameter parameter : parameters) {
-////                        System.out.println(parameter.getType().getCanonicalName());
-////                        System.out.println(parameter.getType());
-//                    if (parameter.isNamePresent()) {
-//                            System.out.println(parameter.getName());
-//                    } else {
-//                        System.out.println("无法获取参数名称，请使用JDK8 添加 -parameters 后编译");
-//                    }
-//                }
                     apis.add(apiModel.processor(groupModel));
                 }
-
 
                 ComparatorUtils.sort(apis, "name", true);
                 groupModel.setApis(apis);
                 groupModels.add(groupModel);
-//                listMap.put(groupModel.getName(), list);
             }
 
-//            ApiConfig _config = new ApiConfig();
 
-        /*
-        生成html
-         */
-
-//            String realPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath("");
-//            String defPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath("/api/");
+            /*
+             *生成html
+             */
             String realPath = context.getResource(getConfig().getName()).getFile().getPath();
-//            String realPath = context.getResource("/").getFile().getPath();
-//            String realPath = ((WebApplicationContext) context).getServletContext().getRealPath("/");
             String webPath = realPath;
             if (!StringUtils.isEmpty(getConfig().getRootPath())) {
                 webPath = getConfig().getRootPath() + getConfig().getName();
             }
             log.info("api文件路径：" + webPath);
-//            if (StringUtils.isEmpty(getConfig().getRootPath())) {
-////                webPath = ((WebApplicationContext) applicationContext).getServletContext().getRealPath(getConfig().getName());
-//                webPath = realPath + File.separator + getConfig().getName();
-//            } else {
-//                webPath = getConfig().getRootPath() + getConfig().getName();
-//            }
-
             FileUtils.forceMkdir(new File(webPath));
-
-//            URL webFile = new File(webPath, "chaosApi.zip").toURL();
-
-//            URL webFile = this.getClass().getClassLoader().getResource(File.separator + "chaosApi.zip");
-//            URL webFile = this.getClass().getClassLoader().getResource(File.separator + "chaosApi");
-
-//            if (webFile != null) {
             File customFile = new File(webPath, "chaosApi.zip");
             if (customFile.exists()) {
                 ZipUtil.unZip(customFile.getPath(), webPath);
             } else {/*获取不到 jar中获取*/
-//                ClassLoaderUtil.
-//                InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("/chaosApi/");
                 InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("chaosApi.zip");
-//                InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(File.separator + "/chaosApi/" + File.separator);
                 FileUtils.copyToFile(resourceAsStream, new File(realPath, "temp.zip"));
-//                new FileImageInputStream(resourceAsStream,)
-//                FileUtils.copyInputStreamToFile(resourceAsStream, new File(realPath, "temp.zip"));
                 ZipUtil.unZip(realPath + File.separator + "temp.zip", webPath);
                 FileUtils.deleteQuietly(new File(realPath + File.separator + "temp.zip"));
             }
-//            JarFile jarFile = new JarFile(this.getClass().getClassLoader())
             /*重命名*/
-//            String src = realPath + File.separator + "chaosApi";
-//            if (!src.equals(webPath)) {
-//                FileUtils.moveDirectoryToDirectory(new File(src), new File(webPath), true);
-//            }
-
-
-//            URL webFile = this.getClass().getClassLoader().getResource("/chaosApi.zip");
-//            ZipUtil.unZip(webFile.getPath(), webPath);
-
-//this.getClass().getClassLoader().getResource("")
-            /*移动默认目录*/
-//            if (!getConfig().getName().equals("api")) {
-//                FileUtils.moveDirectoryToDirectory(new File(defPath), new File(webPath), true);
-//            }
-
-//            VelocityContext context = new VelocityContext();
-//            VelocityEngine ve = new VelocityEngine();
-
-//            Properties properties = new Properties();
-//            properties.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, webPath);
-
-//            properties.setProperty("eventhandler.referenceinsertion.class", EscapeJavaScriptReference.class.getName());
-
-//            properties.setProperty("eventhandler.escape.javascript.match", "/^(?!\\$\\!.*?Json).*/");
-//                properties.setProperty(Velocity.MAX_NUMBER_LOOPS, "5");
-//            ve.init(properties);
-//            Template t = ve.getTemplate("api.vm", "utf-8");
-//            context.put("form", listMap);
             String tojSON = JsonUtils.tojSON(groupModels);
-//            String tojSON = JsonUtils.tojSON(listMap);
-
-
             IOUtils.write(tojSON, new FileOutputStream(webPath + File.separator + "data.json"), UtilsConstant._coding.UTF8);
-
-//            FileOutputStream fos = new FileOutputStream(webPath + "/api.html");
-//            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos, "UTF-8"));//设置写入的文件编码,解决中文问题
-//            t.merge(context, writer);
-//            writer.close();
         } catch (Exception e) {
             log.warn("加载模板异常！", e);
         }

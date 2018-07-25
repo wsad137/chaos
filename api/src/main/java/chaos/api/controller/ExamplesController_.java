@@ -21,7 +21,7 @@ public class ExamplesController_ extends BaseApiController {
     /**
      * 测试返回JSON数据
      */
-    @Api(fs = {@F(name = "name", desc = "测试字段1"), @F("phone")}, name = "测试", beans = {TestModel.class})
+    @Api(fs = {@F(name = "name", desc = "测试字段1"), @F("phone")}, name = "测试", beans = {TestModel.class}, res = {@ApiRes(beans = {TestModel.class})})
     @RequestMapping(value = "/test")
     @ResponseBody
     public CaseRes test() {

@@ -8,6 +8,7 @@ import chaos.api.annoatation.ApiRes;
 import chaos.api.annoatation.F;
 import chaos.utils.Md5Utils;
 import chaos.utils.object.ObjectUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -26,20 +27,43 @@ import java.util.stream.Collectors;
  * 时间：2016-02-03
  */
 public class ApiModel_ {
-
+    /**
+     * 接口标识
+     */
     private String id = RandomStringUtils.randomAlphabetic(10);
+    /**
+     * 组id
+     */
     private String idGroup;
+    /**
+     * 组名称
+     */
     private String nameGroup;
+    /**
+     * url地址
+     */
     private String url;
+    /**
+     * 接口名称
+     */
     private String name;
+    /**
+     * 接口描述
+     */
     private String desc;
+    /**
+     * 方法
+     */
     private Method method;
+
     private String[] fieldStr = {};
     private Class[] beans = {};
     private String[] exclude = {};
     private List<ApiFieldModel> fields = Lists.newArrayList();
+    @JsonIgnore
     private List<F> _fields = Lists.newArrayList();
     private List<ApiFieldModel> returnFields = new ArrayList<>();
+    @JsonIgnore
     private List<ApiRes> _res = Lists.newArrayList();
     private List<ApiModel_> res = Lists.newArrayList();
 
@@ -53,6 +77,8 @@ public class ApiModel_ {
     private ApiModel_ processorRes(ApiRes apiRes) {
         ApiModel_ def = new ApiModel_();
         def.desc = apiRes.desc();
+        def.name = getName();
+        def.nameGroup = getNameGroup();
         processorField(def);
         return def;
     }
@@ -139,6 +165,7 @@ public class ApiModel_ {
     }
 
     public ApiModel_ processor(ApiGroupModel groupModel) {
+
         ApiModel_ def = new ApiModel_();
         def.idGroup = groupModel.getId();
         def.name = getName();
@@ -149,8 +176,8 @@ public class ApiModel_ {
 
 
         /*
-        *返回值 注解处理
-        */
+         *返回值 注解处理
+         */
         List<ApiRes> res = get_res();
         if (CollectionUtils.isEmpty(res)) res = Lists.newArrayList();
         for (ApiRes apiRes : res) def.res.add(processorRes(apiRes));

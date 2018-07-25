@@ -75,5 +75,4 @@ public @interface Api {
      */
     ApiRes[] res() default {};
 
-
 }
