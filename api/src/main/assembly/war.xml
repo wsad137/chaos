@@ -1,12 +1,14 @@
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
-    <!--<id>caid</id>-->
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0
+          http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+    <id>war</id>
     <includeBaseDirectory>false</includeBaseDirectory>
     <formats>
-        <format>jar</format><!--打包的文件格式,也可以有：war zip-->
+        <format>war</format><!--打包的文件格式,也可以有：war zip-->
         <!--<format>tar.gz</format>&lt;!&ndash;打包的文件格式,也可以有：war zip&ndash;&gt;-->
     </formats>
+
     <!--tar.gz压缩包下是否生成和项目名相同的根目录-->
     <!--<includeBaseDirectory>true</includeBaseDirectory>-->
     <!--<dependencySets>-->
@@ -25,13 +27,27 @@
         <!--<outputDirectory>/</outputDirectory>-->
         <!--</fileSet>-->
         <!--<fileSet>-->
-            <!--<directory>${project.build.directory}/classes/chaos/api/</directory>-->
-            <!--<outputDirectory>chaos/api/</outputDirectory>-->
+        <!--<directory>${project.build.directory}/classes/chaos/api/</directory>-->
+        <!--<outputDirectory>chaos/api/</outputDirectory>-->
         <!--</fileSet>-->
+        <!--<fileSet>-->
+        <!--<directory>${project.build.directory}/classes/</directory>-->
+        <!--<outputDirectory>/</outputDirectory>-->
+        <!--</fileSet>-->
+
+
         <fileSet>
-            <directory>${project.build.directory}/classes/</directory>
+            <directory>${project.build.outputDirectory}</directory>
+            <outputDirectory>WEB-INF/classes</outputDirectory>
+        </fileSet>
+
+
+        <!-- 将 webapp 下的文件输出到 WAR 包 -->
+        <fileSet>
+            <directory>${project.basedir}/src/main/webapp</directory>
             <outputDirectory>/</outputDirectory>
         </fileSet>
+
         <!--<fileSet>-->
         <!--<directory>${project.build.directory}/classes/chaos-api.properties</directory>-->
         <!--<outputDirectory>/</outputDirectory>-->

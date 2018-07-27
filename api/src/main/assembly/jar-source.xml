@@ -22,7 +22,10 @@
         <!--<directory>src/main/bin</directory>-->
         <!--<outputDirectory>/</outputDirectory>-->
         <!--</fileSet>-->
-
+        <!--<fileSet>-->
+            <!--<directory>${project.build.directory}/classes/</directory>-->
+            <!--<outputDirectory>/</outputDirectory>-->
+        <!--</fileSet>-->
 
         <fileSet>
             <directory>${project.build.directory}/classes/chaos/api/</directory>
