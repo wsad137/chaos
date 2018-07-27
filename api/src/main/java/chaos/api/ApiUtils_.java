@@ -2,6 +2,7 @@ package chaos.api;
 
 import chaos.api.annoatation.Api;
 import chaos.api.annoatation.ApiGroup;
+import chaos.api.context.ApiInit_;
 import chaos.api.model.ApiConfig;
 import chaos.api.model.ApiGroupModel;
 import chaos.api.model.ApiModel_;
@@ -20,7 +21,10 @@ import org.apache.log4j.Logger;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -173,17 +177,26 @@ public class ApiUtils_ {
                     if (StringUtils.isEmpty(apiModel.getName())) apiModel.setName(api.name());
                     apiModel.setNameGroup(groupModel.getName());
                     apiModel.setDesc(api.desc());
-                    apiModel.setFieldStr(api.fieldStr());
+//                    apiModel.setFieldStr(api.fieldStr());
                     apiModel.set_fields(Arrays.asList(api.fs()));
                     apiModel.setBeans(api.beans());
-                    apiModel.set_res(Arrays.asList(api.res()));
+//                    apiModel.set_res(Arrays.asList(api.res()));
+                    apiModel.setDict_(api.dict());
+                    apiModel.setDicts_(Arrays.asList(api.dicts()));
                     apiModel.setExclude(api.excFields());
                     RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
+
+                    String contextPath = "";
+                    ServletContext bean = ApiInit_.appContext.getBean(ServletContext.class);
+                    contextPath = bean.getContextPath();
+
                     if (ObjectUtils.isEmpty(requestMapping)) {
-                        apiModel.setUrl((clsMapping + "/" + method.getName()));
+                        apiModel.setUrl(contextPath + (clsMapping + "/" + method.getName()));
+//                        ApiInit_.appContext.getBean()
                     } else {
-                        apiModel.setUrl((clsMapping + requestMapping.value()[0]));
+                        apiModel.setUrl(contextPath + (clsMapping + requestMapping.value()[0]));
                     }
+
                     if (ObjectUtils.isEmpty(apiModel.getName())) {
                         apiModel.setName(method.getName());
                     }

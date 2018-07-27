@@ -1,9 +1,6 @@
 package chaos.api.controller;
 
-import chaos.api.annoatation.Api;
-import chaos.api.annoatation.ApiGroup;
-import chaos.api.annoatation.ApiRes;
-import chaos.api.annoatation.F;
+import chaos.api.annoatation.*;
 import chaos.api.model.TestModel;
 import chaos.utils.web.model.CaseRes;
 import org.springframework.stereotype.Controller;
@@ -21,7 +18,7 @@ public class ExamplesController_ extends BaseApiController {
     /**
      * 测试返回JSON数据
      */
-    @Api(fs = {@F(name = "name", desc = "测试字段1"), @F("phone")}, name = "测试", beans = {TestModel.class}, res = {@ApiRes(beans = {TestModel.class})})
+    @Api(dict = @Dict(TestModel.class), fs = {@F(name = "name", desc = "测试字段1"), @F("phone")}, name = "测试", beans = {TestModel.class}, res = {@ApiRes(beans = {TestModel.class})})
     @RequestMapping(value = "/test")
     @ResponseBody
     public CaseRes test() {

@@ -65,7 +65,7 @@ public @interface F {
      *
      * @return
      */
-    int lang() default 20;
+    int lang() default 0;
 
 
 }

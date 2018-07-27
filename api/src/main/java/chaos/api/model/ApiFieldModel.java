@@ -45,6 +45,37 @@ public class ApiFieldModel {
     private String def = "";
 
 
+    /**
+     * 是否非可以为空
+     *
+     * @return
+     */
+    private Boolean notEmpty;
+    /**
+     * 长度
+     *
+     * @return
+     */
+    private Integer lang;
+
+
+    public void setNotEmpty(Boolean notEmpty) {
+        this.notEmpty = notEmpty;
+    }
+
+    public Integer getLang() {
+        return lang;
+    }
+
+    public Boolean getNotEmpty() {
+        return notEmpty;
+    }
+
+    public void setLang(Integer lang) {
+        this.lang = lang;
+    }
+
+
     public ApiFieldModel() {
     }
 
@@ -108,7 +139,9 @@ public class ApiFieldModel {
         if (!StringUtils.isEmpty(apiField.def())) setDef(apiField.def());
         if (!StringUtils.isEmpty(apiField.desc())) setDesc(apiField.desc());
         if (!StringUtils.isEmpty(apiField.type())) setType(apiField.type());
-
+        if (!ObjectUtils.isEmpty(apiField.notEmpty())) setNotEmpty(apiField.notEmpty());
+        if (!ObjectUtils.isEmpty(apiField.lang())) setLang(apiField.lang());
+//        if (!StringUtils.isEmpty(apiField.lang())) (apiField.type());
     }
 
     /**
@@ -122,6 +155,8 @@ public class ApiFieldModel {
         setDef(apiField.def());
         setDesc(apiField.desc());
         setType(apiField.type());
+        setLang(apiField.lang());
+        setNotEmpty(apiField.notEmpty());
     }
 
 

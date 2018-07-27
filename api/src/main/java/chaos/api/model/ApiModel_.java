@@ -2,10 +2,7 @@ package chaos.api.model;
 
 
 import chaos.api.ApiUtils_;
-import chaos.api.annoatation.ApiField;
-import chaos.api.annoatation.ApiModel;
-import chaos.api.annoatation.ApiRes;
-import chaos.api.annoatation.F;
+import chaos.api.annoatation.*;
 import chaos.utils.Md5Utils;
 import chaos.utils.object.ObjectUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -54,10 +51,13 @@ public class ApiModel_ {
     /**
      * 方法
      */
+    @JsonIgnore
     private Method method;
 
     private String[] fieldStr = {};
+    @JsonIgnore
     private Class[] beans = {};
+
     private String[] exclude = {};
     private List<ApiFieldModel> fields = Lists.newArrayList();
     @JsonIgnore
@@ -67,20 +67,30 @@ public class ApiModel_ {
     private List<ApiRes> _res = Lists.newArrayList();
     private List<ApiModel_> res = Lists.newArrayList();
 
+    @JsonIgnore
+    private Dict dict_ = null;
 
-    /**
-     * 返回值 处理器
-     *
-     * @param apiRes
-     * @return
-     */
-    private ApiModel_ processorRes(ApiRes apiRes) {
-        ApiModel_ def = new ApiModel_();
-        def.desc = apiRes.desc();
-        def.name = getName();
-        def.nameGroup = getNameGroup();
-        processorField(def);
-        return def;
+    private ApiModel_ dict;
+
+    @JsonIgnore
+    private List<Dict> dicts_ = Lists.newArrayList();
+
+    private List<ApiModel_> dicts = Lists.newArrayList();
+
+    public List<Dict> getDicts_() {
+        return dicts_;
+    }
+
+    public void setDicts_(List<Dict> dicts_) {
+        this.dicts_ = dicts_;
+    }
+
+    public List<ApiModel_> getDicts() {
+        return dicts;
+    }
+
+    public void setDicts(List<ApiModel_> dicts) {
+        this.dicts = dicts;
     }
 
     /**
@@ -88,12 +98,16 @@ public class ApiModel_ {
      *
      * @param def
      */
-    private void processorField(ApiModel_ def) {
+    private void processorField(ApiModel_ def, boolean isDict) {
         Map<String, ApiFieldModel> temp = new HashMap<>();
         //添加bean中的字段
         for (Class bean : getBeans()) {
             ApiModel apiModel = (ApiModel) bean.getAnnotation(ApiModel.class);
             if (apiModel == null) continue;
+            if (isDict) {/*字典包含实体类名称和说明*/
+                def.setName(StringUtils.isBlank(apiModel.value()) ? apiModel.name() : apiModel.value());
+                def.setDesc(apiModel.desc());
+            }
             for (Field field : bean.getDeclaredFields()) {
                 ApiField apiField = field.getAnnotation(ApiField.class);
                 if (apiField == null && !apiModel.autoSca()) continue;
@@ -121,14 +135,18 @@ public class ApiModel_ {
         /*
          *添加注解字段
          */
-        if (!CollectionUtils.isEmpty(Collections.singletonList(get_fields()))) {
-            List<ApiFieldModel> models = get_fields().stream().map(ApiFieldModel::new).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(Collections.singletonList(def.get_fields()))) {
+            List<ApiFieldModel> models = def.get_fields().stream().map(ApiFieldModel::new).collect(Collectors.toList());
             def.fields.addAll(models);
         }
+//        if (!CollectionUtils.isEmpty(Collections.singletonList(get_fields()))) {
+//            List<ApiFieldModel> models = get_fields().stream().map(ApiFieldModel::new).collect(Collectors.toList());
+//            def.fields.addAll(models);
+//        }
 
 
         //添加自定义字段
-        for (String s : getFieldStr()) {
+        for (String s : def.getFieldStr()) {
             ApiFieldModel paramModel = new ApiFieldModel(s);
 
             if (temp.containsKey(paramModel.getName())) {
@@ -143,7 +161,7 @@ public class ApiModel_ {
 
 
         //排除不需要的字段
-        for (String s : getExclude()) temp.remove(s);
+        for (String s : def.getExclude()) temp.remove(s);
 
         String globalIgnore = ApiUtils_.getConfig().getGlobalIgnore();
 
@@ -164,6 +182,28 @@ public class ApiModel_ {
         });
     }
 
+    public Dict getDict_() {
+        return dict_;
+    }
+
+    public void setDict_(Dict dict_) {
+        this.dict_ = dict_;
+    }
+
+    public ApiModel_ getDict() {
+        return dict;
+    }
+
+    public void setDict(ApiModel_ dict) {
+        this.dict = dict;
+    }
+
+    /**
+     * api 注解解析处理器
+     *
+     * @param groupModel
+     * @return
+     */
     public ApiModel_ processor(ApiGroupModel groupModel) {
 
         ApiModel_ def = new ApiModel_();
@@ -172,16 +212,44 @@ public class ApiModel_ {
         def.nameGroup = getNameGroup();
         def.url = getUrl();
         def.generateId();
-        processorField(def);
+        def.exclude = getExclude();
+        def._fields = get_fields();
+        def.beans = getBeans();
+        def.dicts_ = getDicts_();
+        def.dict_ = getDict_();
+        processorField(def, false);
 
 
         /*
          *返回值 注解处理
          */
-        List<ApiRes> res = get_res();
-        if (CollectionUtils.isEmpty(res)) res = Lists.newArrayList();
-        for (ApiRes apiRes : res) def.res.add(processorRes(apiRes));
+//        List<ApiRes> res = get_res();
+//        if (CollectionUtils.isEmpty(res)) res = Lists.newArrayList();
+//        for (ApiRes apiRes : res) def.res.add(processorRes(apiRes));
+        /*
+         * 对象字典注解
+         */
+//        def.dict = processorDict();
+        def.dicts = processorDicts();
+        return def;
+    }
 
+    private List<ApiModel_> processorDicts() {
+
+        List<ApiModel_> dicts = Lists.newArrayList();
+
+        List<Dict> dicts_ = Lists.newArrayList();
+        if (CollectionUtils.isEmpty(getDicts_())) dicts_ = Lists.newArrayList();
+        dicts_.add(getDict_());
+        for (Dict dict1 : dicts_) dicts.add(processorDict(dict1));
+        return dicts;
+    }
+
+    private ApiModel_ processorDict(Dict dict) {
+        ApiModel_ def = new ApiModel_();
+        def.beans = new Class[]{dict.value()};
+        def._fields = Arrays.asList(dict.fs());
+        processorField(def, true);
         return def;
     }
 

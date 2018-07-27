@@ -66,6 +66,7 @@ public @interface Api {
      *
      * @return
      */
+    @Deprecated
     String[] fieldStr() default {};
 
     /**
@@ -73,6 +74,21 @@ public @interface Api {
      *
      * @return
      */
+    @Deprecated
     ApiRes[] res() default {};
+
+    /**
+     * 对象字典
+     *
+     * @return
+     */
+    Dict dict() default @Dict;
+
+    /**
+     * 对象字典集合
+     *
+     * @return
+     */
+    Dict[] dicts() default {};
 
 }

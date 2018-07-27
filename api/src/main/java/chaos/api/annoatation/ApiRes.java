@@ -20,6 +20,7 @@ public @interface ApiRes {
      * @return
      */
     String value() default "";
+
     /**
      * 字段集合
      *
@@ -65,6 +66,7 @@ public @interface ApiRes {
      *
      * @return
      */
+    @Deprecated
     String[] fieldStr() default {};
 
 

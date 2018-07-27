@@ -175,6 +175,17 @@ function apiCtrl($scope, http, toastr) {
     function setFormsApiData() {
         $scope.apis.forEach(function (t) {
             var findApi = $scope.forms.find("id", t.id);
+
+            Object.keys(t.data).forEach(function (k) {
+                try {
+                    var obj = angular.fromJson(t.data[k]);
+                    /*json 字符串转对象*/
+                    t.data[k] = obj;
+                } catch (e) {
+
+                }
+            });
+
             if (!findApi) {
                 $scope.forms.push({id: t.id, data: t.data})
             } else {

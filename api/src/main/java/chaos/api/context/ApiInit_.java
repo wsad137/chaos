@@ -16,7 +16,7 @@ public class ApiInit_ implements ApplicationListener<ContextRefreshedEvent> {
 //    private boolean email_send;
 
     private static final Logger log = Logger.getLogger(ApiInit_.class);
-    public ApplicationContext appContext;
+    public static ApplicationContext appContext;
 
     //  private static Scanner sc = new Scanner(System.in);
     @Override
@@ -32,7 +32,6 @@ public class ApiInit_ implements ApplicationListener<ContextRefreshedEvent> {
             log.warn("初始化异常！", e);
         }
         log.info("api-web初始化完成");
-
     }
 
 
