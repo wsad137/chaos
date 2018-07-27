@@ -38,6 +38,7 @@ public class ApiInit_ implements ApplicationListener<ContextRefreshedEvent> {
 
     public void init(ApplicationContext appContext) {
 
+
     }
 
     public static void main(String[] args) {
