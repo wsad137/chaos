@@ -25,6 +25,7 @@ public class ApiInit_ implements ApplicationListener<ContextRefreshedEvent> {
         appContext = event.getApplicationContext();
         System.out.println(appContext.getId());
 
+
         log.info("api-web初始化");
         try {
             ApiUtils_.init(appContext);
