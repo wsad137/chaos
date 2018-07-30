@@ -175,17 +175,15 @@ function apiCtrl($scope, http, toastr) {
     function setFormsApiData() {
         $scope.apis.forEach(function (t) {
             var findApi = $scope.forms.find("id", t.id);
-
-            Object.keys(t.data).forEach(function (k) {
-                try {
+            try {
+                Object.keys(t.data).forEach(function (k) {
                     var obj = angular.fromJson(t.data[k]);
-                    /*json 字符串转对象*/
                     t.data[k] = obj;
-                } catch (e) {
-
-                }
-            });
-
+                    /*json 字符串转对象*/
+                });
+            } catch (e) {
+                console.info("格式转换异常")
+            }
             if (!findApi) {
                 $scope.forms.push({id: t.id, data: t.data})
             } else {

@@ -497,67 +497,69 @@
             <!--</configuration>-->
             <!--</plugin>-->
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>
-                <!--web同时打包jar-->
-                <configuration>
-                    <!--<packagingExcludes>*.sql</packagingExcludes>-->
-                    <!--<warSourceExcludes>*.sql</warSourceExcludes>-->
-                    <attachClasses>true</attachClasses>
-                    <classesClassifier>jar</classesClassifier>
-                    <!--<webResources>-->
-                    <!--<resource>-->
-                    <!--<directory>src/main/resources</directory>-->
-                    <!--<targetPath>WEB-INF/classes</targetPath>-->
-                    <!--<filtering>true</filtering>-->
-                    <!--</resource>-->
-                    <!--</webResources>-->
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-war-plugin</artifactId>-->
+            <!--<version>3.0.0</version>-->
+            <!--&lt;!&ndash;web同时打包jar&ndash;&gt;-->
+            <!--<configuration>-->
+            <!--<packagingExcludes>*.sql</packagingExcludes>-->
+            <!--<warSourceExcludes>*.sql</warSourceExcludes>-->
 
-                    <!--<webResources>-->
-                    <!--<resource>-->
-                    <!--&lt;!&ndash; 相对pom.xml的目录 &ndash;&gt;-->
-                    <!--<directory>src/main/resources/</directory>-->
-                    <!--&lt;!&ndash; 文件目标位置 &ndash;&gt;-->
-                    <!--<targetPath>WEB-INF/classes</targetPath>-->
-                    <!--<includes>-->
-                    <!--<include>*.xml</include>-->
-                    <!--<include>*.properties</include>-->
-                    <!--</includes>-->
-                    <!--&lt;!&ndash;-->
-                    <!--<excludes>-->
-                    <!--<exclude>**/image2</exclude>-->
-                    <!--</excludes>-->
-                    <!--&ndash;&gt;-->
-                    <!--</resource>-->
-                    <!--</webResources>-->
-                    <!--<archiveClasses>false</archiveClasses>-->
+            <!--<attachClasses>true</attachClasses>-->
+            <!--<classesClassifier>jar</classesClassifier>-->
 
-                    <!--当archiveClasses=true时，resources中的文件资源会被打到jar中；-->
-                    <!--当archiveClasses=false时，resources中的文件资源在war的根目录。-->
-                    <!--<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>-->
-                </configuration>
-            </plugin>
+            <!--<webResources>-->
+            <!--<resource>-->
+            <!--<directory>src/main/resources</directory>-->
+            <!--<targetPath>WEB-INF/classes</targetPath>-->
+            <!--<filtering>true</filtering>-->
+            <!--</resource>-->
+            <!--</webResources>-->
+
+            <!--<webResources>-->
+            <!--<resource>-->
+            <!--&lt;!&ndash; 相对pom.xml的目录 &ndash;&gt;-->
+            <!--<directory>src/main/resources/</directory>-->
+            <!--&lt;!&ndash; 文件目标位置 &ndash;&gt;-->
+            <!--<targetPath>WEB-INF/classes</targetPath>-->
+            <!--<includes>-->
+            <!--<include>*.xml</include>-->
+            <!--<include>*.properties</include>-->
+            <!--</includes>-->
+            <!--&lt;!&ndash;-->
+            <!--<excludes>-->
+            <!--<exclude>**/image2</exclude>-->
+            <!--</excludes>-->
+            <!--&ndash;&gt;-->
+            <!--</resource>-->
+            <!--</webResources>-->
+            <!--<archiveClasses>false</archiveClasses>-->
+
+            <!--当archiveClasses=true时，resources中的文件资源会被打到jar中；-->
+            <!--当archiveClasses=false时，resources中的文件资源在war的根目录。-->
+            <!--<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
 
 
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-                <executions>
-                    <execution>
-                        <!-- 指示在编译时打包源码 -->
-                        <phase>compile</phase>
-                        <goals>
-                            <!-- 非交叉构建 -->
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+            <!--<artifactId>maven-source-plugin</artifactId>-->
+            <!--<version>3.0.0</version>-->
+            <!--<configuration>-->
+            <!--<attach>true</attach>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--&lt;!&ndash; 指示在编译时打包源码 &ndash;&gt;-->
+            <!--<phase>compile</phase>-->
+            <!--<goals>-->
+            <!--&lt;!&ndash; 非交叉构建 &ndash;&gt;-->
+            <!--<goal>jar-no-fork</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
@@ -614,6 +616,32 @@
                 </configuration>
             </plugin>
 
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-deploy-plugin</artifactId>-->
+            <!--<version>2.7</version>-->
+            <!--<configuration>-->
+            <!--<skip>true</skip>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-install-plugin</artifactId>-->
+            <!--<version>2.5.2</version>-->
+            <!--</plugin>-->
+
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-war-plugin</artifactId>-->
+                <!--<version>3.2.0</version>-->
+                <!--<configuration>-->
+                    <!--<skip>true</skip>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
             <!--打包插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -621,6 +649,8 @@
                 <executions>
                     <execution><!-- 配置执行器 -->
                         <id>make-assembly</id>
+                        <!--<phase>compile</phase>&lt;!&ndash; 绑定到package生命周期阶段上 &ndash;&gt;-->
+                        <!--<phase>package</phase>&lt;!&ndash; 绑定到package生命周期阶段上 &ndash;&gt;-->
                         <phase>package</phase><!-- 绑定到package生命周期阶段上 -->
                         <goals>
                             <goal>single</goal><!-- 只运行一次 -->
@@ -633,6 +663,7 @@
                             <!--打包的详细描述，需要配置额外文件-->
                             <descriptors>
                                 <descriptor>src/main/assembly/jar.xml</descriptor>
+                                <descriptor>src/main/assembly/war.xml</descriptor>
                                 <descriptor>src/main/assembly/jar-source.xml</descriptor>
                             </descriptors>
                         </configuration>

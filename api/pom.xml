@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>api</artifactId>
     <!--<version>2.0.1</version>-->
-    <!--<version>${maven.build.timestamp}-RELEASE</version>-->
+    <version>${maven.build.timestamp}-RELEASE</version>
     <packaging>war</packaging>
     <name>api Maven Webapp</name>
     <url>http://maven.apache.org</url>

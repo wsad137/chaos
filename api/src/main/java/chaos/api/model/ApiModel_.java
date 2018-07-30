@@ -101,7 +101,7 @@ public class ApiModel_ {
     private void processorField(ApiModel_ def, boolean isDict) {
         Map<String, ApiFieldModel> temp = new HashMap<>();
         //添加bean中的字段
-        for (Class bean : getBeans()) {
+        for (Class bean : def.getBeans()) {
             ApiModel apiModel = (ApiModel) bean.getAnnotation(ApiModel.class);
             if (apiModel == null) continue;
             if (isDict) {/*字典包含实体类名称和说明*/
@@ -169,7 +169,10 @@ public class ApiModel_ {
         if (!StringUtils.isEmpty(globalIgnore)) strings = StringUtils.split(globalIgnore, ",");
         for (String s : strings) temp.remove(s);
 
-        def.fields.addAll(new ArrayList<>(temp.values()));
+        /*去除重复字段*/
+        Set<String> names = def.fields.stream().map(ApiFieldModel::getName).collect(Collectors.toSet());
+        List<ApiFieldModel> tSet = temp.values().stream().filter(t -> !names.contains(t.getName())).collect(Collectors.toList());
+        def.fields.addAll(tSet);
 
 //        ComparatorUtils.sort(paramModels, "name", true);
 //        def.fields.sort(Comparator.comparing());
