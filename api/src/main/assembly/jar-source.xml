@@ -28,7 +28,7 @@
         <!--</fileSet>-->
 
         <fileSet>
-            <directory>${project.build.directory}/classes/chaos/api/</directory>
+            <directory>src/main/java/chaos/api</directory>
             <outputDirectory>chaos/api/</outputDirectory>
         </fileSet>
 

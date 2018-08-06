@@ -132,7 +132,7 @@
                             <button class="btn btn-xs btn-info">复制</button>
                         </div>
                     </div>
-                    <div class="panel panel-success">
+                    <div class="panel panel-success" ng-if="api.fields.length>0">
                         <div class="panel-heading" ng-click="api.data.isShow=!api.data.isShow;">
                             <h3 class="panel-title">参数&gt;
                                 &nbsp;&nbsp;&nbsp;<button class="btn btn-xs btn-info" ng-click="">清空表单</button>
@@ -150,7 +150,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="panel panel-success" ng-repeat="a in api.dicts">
+                    <div class="panel panel-success" ng-repeat="a in api.dicts" ng-if="api.dicts.length>0">
                         <div class="panel-heading" ng-click="a.isShow=!a.isShow;">
                             <h3 class="panel-title">{{a.name}} 字典 &gt; {{a.desc}}
                                 &nbsp;&nbsp;&nbsp;

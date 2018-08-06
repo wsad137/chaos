@@ -58,7 +58,7 @@ gulp.task("bower-update", function () {
     return bower({cmd: 'update', interactive: true});
 });
 
-gulp.task('bower-libs', ['bower-update'], function () {
+gulp.task('bower-libs', [], function () {
     gulp.src('./bower_components/angular/angular.min.js').pipe(gulp.dest('./src/lib/angular/'));
     // gulp.src('./bower_components/angular/angular.min.js.map').pipe(gulp.dest('./src/lib/angular/'));
     // gulp.src('./bower_components/angular-cookies/angular-cookies.min.js').pipe(gulp.dest('./src/lib/angular/'));

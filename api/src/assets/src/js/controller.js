@@ -177,9 +177,16 @@ function apiCtrl($scope, http, toastr) {
             var findApi = $scope.forms.find("id", t.id);
             try {
                 Object.keys(t.data).forEach(function (k) {
-                    var obj = angular.fromJson(t.data[k]);
-                    t.data[k] = obj;
-                    /*json 字符串转对象*/
+                    try {
+                        /*json 字符串转对象*/
+                        var datum = t.data[k];
+                        if (datum.indexOf('{') < 0) return;
+                        // if (typeof datum == "number" && datum) datum = new String(datum);
+                        var obj = angular.fromJson(datum);
+                        t.data[k] = obj;
+                    } catch (e) {
+                    }
+
                 });
             } catch (e) {
                 console.info("格式转换异常")
