@@ -187,8 +187,10 @@ public class ApiUtils_ {
                     RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
 
                     String contextPath = "";
-                    ServletContext bean = ApiInit_.appContext.getBean(ServletContext.class);
-                    contextPath = bean.getContextPath();
+                    if (ApiInit_.appContext != null) {/*设置项目 contextPath*/
+                        ServletContext bean = ApiInit_.appContext.getBean(ServletContext.class);
+                        contextPath = bean.getContextPath();
+                    }
 
                     if (ObjectUtils.isEmpty(requestMapping)) {
                         apiModel.setUrl(contextPath + (clsMapping + "/" + method.getName()));
