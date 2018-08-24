@@ -82,6 +82,7 @@ gulp.task('bower-libs', [], function () {
     // gulp.src('./bower_components/font-awesome/css/font-awesome.min.css').pipe(gulp.dest('./src/lib/font-awesome/css/'));
     // gulp.src('./bower_components/font-awesome/fonts/**').pipe(gulp.dest('./src/lib/font-awesome/fonts/'));
 
+    gulp.src('./bower_components/jsoneditor/dist/jsoneditor.js').pipe(gulp.dest('./src/lib/jsoneditor/dist/'));
     gulp.src('./bower_components/jsoneditor/dist/jsoneditor-minimalist.min.js').pipe(gulp.dest('./src/lib/jsoneditor/dist/'));
     gulp.src('./bower_components/jsoneditor/dist/jsoneditor.css').pipe(gulp.dest('./src/lib/jsoneditor/dist/'));
     gulp.src('./bower_components/jsoneditor/dist/img/**').pipe(gulp.dest('./src/lib/jsoneditor/dist/img/'));

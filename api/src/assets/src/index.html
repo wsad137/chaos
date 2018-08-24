@@ -9,11 +9,12 @@
     <link rel="stylesheet" type="text/css" href="lib/angular-toastr/angular-toastr.css"/>
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <!--<script src="lib/jsoneditor/dist/jsoneditor.js"></script>-->
     <script src="lib/jsoneditor/dist/jsoneditor-minimalist.min.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-toastr/angular-toastr.tpls.js"></script>
     <script src="lib/angular-file-upload/dist/angular-file-upload.min.js"></script>
-    <script type="text/javascript" src="lib/angular/angular-animate.min.js"></script>
+    <!--<script type="text/javascript" src="lib/angular/angular-animate.min.js"></script>-->
     <script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/controller.js"></script>
@@ -150,7 +151,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="panel panel-success" ng-repeat="a in api.dicts" ng-if="api.dicts.length>0">
+                    <div class="panel panel-success" ng-repeat="a in api.dicts" ng-if="api.dicts.length>0&&a.fields.length>0">
                         <div class="panel-heading" ng-click="a.isShow=!a.isShow;">
                             <h3 class="panel-title">{{a.name}} 字典 &gt; {{a.desc}}
                                 &nbsp;&nbsp;&nbsp;

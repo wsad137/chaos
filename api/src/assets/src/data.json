@@ -1,1 +1,225 @@
-[{"id":"exYMHkBZWj","name":"账户","apis":[{"id":"6e7975355b3e1d74f749eda4ee46b75c","idGroup":"exYMHkBZWj","nameGroup":"账户","url":"/account/login","name":"登录","desc":null,"method":null,"fieldStr":[],"beans":[],"exclude":[],"fields":[{"name":"iCode","type":"string","desc":"","def":""},{"name":"password","type":"string","desc":"","def":"123456"},{"name":"username","type":"string","desc":"","def":"admin"}],"_fields":[],"returnFields":[],"_res":[],"res":[]}]},{"id":"EuuhXJvSAY","name":"core-api控制器","apis":[{"id":"99410aae105c47cbb5ae9307a1a482ff","idGroup":"EuuhXJvSAY","nameGroup":"core-api控制器","url":"/api/test","name":"测试","desc":null,"method":null,"fieldStr":[],"beans":[],"exclude":[],"fields":[{"name":"aa","type":"string","desc":"","def":""},{"name":"aaaa","type":"string","desc":"测试字段1","def":""}],"_fields":[],"returnFields":[],"_res":[],"res":[{"id":"EKDwhZdKev","idGroup":null,"nameGroup":null,"url":null,"name":null,"desc":"aaa","method":null,"fieldStr":[],"beans":[],"exclude":[],"fields":[{"name":"aa","type":"string","desc":"","def":""},{"name":"aaaa","type":"string","desc":"测试字段1","def":""}],"_fields":[],"returnFields":[],"_res":[],"res":[]}]},{"id":"acfcb805013d682e5d3c7bb16e86f796","idGroup":"EuuhXJvSAY","nameGroup":"core-api控制器","url":"/api/test2","name":"测试","desc":null,"method":null,"fieldStr":[],"beans":[],"exclude":[],"fields":[{"name":"aa","type":"string","desc":"","def":""},{"name":"id","type":"number","desc":"","def":""},{"name":"aaaa","type":"string","desc":"","def":""},{"name":"bool","type":"boolean","desc":"","def":""},{"name":"name","type":"string","desc":"","def":""}],"_fields":[],"returnFields":[],"_res":[],"res":[{"id":"RKfGtkexAG","idGroup":null,"nameGroup":null,"url":null,"name":null,"desc":"aaa","method":null,"fieldStr":[],"beans":[],"exclude":[],"fields":[{"name":"aa","type":"string","desc":"","def":""},{"name":"id","type":"number","desc":"","def":""},{"name":"aaaa","type":"string","desc":"","def":""},{"name":"bool","type":"boolean","desc":"","def":""},{"name":"name","type":"string","desc":"","def":""}],"_fields":[],"returnFields":[],"_res":[],"res":[]}]},{"id":"329f2b7ecfe82cef2fc574055cb6fca0","idGroup":"EuuhXJvSAY","nameGroup":"core-api控制器","url":"/api/system","name":"获取服务器信息","desc":null,"method":null,"fieldStr":[],"beans":[],"exclude":[],"fields":[{"name":"id","type":"number","desc":"","def":""},{"name":"bool","type":"boolean","desc":"","def":""},{"name":"name","type":"string","desc":"","def":""}],"_fields":[],"returnFields":[],"_res":[],"res":[]}]}]
+[
+  {
+    "id": "dEZsBleoEG",
+    "name": "core-api控制器",
+    "apis": [
+      {
+        "id": "99410aae105c47cbb5ae9307a1a482ff",
+        "idGroup": "dEZsBleoEG",
+        "nameGroup": "core-api控制器",
+        "url": "/api/test",
+        "name": "测试",
+        "desc": null,
+        "fieldStr": [],
+        "exclude": [],
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "desc": "id",
+            "def": "001",
+            "notEmpty": false,
+            "lang": 0
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "desc": "测试字段1",
+            "def": "",
+            "notEmpty": false,
+            "lang": 0
+          },
+          {
+            "name": "bool",
+            "type": "string",
+            "desc": "bool",
+            "def": "true",
+            "notEmpty": true,
+            "lang": 50
+          },
+          {
+            "name": "phone",
+            "type": "string",
+            "desc": "",
+            "def": "",
+            "notEmpty": false,
+            "lang": 0
+          }
+        ],
+        "returnFields": [],
+        "res": [],
+        "dict": null,
+        "dicts": [
+          {
+            "id": "indidEccOg",
+            "idGroup": null,
+            "nameGroup": null,
+            "url": null,
+            "name": "value",
+            "desc": "desc",
+            "fieldStr": [],
+            "exclude": [],
+            "fields": [
+              {
+                "name": "id",
+                "type": "string",
+                "desc": "id",
+                "def": "001",
+                "notEmpty": false,
+                "lang": 0
+              },
+              {
+                "name": "bool",
+                "type": "string",
+                "desc": "bool",
+                "def": "true",
+                "notEmpty": true,
+                "lang": 50
+              },
+              {
+                "name": "name",
+                "type": "string",
+                "desc": "用户名",
+                "def": "hahah",
+                "notEmpty": false,
+                "lang": 100
+              }
+            ],
+            "returnFields": [],
+            "res": [],
+            "dict": null,
+            "dicts": []
+          }
+        ]
+      },
+      {
+        "id": "c3668eba50731afe90d88189723d6cb3",
+        "idGroup": "dEZsBleoEG",
+        "nameGroup": "core-api控制器",
+        "url": "/api/test2",
+        "name": "测试2",
+        "desc": null,
+        "fieldStr": [],
+        "exclude": [],
+        "fields": [
+          {
+            "name": "aa",
+            "type": "string",
+            "desc": "",
+            "def": "",
+            "notEmpty": false,
+            "lang": 0
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "desc": "id",
+            "def": "001",
+            "notEmpty": false,
+            "lang": 0
+          },
+          {
+            "name": "aaaa",
+            "type": "string",
+            "desc": "",
+            "def": "",
+            "notEmpty": false,
+            "lang": 0
+          },
+          {
+            "name": "bool",
+            "type": "string",
+            "desc": "bool",
+            "def": "true",
+            "notEmpty": true,
+            "lang": 50
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "desc": "用户名",
+            "def": "hahah",
+            "notEmpty": false,
+            "lang": 100
+          }
+        ],
+        "returnFields": [],
+        "res": [],
+        "dict": null,
+        "dicts": [
+          {
+            "id": "URgpmmRXBz",
+            "idGroup": null,
+            "nameGroup": null,
+            "url": null,
+            "name": null,
+            "desc": null,
+            "fieldStr": [],
+            "exclude": [],
+            "fields": [],
+            "returnFields": [],
+            "res": [],
+            "dict": null,
+            "dicts": []
+          }
+        ]
+      },
+      {
+        "id": "329f2b7ecfe82cef2fc574055cb6fca0",
+        "idGroup": "dEZsBleoEG",
+        "nameGroup": "core-api控制器",
+        "url": "/api/system",
+        "name": "获取服务器信息",
+        "desc": null,
+        "fieldStr": [],
+        "exclude": [],
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "desc": "id",
+            "def": "001",
+            "notEmpty": false,
+            "lang": 0
+          },
+          {
+            "name": "bool",
+            "type": "string",
+            "desc": "bool",
+            "def": "true",
+            "notEmpty": true,
+            "lang": 50
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "desc": "用户名",
+            "def": "hahah",
+            "notEmpty": false,
+            "lang": 100
+          }
+        ],
+        "returnFields": [],
+        "res": [],
+        "dict": null,
+        "dicts": [
+          {
+            "id": "tEKMjQoWeF",
+            "idGroup": null,
+            "nameGroup": null,
+            "url": null,
+            "name": null,
+            "desc": null,
+            "fieldStr": [],
+            "exclude": [],
+            "fields": [],
+            "returnFields": [],
+            "res": [],
+            "dict": null,
+            "dicts": []
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -45,34 +45,18 @@ appServices.service("http", http);
 
 function http($http, toastr) {
     this.post = function (url, data, fn) {
+        /*添加请求头*/
+        var headers = {};
+        if (getItem('header')) {
+            var header = JSON.parse(getItem('header'));
+            if (header && header.childs) {
+                header.childs.forEach((item, index) => {
+                    headers[item.k] = item.v;
+                });
+            }
+        }
 
-
-        // $.ajax({
-        //     type: 'POST',
-        //     url: url,
-        //     data: data,
-        //     dataType: 'json',
-        //     success: function (result,status,xhr) {
-        //         var data = result;
-        //         // if (!data.success) {
-        //         //     toastr.warning(data.eMsg, "", {
-        //         //         onHidden: function () {
-        //         //             if (data.eCode === -1) window.location.href = "../index.html";
-        //         //         }
-        //         //     });
-        //         //     return;
-        //         // }
-        //         console.info(url);
-        //         console.info(data);
-        //         // console.info(JSON.stringify(data));
-        //         fn(data, status, xhr.headers, xhr.config)
-        //     },
-        //     error: function (xhr,status,error) {
-        //         toastr.error("链接超时！");
-        //     }
-        // });
-
-        $http.post(url, data).then(function (resp) {
+        $http.post(url, data, {headers: headers}).then(function (resp) {
             //console.info("*-*-*-*-sDao-success");
             var data = resp.data;
             // if (!data.success) {
@@ -90,32 +74,40 @@ function http($http, toastr) {
         }, function (resp) {
             // 响应失败时调用，resp带有错误信息
             console.error(url);
-            console.error(resp.data);
-            toastr.error("链接超时！");
+            // console.error(resp.data);
+            console.error(JSON.stringify(resp));
+            toastr.error(JSON.stringify(resp));
+            // toastr.error("链接超时！");
             // fn(resp.data, resp.status, resp.headers, resp.config);
         });
     };
     this.get = function (url, data, fn) {
-        $http.get(url, JSON.data).then(function (resp) {
-            //console.info("*-*-*-*-sDao-success");
+        /*添加请求头*/
+        var headers = {};
+        if (getItem('header')) {
+            var header = JSON.parse(getItem('header'));
+            if (header && header.childs) {
+                header.childs.forEach((item, index) => {
+                    headers[item.k] = item.v;
+                });
+            }
+        }
+        $http.get(url, JSON.data, {headers: headers}).then(function (resp) {
             var data = resp.data;
-            // if (!data.success) {
-            //     toastr.warning(data.eMsg, "", {
-            //         onHidden: function () {
-            //             if (data.eCode === -1) window.location.href = "../index.html";
-            //         }
-            //     });
-            //     return;
-            // }
             console.info(url);
             console.info(data);
             // console.info(JSON.stringify(data));
             fn(data, resp.status, resp.headers, resp.config)
         }, function (resp) {
             // 响应失败时调用，resp带有错误信息
+            // console.error(url);
+            // console.error(resp.data);
+            // toastr.error("链接超时！");
+
             console.error(url);
-            console.error(resp.data);
-            toastr.error("链接超时！");
+            // console.error(resp.data);
+            console.error(JSON.stringify(resp));
+            toastr.error(JSON.stringify(resp));
             // fn(resp.data, resp.status, resp.headers, resp.config);
         });
     };

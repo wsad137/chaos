@@ -18,13 +18,17 @@ public class ExamplesController_ extends BaseApiController {
     /**
      * 测试返回JSON数据
      */
-    @Api(dict = @Dict(TestModel.class), fs = {@F(name = "name", desc = "测试字段1"), @F("phone")}, name = "测试", beans = {TestModel.class}, res = {@ApiRes(beans = {TestModel.class})})
+    @Api(name = "测试",
+            dict = @Dict(TestModel.class),
+            fs = {@F(name = "name", desc = "测试字段1"), @F("phone")},
+            beans = {TestModel.class},
+            res = {@ApiRes(beans = {TestModel.class})})
     @RequestMapping(value = "/test")
     @ResponseBody
     public CaseRes test() {
 
-        System.out.println("-=-=-=-=-" + request.getRemoteAddr());
-        System.out.println("Test................");
+//        System.out.println("-=-=-=-=-" + request.getRemoteAddr());
+//        System.out.println("Test................");
 //        String a = null;
 //        a.toString();
 //        throw new IllegalArgumentException("唯一约束异常！");
@@ -35,15 +39,17 @@ public class ExamplesController_ extends BaseApiController {
      * 测试返回JSON数据
      */
 //    @Api(value = "测试方法", params = {"value///aaaa//bbb"})
-    @Api(fs = {@F("aaaa"), @F("aa")}, name = "测试", beans = {TestModel.class},
+    @Api(name = "测试2",
+            fs = {@F("aaaa"), @F("aa")},
+            beans = {TestModel.class},
             res = {@ApiRes(desc = "aaa", beans = {TestModel.class})})
 //    @ApiRes(desc = "接口数据返回说明desc", beans = {TestModel.class})
     @RequestMapping(value = "/test2")
     @ResponseBody
     public CaseRes test2() {
 
-        System.out.println("-=-=-=-=-" + request.getRemoteAddr());
-        System.out.println("Test................");
+//        System.out.println("-=-=-=-=-" + request.getRemoteAddr());
+//        System.out.println("Test................");
 //        String a = null;
 //        a.toString();
 //        throw new IllegalArgumentException("唯一约束异常！");
@@ -76,8 +82,8 @@ public class ExamplesController_ extends BaseApiController {
 
         System.out.println("-=-=-=-=-" + request.getRemoteAddr());
         System.out.println("Test................");
-        String a = null;
-        a.toString();
+//        String a = null;
+//        a.toString();
 //        throw new IllegalArgumentException("唯一约束异常！");
         return CaseRes.data(p);
     }

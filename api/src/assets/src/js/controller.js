@@ -134,6 +134,7 @@ function apiCtrl($scope, http, toastr) {
         if ($scope.record.childs.length > 50) $scope.record.childs.shift();
 
         if (!api.JSONEditor) {
+            // api.JSONEditor = new JSONEditor(angular.element("#show-" + api.id)[0], {})
             api.JSONEditor = new JSONEditor(angular.element("#show-" + api.id)[0], options)
         }
 
@@ -142,7 +143,9 @@ function apiCtrl($scope, http, toastr) {
 
         if (api.type === 'POST') {
             http.post($scope.global.basePath + api.url, api.data, function (d) {
+                // console.info(JSON.stringify(d));
                 api.JSONEditor.set(d);
+                // console.info("api.JSONEditor.get()" + JSON.stringify(api.JSONEditor.get()));
             })
         } else if (api.type === 'GET') {
 
@@ -175,22 +178,22 @@ function apiCtrl($scope, http, toastr) {
     function setFormsApiData() {
         $scope.apis.forEach(function (t) {
             var findApi = $scope.forms.find("id", t.id);
-            try {
-                Object.keys(t.data).forEach(function (k) {
-                    try {
-                        /*json 字符串转对象*/
-                        var datum = t.data[k];
-                        if (datum.indexOf('{') < 0) return;
-                        // if (typeof datum == "number" && datum) datum = new String(datum);
-                        var obj = angular.fromJson(datum);
-                        t.data[k] = obj;
-                    } catch (e) {
-                    }
-
-                });
-            } catch (e) {
-                console.info("格式转换异常")
-            }
+            // try {
+            //     Object.keys(t.data).forEach(function (k) {
+            //         try {
+            //             /*json 字符串转对象*/
+            //             var datum = t.data[k];
+            //             if (datum.indexOf('{') < 0) return;
+            //             // if (typeof datum == "number" && datum) datum = new String(datum);
+            //             var obj = angular.fromJson(datum);
+            //             t.data[k] = obj;
+            //         } catch (e) {
+            //         }
+            //
+            //     });
+            // } catch (e) {
+            //     console.info("格式转换异常")
+            // }
             if (!findApi) {
                 $scope.forms.push({id: t.id, data: t.data})
             } else {
