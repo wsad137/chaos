@@ -111,6 +111,36 @@
     <build>
         <!--<finalName>${project.parent.groupId}-${project.artifactId}.${project.version}</finalName>-->
         <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution><!-- 配置执行器 -->
+                        <id>make-assembly</id>
+                        <!--<phase>compile</phase>&lt;!&ndash; 绑定到package生命周期阶段上 &ndash;&gt;-->
+                        <!--<phase>package</phase>&lt;!&ndash; 绑定到package生命周期阶段上 &ndash;&gt;-->
+                        <phase>package</phase><!-- 绑定到package生命周期阶段上 -->
+                        <goals>
+                            <goal>single</goal><!-- 只运行一次 -->
+                        </goals>
+                        <configuration>
+                            <!-- not append assembly id in release file name -->
+                            <!--<appendAssemblyId>false</appendAssemblyId>-->
+                            <!--<finalName>/</finalName>-->
+                            <!--<finalName>${project.name}</finalName>-->
+                            <!--打包的详细描述，需要配置额外文件-->
+                            <descriptors>
+                                <descriptor>src/main/assembly/jar.xml</descriptor>
+                                <!--<descriptor>src/main/assembly/war.xml</descriptor>-->
+                                <descriptor>src/main/assembly/jar-source.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

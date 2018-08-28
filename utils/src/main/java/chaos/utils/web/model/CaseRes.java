@@ -1,6 +1,7 @@
 package chaos.utils.web.model;
 
 import chaos.utils.json.JsonUtils;
+import chaos.utils.object.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -31,7 +32,8 @@ public class CaseRes<E> {
         String[] temp = {"0", ""};
         try {
             temp = message.split("_");
-            if (!StringUtils.isNumeric(temp[0])) {//内容包含'_'直接返回。
+//            if (!StringUtils.isNumeric(temp[0])) {//内容包含'_'直接返回。
+            if (ObjectUtils.toInt(temp[0]) == 0) {//内容包含'_'直接返回。
                 this.eMsg = message;
                 return this;
             }

@@ -646,6 +646,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution><!-- 配置执行器 -->
                         <id>make-assembly</id>
